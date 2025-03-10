@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -297,14 +296,12 @@ const subjectsData = {
 
 const SubjectDetails = () => {
   const { subjectId } = useParams();
+  const subjectData = subjectsData as Record<string, any>;
   const subject = subjectData[subjectId] || null;
   
-  // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const subjectData = subjectsData as Record<string, any>;
   
   if (!subject) {
     return (
@@ -333,7 +330,6 @@ const SubjectDetails = () => {
       
       <main className="flex-grow pt-32 md:pt-40 pb-16">
         <div className="container mx-auto px-4">
-          {/* Breadcrumb */}
           <div className="mb-8">
             <Button variant="ghost" size="sm" asChild className="hover:bg-transparent p-0">
               <Link to="/" className="flex items-center text-muted-foreground hover:text-foreground">
@@ -343,7 +339,6 @@ const SubjectDetails = () => {
             </Button>
           </div>
 
-          {/* Header Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             <div className="flex flex-col justify-center">
               <div className={`h-16 w-16 rounded-xl flex items-center justify-center mb-6 ${subject.color} ${subject.textColor}`}>
@@ -371,7 +366,6 @@ const SubjectDetails = () => {
             </div>
           </div>
 
-          {/* Content Sections */}
           <Tabs defaultValue={subject.sections[0].id} className="mb-16">
             <TabsList className="mb-8 flex flex-wrap h-auto">
               {subject.sections.map((section) => (
@@ -441,7 +435,6 @@ const SubjectDetails = () => {
             ))}
           </Tabs>
 
-          {/* Accessibility Features */}
           <div className="bg-muted p-8 rounded-xl border border-border mb-16">
             <div className="flex flex-col md:flex-row items-center gap-6">
               <div className="md:w-1/4 flex justify-center">
@@ -465,7 +458,6 @@ const SubjectDetails = () => {
             </div>
           </div>
 
-          {/* Related Subjects */}
           <div>
             <h2 className="text-2xl font-bold mb-6">Related Subjects</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
