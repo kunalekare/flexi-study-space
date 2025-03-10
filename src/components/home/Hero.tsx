@@ -61,7 +61,7 @@ const Hero = () => {
             <div className="relative mx-auto max-w-md lg:max-w-none">
               <div className="aspect-w-5 aspect-h-4 rounded-xl overflow-hidden glass-panel shadow-xl">
                 <img 
-                  src="/placeholder.svg" 
+                  src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
                   alt="Students using the FlexiLearn platform" 
                   className="object-cover w-full h-full"
                 />

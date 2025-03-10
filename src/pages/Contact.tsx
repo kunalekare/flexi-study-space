@@ -140,7 +140,7 @@ const Contact = () => {
                   
                   <div className="aspect-video w-full rounded-lg overflow-hidden mt-4 border border-border">
                     <img 
-                      src="/placeholder.svg" 
+                      src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
                       alt="Map location" 
                       className="w-full h-full object-cover"
                     />

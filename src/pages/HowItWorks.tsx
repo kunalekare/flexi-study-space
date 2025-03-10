@@ -45,7 +45,7 @@ const HowItWorks = () => {
                 <div className="md:col-span-5 order-1 md:order-2">
                   <div className="aspect-square rounded-xl overflow-hidden glass-panel shadow-lg">
                     <img 
-                      src="/placeholder.svg" 
+                      src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
                       alt="Personalization options" 
                       className="w-full h-full object-cover"
                     />
@@ -58,7 +58,7 @@ const HowItWorks = () => {
                 <div className="md:col-span-5 order-1">
                   <div className="aspect-square rounded-xl overflow-hidden glass-panel shadow-lg">
                     <img 
-                      src="/placeholder.svg" 
+                      src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
                       alt="Subject selection" 
                       className="w-full h-full object-cover"
                     />
@@ -103,7 +103,7 @@ const HowItWorks = () => {
                 <div className="md:col-span-5 order-1 md:order-2">
                   <div className="aspect-square rounded-xl overflow-hidden glass-panel shadow-lg">
                     <img 
-                      src="/placeholder.svg" 
+                      src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
                       alt="Interactive lessons" 
                       className="w-full h-full object-cover"
                     />
