@@ -2,80 +2,100 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { 
+  ArrowRight, 
+  Calculator, 
+  Beaker, 
+  BookOpen, 
+  Globe, 
+  Palette 
+} from "lucide-react";
 
 const subjects = [
   {
     id: "mathematics",
     title: "Mathematics",
-    description: "Interactive math lessons with visual representations, audio support, and step-by-step problem solving.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M19 5 5 19" />
-        <circle cx="6.5" cy="6.5" r="2.5" />
-        <circle cx="17.5" cy="17.5" r="2.5" />
-      </svg>
-    ),
+    description: "Interactive math lessons with visual representations, audio support, and step-by-step problem solving for all learning abilities.",
+    icon: <Calculator className="h-6 w-6" />,
     color: "bg-blue-50 dark:bg-blue-900/20",
     textColor: "text-blue-600 dark:text-blue-400",
-    ringColor: "focus-visible:ring-blue-500"
+    ringColor: "focus-visible:ring-blue-500",
+    features: [
+      "Basic number concepts with visual aids",
+      "Interactive games with virtual manipulatives",
+      "Color-coded equations and step-by-step solutions",
+      "Adaptive difficulty levels based on progress",
+      "Real-life applications like money and time",
+      "Speech-to-text support for math problems"
+    ]
   },
   {
     id: "science",
     title: "Science",
-    description: "Explore science concepts through multi-sensory experiences, simulations, and adaptive experiments.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M10 2v8.5a2.5 2.5 0 0 1-5 0V2" />
-        <path d="M7 2v8.5a2.5 2.5 0 0 0 5 0V2" />
-        <path d="M8.5 2h7.1a3 3 0 0 1 2.8 2.8c.1 2-.6 3.1-2.2 3.1h-2.2a3 3 0 0 0-2.8 2.8c-.1 2 .6 3.1 2.2 3.1h2.2a3 3 0 0 1 2.8 2.8c.1 2-.6 3.1-2.2 3.1h-7.5a3 3 0 0 1-2.8-2.8c-.1-2 .6-3.1 2.2-3.1h2.2a3 3 0 0 0 2.8-2.8c.1-2-.6-3.1-2.2-3.1h-2.2a3 3 0 0 1-2.8-2.8C5.4 3.2 6.1 2 7.7 2h.8" />
-      </svg>
-    ),
+    description: "Explore science concepts through multi-sensory experiences, simulations, and adaptive experiments designed for diverse learning needs.",
+    icon: <Beaker className="h-6 w-6" />,
     color: "bg-emerald-50 dark:bg-emerald-900/20",
     textColor: "text-emerald-600 dark:text-emerald-400",
-    ringColor: "focus-visible:ring-emerald-500"
+    ringColor: "focus-visible:ring-emerald-500",
+    features: [
+      "Animated lessons for fundamental concepts",
+      "Hands-on experiments with video tutorials",
+      "Virtual labs and interactive simulations",
+      "Sensory-based learning with textures and sounds",
+      "Virtual field trips to natural environments",
+      "Accessible scientific terminology"
+    ]
   },
   {
     id: "language-arts",
     title: "Language Arts",
-    description: "Improve literacy skills with text-to-speech, customizable reading formats, and assistive writing tools.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1" />
-        <path d="M7 22h1a4 4 0 0 0 4-4v-1" />
-        <path d="M7 2h1a4 4 0 0 1 4 4v1" />
-      </svg>
-    ),
+    description: "Improve literacy skills with text-to-speech, customizable reading formats, and assistive writing tools tailored to diverse abilities.",
+    icon: <BookOpen className="h-6 w-6" />,
     color: "bg-amber-50 dark:bg-amber-900/20",
     textColor: "text-amber-600 dark:text-amber-400",
-    ringColor: "focus-visible:ring-amber-500"
+    ringColor: "focus-visible:ring-amber-500",
+    features: [
+      "Phonics and sight words with audio support",
+      "Text-to-speech and speech-to-text tools",
+      "Visual storytelling with sign language options",
+      "Interactive sentence building games",
+      "Picture-based communication support",
+      "Customizable text formats for different needs"
+    ]
   },
   {
     id: "social-studies",
     title: "Social Studies",
-    description: "Experience history and cultures through accessible storytelling, audio narrations, and visual aids.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-      </svg>
-    ),
+    description: "Experience history and cultures through accessible storytelling, interactive maps, and inclusive activities designed for all students.",
+    icon: <Globe className="h-6 w-6" />,
     color: "bg-purple-50 dark:bg-purple-900/20",
     textColor: "text-purple-600 dark:text-purple-400",
-    ringColor: "focus-visible:ring-purple-500"
+    ringColor: "focus-visible:ring-purple-500",
+    features: [
+      "History through engaging animated stories",
+      "Community roles and safety awareness",
+      "Interactive maps with zoom features",
+      "Diversity and inclusion activities",
+      "Virtual cultural experiences",
+      "Accessible historical timelines"
+    ]
   },
   {
     id: "art-music",
     title: "Art & Music",
-    description: "Creative expression through accessible art tools, audio-based music lessons, and tactile experiences.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="m9 18 6-6" />
-        <path d="m15 18-6-6" />
-      </svg>
-    ),
+    description: "Creative expression through accessible art tools, audio-based music lessons, and adaptive activities for students of all abilities.",
+    icon: <Palette className="h-6 w-6" />,
     color: "bg-rose-50 dark:bg-rose-900/20",
     textColor: "text-rose-600 dark:text-rose-400",
-    ringColor: "focus-visible:ring-rose-500"
+    ringColor: "focus-visible:ring-rose-500",
+    features: [
+      "Digital art tools with adaptive controls",
+      "Sensory art projects and 3D modeling",
+      "Music therapy and rhythm exercises",
+      "Virtual instruments with simplified controls",
+      "Guided movement and dance videos",
+      "Creative expression for all abilities"
+    ]
   }
 ];
 
@@ -106,6 +126,18 @@ const SubjectCards = () => {
                 
                 <h3 className="text-xl font-semibold mb-2">{subject.title}</h3>
                 <p className="text-muted-foreground mb-6">{subject.description}</p>
+                
+                <div className="mt-4">
+                  <h4 className="font-medium mb-2">What you'll learn:</h4>
+                  <ul className="space-y-1 mb-6">
+                    {subject.features.slice(0, 3).map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="mr-2 mt-1">•</span>
+                        <span className="text-sm text-muted-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 
                 <div className="mt-auto">
                   <Button 
