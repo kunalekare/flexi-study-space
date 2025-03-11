@@ -30,9 +30,11 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="group">
-                <span>Get Started for Free</span>
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <Button size="lg" className="group" asChild>
+                <Link to="/signup">
+                  <span>Get Started for Free</span>
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
                 <Link to="/how-it-works">

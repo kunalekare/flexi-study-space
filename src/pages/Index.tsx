@@ -7,6 +7,7 @@ import Features from "@/components/home/Features";
 import SubjectCards from "@/components/home/SubjectCards";
 import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   // Scroll to top on page load
@@ -126,11 +127,15 @@ const Index = () => {
                   Join thousands of students who are already benefiting from our accessible educational platform. Start your learning journey today.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="w-full sm:w-auto">
-                    Sign Up Free
+                  <Button size="lg" className="w-full sm:w-auto" asChild>
+                    <Link to="/signup">
+                      Sign Up Free
+                    </Link>
                   </Button>
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                    Request Demo
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto" asChild>
+                    <Link to="/contact">
+                      Request Demo
+                    </Link>
                   </Button>
                 </div>
               </div>
