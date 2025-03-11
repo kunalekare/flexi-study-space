@@ -24,7 +24,9 @@ const SubjectData = {
           { title: "Number Recognition", type: "Interactive", duration: "15 mins" },
           { title: "Counting Games", type: "Game", duration: "10 mins" },
           { title: "Shape Explorer", type: "Visual Aid", duration: "20 mins" },
-          { title: "Pattern Matching", type: "Interactive", duration: "15 mins" }
+          { title: "Pattern Matching", type: "Interactive", duration: "15 mins" },
+          { title: "Introduction to Numbers", type: "Video", duration: "8 mins" },
+          { title: "Geometry Basics", type: "Video", duration: "12 mins" }
         ]
       },
       {
@@ -35,7 +37,9 @@ const SubjectData = {
           { title: "Addition Adventure", type: "Game", duration: "15 mins" },
           { title: "Subtraction Safari", type: "Game", duration: "15 mins" },
           { title: "Multiplication Quest", type: "Interactive", duration: "20 mins" },
-          { title: "Division Discovery", type: "Game", duration: "20 mins" }
+          { title: "Division Discovery", type: "Game", duration: "20 mins" },
+          { title: "Math Games Tutorial", type: "Video", duration: "10 mins" },
+          { title: "Problem-Solving Strategies", type: "Video", duration: "15 mins" }
         ]
       },
       {
@@ -46,7 +50,9 @@ const SubjectData = {
           { title: "Color-Coded Equations", type: "Visual Aid", duration: "15 mins" },
           { title: "Step-by-Step Problem Solving", type: "Tutorial", duration: "25 mins" },
           { title: "Visual Fractions", type: "Interactive", duration: "20 mins" },
-          { title: "Geometry Visualizer", type: "Visual Aid", duration: "15 mins" }
+          { title: "Geometry Visualizer", type: "Visual Aid", duration: "15 mins" },
+          { title: "Visualizing Math Concepts", type: "Video", duration: "12 mins" },
+          { title: "Understanding Fractions", type: "Video", duration: "14 mins" }
         ]
       },
       {
@@ -57,7 +63,9 @@ const SubjectData = {
           { title: "Money Math", type: "Interactive", duration: "20 mins" },
           { title: "Telling Time", type: "Game", duration: "15 mins" },
           { title: "Measurement Madness", type: "Interactive", duration: "20 mins" },
-          { title: "Shopping Simulator", type: "Game", duration: "25 mins" }
+          { title: "Shopping Simulator", type: "Game", duration: "25 mins" },
+          { title: "Math in Daily Life", type: "Video", duration: "10 mins" },
+          { title: "Budgeting Basics", type: "Video", duration: "12 mins" }
         ]
       }
     ]
@@ -78,7 +86,9 @@ const SubjectData = {
           { title: "Gravity Explorer", type: "Animation", duration: "10 mins" },
           { title: "Life Cycle Journey", type: "Interactive", duration: "15 mins" },
           { title: "Weather Wonders", type: "Animation", duration: "12 mins" },
-          { title: "Human Body Basics", type: "Interactive", duration: "20 mins" }
+          { title: "Human Body Basics", type: "Interactive", duration: "20 mins" },
+          { title: "The Water Cycle", type: "Video", duration: "8 mins" },
+          { title: "Exploring Photosynthesis", type: "Video", duration: "12 mins" }
         ]
       },
       {
@@ -89,7 +99,9 @@ const SubjectData = {
           { title: "Kitchen Chemistry", type: "Video Tutorial", duration: "25 mins" },
           { title: "Plant Growth Lab", type: "Experiment", duration: "15 mins" },
           { title: "Water Properties", type: "Video Tutorial", duration: "20 mins" },
-          { title: "Simple Machines", type: "Experiment", duration: "30 mins" }
+          { title: "Simple Machines", type: "Experiment", duration: "30 mins" },
+          { title: "Safe Home Experiments", type: "Video", duration: "15 mins" },
+          { title: "Chemical Reactions Demo", type: "Video", duration: "10 mins" }
         ]
       },
       {
@@ -100,7 +112,9 @@ const SubjectData = {
           { title: "Chemistry Lab Simulator", type: "Virtual Lab", duration: "25 mins" },
           { title: "Ecosystem Explorer", type: "Interactive", duration: "20 mins" },
           { title: "Energy Transformation", type: "Virtual Lab", duration: "15 mins" },
-          { title: "Solar System Journey", type: "Interactive", duration: "30 mins" }
+          { title: "Solar System Journey", type: "Interactive", duration: "30 mins" },
+          { title: "Virtual Lab Tutorial", type: "Video", duration: "8 mins" },
+          { title: "Biology Lab Introduction", type: "Video", duration: "14 mins" }
         ]
       },
       {
@@ -111,7 +125,9 @@ const SubjectData = {
           { title: "Forest Ecosystem", type: "Virtual Field Trip", duration: "20 mins" },
           { title: "Ocean Depths", type: "Interactive", duration: "25 mins" },
           { title: "Space Adventure", type: "Virtual Field Trip", duration: "30 mins" },
-          { title: "Desert Discoveries", type: "Interactive", duration: "20 mins" }
+          { title: "Desert Discoveries", type: "Interactive", duration: "20 mins" },
+          { title: "Rainforest Exploration", type: "Video", duration: "15 mins" },
+          { title: "Marine Life Documentary", type: "Video", duration: "18 mins" }
         ]
       }
     ]
@@ -132,7 +148,9 @@ const SubjectData = {
           { title: "Letter Sounds", type: "Interactive", duration: "10 mins" },
           { title: "Sight Word Games", type: "Game", duration: "15 mins" },
           { title: "Blending Sounds", type: "Interactive", duration: "12 mins" },
-          { title: "Word Recognition", type: "Game", duration: "10 mins" }
+          { title: "Word Recognition", type: "Game", duration: "10 mins" },
+          { title: "Phonics Basics", type: "Video", duration: "12 mins" },
+          { title: "Reading Fundamentals", type: "Video", duration: "15 mins" }
         ]
       },
       {
@@ -143,7 +161,9 @@ const SubjectData = {
           { title: "Text-to-Speech Basics", type: "Tutorial", duration: "15 mins" },
           { title: "Speech-to-Text Practice", type: "Interactive", duration: "20 mins" },
           { title: "Screen Reader Navigation", type: "Tutorial", duration: "15 mins" },
-          { title: "Digital Writing Tools", type: "Interactive", duration: "25 mins" }
+          { title: "Digital Writing Tools", type: "Interactive", duration: "25 mins" },
+          { title: "Assistive Tech Overview", type: "Video", duration: "10 mins" },
+          { title: "Digital Reading Tools", type: "Video", duration: "12 mins" }
         ]
       },
       {
@@ -154,7 +174,9 @@ const SubjectData = {
           { title: "Interactive Storybook", type: "Story", duration: "15 mins" },
           { title: "Visual Narrative Creation", type: "Interactive", duration: "25 mins" },
           { title: "Sign Language Stories", type: "Video", duration: "20 mins" },
-          { title: "Sequencing Events", type: "Game", duration: "15 mins" }
+          { title: "Sequencing Events", type: "Game", duration: "15 mins" },
+          { title: "Storytelling Techniques", type: "Video", duration: "15 mins" },
+          { title: "Visual Narrative Guide", type: "Video", duration: "10 mins" }
         ]
       },
       {
@@ -165,7 +187,9 @@ const SubjectData = {
           { title: "Simple Sentences", type: "Interactive", duration: "15 mins" },
           { title: "Question Formation", type: "Game", duration: "15 mins" },
           { title: "Descriptive Writing", type: "Interactive", duration: "20 mins" },
-          { title: "Grammar Games", type: "Game", duration: "15 mins" }
+          { title: "Grammar Games", type: "Game", duration: "15 mins" },
+          { title: "Grammar Fundamentals", type: "Video", duration: "12 mins" },
+          { title: "Writing Workshop", type: "Video", duration: "18 mins" }
         ]
       }
     ]
@@ -186,7 +210,9 @@ const SubjectData = {
           { title: "Ancient Civilizations", type: "Animation", duration: "20 mins" },
           { title: "Important Inventions", type: "Story", duration: "15 mins" },
           { title: "Historical Heroes", type: "Interactive", duration: "25 mins" },
-          { title: "Timeline Explorer", type: "Interactive", duration: "15 mins" }
+          { title: "Timeline Explorer", type: "Interactive", duration: "15 mins" },
+          { title: "World History Overview", type: "Video", duration: "18 mins" },
+          { title: "Famous Historical Figures", type: "Video", duration: "15 mins" }
         ]
       },
       {
@@ -197,7 +223,9 @@ const SubjectData = {
           { title: "Family Roles", type: "Interactive", duration: "15 mins" },
           { title: "Community Helpers", type: "Game", duration: "20 mins" },
           { title: "Safety Rules", type: "Interactive", duration: "15 mins" },
-          { title: "Neighborhood Explorer", type: "Virtual Tour", duration: "25 mins" }
+          { title: "Neighborhood Explorer", type: "Virtual Tour", duration: "25 mins" },
+          { title: "Community Services", type: "Video", duration: "12 mins" },
+          { title: "Daily Routines", type: "Video", duration: "10 mins" }
         ]
       },
       {
@@ -208,7 +236,9 @@ const SubjectData = {
           { title: "World Continents", type: "Interactive Map", duration: "20 mins" },
           { title: "Country Explorer", type: "Interactive", duration: "15 mins" },
           { title: "Landform Basics", type: "Visual Aid", duration: "15 mins" },
-          { title: "Map Reading Skills", type: "Interactive", duration: "20 mins" }
+          { title: "Map Reading Skills", type: "Interactive", duration: "20 mins" },
+          { title: "Map Reading Guide", type: "Video", duration: "10 mins" },
+          { title: "Geography Fundamentals", type: "Video", duration: "15 mins" }
         ]
       },
       {
@@ -219,7 +249,9 @@ const SubjectData = {
           { title: "Cultural Celebrations", type: "Interactive", duration: "20 mins" },
           { title: "Diverse Abilities", type: "Story", duration: "15 mins" },
           { title: "Global Traditions", type: "Interactive", duration: "25 mins" },
-          { title: "Empathy Building", type: "Game", duration: "20 mins" }
+          { title: "Empathy Building", type: "Game", duration: "20 mins" },
+          { title: "Cultural Diversity", type: "Video", duration: "15 mins" },
+          { title: "Inclusive Communities", type: "Video", duration: "12 mins" }
         ]
       }
     ]
@@ -240,7 +272,9 @@ const SubjectData = {
           { title: "Digital Coloring", type: "Interactive", duration: "15 mins" },
           { title: "Simple Drawing Tools", type: "Interactive", duration: "20 mins" },
           { title: "Pattern Creator", type: "Interactive", duration: "15 mins" },
-          { title: "Digital Collage", type: "Interactive", duration: "25 mins" }
+          { title: "Digital Collage", type: "Interactive", duration: "25 mins" },
+          { title: "Digital Art Basics", type: "Video", duration: "12 mins" },
+          { title: "Creative Digital Expression", type: "Video", duration: "15 mins" }
         ]
       },
       {
@@ -251,7 +285,9 @@ const SubjectData = {
           { title: "Texture Explorer", type: "Interactive", duration: "15 mins" },
           { title: "Virtual Clay Modeling", type: "Interactive", duration: "20 mins" },
           { title: "3D Art Creation", type: "Interactive", duration: "25 mins" },
-          { title: "Sensory Painting", type: "Tutorial", duration: "15 mins" }
+          { title: "Sensory Painting", type: "Tutorial", duration: "15 mins" },
+          { title: "Tactile Art Techniques", type: "Video", duration: "12 mins" },
+          { title: "Sensory Art Introduction", type: "Video", duration: "10 mins" }
         ]
       },
       {
@@ -262,7 +298,9 @@ const SubjectData = {
           { title: "Rhythm Basics", type: "Interactive", duration: "10 mins" },
           { title: "Calming Sounds", type: "Audio", duration: "15 mins" },
           { title: "Sing-Along Songs", type: "Interactive", duration: "15 mins" },
-          { title: "Music & Emotions", type: "Interactive", duration: "20 mins" }
+          { title: "Music & Emotions", type: "Interactive", duration: "20 mins" },
+          { title: "Music Therapy Principles", type: "Video", duration: "14 mins" },
+          { title: "Sound Healing", type: "Video", duration: "12 mins" }
         ]
       },
       {
@@ -273,7 +311,9 @@ const SubjectData = {
           { title: "Virtual Piano", type: "Interactive", duration: "15 mins" },
           { title: "Drum Rhythms", type: "Interactive", duration: "15 mins" },
           { title: "Guitar Basics", type: "Interactive", duration: "20 mins" },
-          { title: "Music Maker", type: "Interactive", duration: "25 mins" }
+          { title: "Music Maker", type: "Interactive", duration: "25 mins" },
+          { title: "Instrument Families", type: "Video", duration: "15 mins" },
+          { title: "Learning Music Notation", type: "Video", duration: "12 mins" }
         ]
       }
     ]

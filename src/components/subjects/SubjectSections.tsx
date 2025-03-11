@@ -3,7 +3,7 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ListChecks, Play } from "lucide-react";
+import { ListChecks, Play, Video } from "lucide-react";
 
 interface Lesson {
   title: string;
@@ -78,7 +78,11 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
                               Duration: {lesson.duration}
                             </div>
                             <Button variant="ghost" size="sm" className="p-0">
-                              <Play className="h-4 w-4" />
+                              {lesson.type === "Video" ? (
+                                <Video className="h-4 w-4 text-red-500" />
+                              ) : (
+                                <Play className="h-4 w-4" />
+                              )}
                             </Button>
                           </div>
                         </CardContent>
