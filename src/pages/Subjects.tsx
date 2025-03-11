@@ -52,21 +52,21 @@ const Subjects = () => {
               >
                 <div 
                   className="h-48 bg-cover bg-center" 
-                  style={{ backgroundImage: `url(${subject.heroImage})` }}
+                  style={{ backgroundImage: `url(${subject.image})` }}
                 >
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-t from-black/70 to-transparent p-6">
                     <h2 className="text-2xl font-bold text-white mt-auto">{subject.title}</h2>
                   </div>
                 </div>
                 <div className="p-6">
-                  <p className="text-muted-foreground mb-6">{subject.shortDescription}</p>
+                  <p className="text-muted-foreground mb-6">{subject.description}</p>
                   <div className="space-y-3 mb-6">
                     <h3 className="font-medium">Key Features:</h3>
                     <ul className="space-y-1">
-                      {subject.keyFeatures.slice(0, 3).map((feature, index) => (
-                        <li key={index} className="flex items-start">
+                      {subject.sections.slice(0, 3).map((section) => (
+                        <li key={section.id} className="flex items-start">
                           <span className="mr-2 text-primary">•</span>
-                          <span className="text-sm text-muted-foreground">{feature}</span>
+                          <span className="text-sm text-muted-foreground">{section.title}</span>
                         </li>
                       ))}
                     </ul>
