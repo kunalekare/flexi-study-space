@@ -1,3 +1,4 @@
+import React from "react";
 import { 
   Calculator, 
   Beaker, 
@@ -5,13 +6,12 @@ import {
   Globe, 
   Palette
 } from "lucide-react";
-import React from "react";
 
 const SubjectData = {
   "mathematics": {
     title: "Mathematics",
     description: "Interactive math lessons with visual representations, audio support, and step-by-step problem solving.",
-    icon: <Calculator className="h-6 w-6" />,
+    icon: React.createElement(Calculator, { className: "h-6 w-6" }),
     color: "bg-blue-50 dark:bg-blue-900/20",
     textColor: "text-blue-600 dark:text-blue-400",
     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
@@ -65,7 +65,7 @@ const SubjectData = {
   "science": {
     title: "Science",
     description: "Explore science concepts through multi-sensory experiences, simulations, and adaptive experiments.",
-    icon: <Beaker className="h-6 w-6" />,
+    icon: React.createElement(Beaker, { className: "h-6 w-6" }),
     color: "bg-emerald-50 dark:bg-emerald-900/20",
     textColor: "text-emerald-600 dark:text-emerald-400",
     image: "https://images.unsplash.com/photo-1532094349884-543019a69b2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
@@ -119,7 +119,7 @@ const SubjectData = {
   "language-arts": {
     title: "Language Arts",
     description: "Improve literacy skills with text-to-speech, customizable reading formats, and assistive writing tools.",
-    icon: <BookOpen className="h-6 w-6" />,
+    icon: React.createElement(BookOpen, { className: "h-6 w-6" }),
     color: "bg-amber-50 dark:bg-amber-900/20",
     textColor: "text-amber-600 dark:text-amber-400",
     image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
@@ -173,7 +173,7 @@ const SubjectData = {
   "social-studies": {
     title: "Social Studies",
     description: "Experience history and cultures through accessible storytelling, audio narrations, and visual aids.",
-    icon: <Globe className="h-6 w-6" />,
+    icon: React.createElement(Globe, { className: "h-6 w-6" }),
     color: "bg-purple-50 dark:bg-purple-900/20",
     textColor: "text-purple-600 dark:text-purple-400",
     image: "https://images.unsplash.com/photo-1447069387593-a5de0862481e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
@@ -227,7 +227,7 @@ const SubjectData = {
   "art-music": {
     title: "Art & Music",
     description: "Creative expression through accessible art tools, audio-based music lessons, and tactile experiences.",
-    icon: <Palette className="h-6 w-6" />,
+    icon: React.createElement(Palette, { className: "h-6 w-6" }),
     color: "bg-rose-50 dark:bg-rose-900/20",
     textColor: "text-rose-600 dark:text-rose-400",
     image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",

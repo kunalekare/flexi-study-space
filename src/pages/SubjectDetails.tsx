@@ -16,8 +16,7 @@ import NotFoundContent from "@/components/subjects/NotFoundContent";
 
 const SubjectDetails = () => {
   const { subjectId } = useParams();
-  const subjectData = SubjectData as Record<string, any>;
-  const subject = subjectData[subjectId] || null;
+  const subject = SubjectData[subjectId as keyof typeof SubjectData] || null;
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -45,7 +44,7 @@ const SubjectDetails = () => {
           <SubjectHeader subject={subject} />
           <SubjectSections sections={subject.sections} />
           <AccessibilityFeature subjectTitle={subject.title} />
-          <RelatedSubjects currentSubjectTitle={subject.title} subjectData={subjectData} />
+          <RelatedSubjects currentSubjectTitle={subject.title} subjectData={SubjectData} />
         </div>
       </main>
       
