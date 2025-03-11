@@ -12,6 +12,8 @@ import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import SubjectDetails from "./pages/SubjectDetails";
+import Subjects from "./pages/Subjects";
+import Accessibility from "./pages/Accessibility";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +30,9 @@ const App = () => (
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/subjects" element={<Subjects />} />
           <Route path="/subjects/:subjectId" element={<SubjectDetails />} />
+          <Route path="/accessibility" element={<Accessibility />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
