@@ -7,6 +7,7 @@ import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 import { 
   Accessibility, 
   Headphones, 
@@ -18,14 +19,20 @@ import {
   ArrowLeft,
   Filter
 } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { getProductsByCategory, categoryMap } from "@/data/products";
 
 const ShopCategory = () => {
-  const { categoryId } = useParams<{ categoryId: string }>();
+  const { categoryId = 'all-accessibility' } = useParams<{ categoryId: string }>();
+  const { addToCart } = useCart();
   
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Get filtered products based on the category
+  const filteredProducts = getProductsByCategory(categoryId);
 
   // Category mapping for displaying the correct title and description
   const categoryInfo = {
@@ -81,114 +88,21 @@ const ShopCategory = () => {
     color: "bg-primary/10"
   };
 
-  // Sample products (would typically come from an API)
-  const products = [
-    {
-      id: 1,
-      name: "Voice-Controlled Smart Home Hub",
-      category: "Smart Home Assistance",
-      price: 129.99,
-      originalPrice: 199.99,
-      discount: 35,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Smart+Hub",
-      rating: 4.8,
-      reviews: 245
-    },
-    {
-      id: 2,
-      name: "Adaptive Buttoning Aid Tool",
-      category: "Adaptive Clothing",
-      price: 24.99,
-      originalPrice: 34.99,
-      discount: 28,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Button+Aid",
-      rating: 4.6,
-      reviews: 187
-    },
-    {
-      id: 3,
-      name: "Ultra-Lightweight Folding Wheelchair",
-      category: "Mobility Aids",
-      price: 599.99,
-      originalPrice: 849.99,
-      discount: 29,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Wheelchair",
-      rating: 4.9,
-      reviews: 312
-    },
-    {
-      id: 4,
-      name: "Screen Reader Software Premium",
-      category: "Assistive Technology",
-      price: 199.99,
-      originalPrice: 299.99,
-      discount: 33,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Screen+Reader",
-      rating: 4.7,
-      reviews: 156
-    },
-    {
-      id: 5,
-      name: "Adjustable Ergonomic Keyboard",
-      category: "Assistive Technology",
-      price: 89.99,
-      originalPrice: 119.99,
-      discount: 25,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Keyboard",
-      rating: 4.5,
-      reviews: 124
-    },
-    {
-      id: 6,
-      name: "Sensory Calming Weighted Blanket",
-      category: "Sensory-Friendly Items",
-      price: 79.99,
-      originalPrice: 99.99,
-      discount: 20,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Blanket",
-      rating: 4.8,
-      reviews: 208
-    },
-    {
-      id: 7,
-      name: "Amplified Hearing Aid - Rechargeable",
-      category: "Hearing & Vision Support",
-      price: 249.99,
-      originalPrice: 349.99,
-      discount: 29,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Hearing+Aid",
-      rating: 4.7,
-      reviews: 182
-    },
-    {
-      id: 8,
-      name: "Magnetic Button Shirts - 3 Pack",
-      category: "Adaptive Clothing",
-      price: 89.99,
-      originalPrice: 129.99,
-      discount: 31,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Shirts",
-      rating: 4.6,
-      reviews: 97
-    },
-  ];
-
-  // Filter products if a specific category is selected
-  const filteredProducts = categoryId === "all-accessibility" 
-    ? products 
-    : products.filter(product => {
-        // This is a simplified filter that would match category names to URL parameters in a real app
-        const categoryMap: Record<string, string> = {
-          "assistive-technology": "Assistive Technology",
-          "mobility-aids": "Mobility Aids",
-          "adaptive-clothing": "Adaptive Clothing",
-          "sensory-friendly": "Sensory-Friendly Items",
-          "hearing-vision": "Hearing & Vision Support",
-          "smart-home": "Smart Home Assistance"
-        };
-        
-        return product.category === categoryMap[categoryId as keyof typeof categoryMap];
-      });
+  // Handle add to cart
+  const handleAddToCart = (product: any) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image
+    });
+    
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+      duration: 3000,
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -257,7 +171,7 @@ const ShopCategory = () => {
                           <img 
                             src={product.image} 
                             alt={product.name} 
-                            className="w-full h-48 object-contain rounded-md"
+                            className="w-full h-48 object-cover rounded-md"
                           />
                           {product.discount > 0 && (
                             <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
@@ -292,7 +206,14 @@ const ShopCategory = () => {
                               <span className="text-sm text-muted-foreground line-through">${product.originalPrice}</span>
                             )}
                           </div>
-                          <Button className="w-full" size="sm">Add to Cart</Button>
+                          <Button 
+                            className="w-full" 
+                            size="sm"
+                            onClick={() => handleAddToCart(product)}
+                          >
+                            <ShoppingCart className="mr-2 h-3 w-3" />
+                            Add to Cart
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -24,12 +23,13 @@ import {
   Shirt,
   Heart
 } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { cartCount } = useCart();
   
-  // Track scroll position to change navbar style
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -86,13 +86,11 @@ const Navbar = () => {
           <span className="tracking-tight">AccessiShop</span>
         </Link>
         
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-2">
           <Link to="/" className="px-3 py-2 text-foreground/80 hover:text-primary transition-colors">
             Home
           </Link>
           
-          {/* Accessible Shopping Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="px-3 py-2 flex items-center gap-1">
@@ -161,7 +159,9 @@ const Navbar = () => {
           <Button variant="outline" size="icon" className="relative" asChild>
             <Link to="/cart">
               <ShoppingCart className="h-4 w-4" />
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full w-4 h-4 text-[10px] flex items-center justify-center">0</span>
+              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full w-4 h-4 text-[10px] flex items-center justify-center">
+                {cartCount}
+              </span>
             </Link>
           </Button>
           <Button variant="ghost" asChild>
@@ -172,7 +172,6 @@ const Navbar = () => {
           </Button>
         </div>
         
-        {/* Mobile Menu Trigger */}
         <button 
           className="md:hidden p-2 text-foreground"
           onClick={toggleMobileMenu}
@@ -182,7 +181,6 @@ const Navbar = () => {
         </button>
       </div>
       
-      {/* Mobile Navigation */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg border-t border-border animate-slide-in">
           <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
@@ -194,7 +192,6 @@ const Navbar = () => {
               Home
             </Link>
             
-            {/* Mobile Accessible Shopping Section */}
             <div className="px-4 py-3 text-foreground/80">
               <div className="font-medium mb-2 flex items-center">
                 <Accessibility className="h-4 w-4 mr-2" />

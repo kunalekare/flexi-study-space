@@ -1,10 +1,11 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 import { 
   ShoppingCart, 
   Trash2, 
@@ -16,27 +17,10 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-
-// Sample cart items (would come from a cart context or API in a real app)
-const initialCartItems = [
-  {
-    id: 1,
-    name: "Voice-Controlled Smart Home Hub",
-    price: 129.99,
-    quantity: 1,
-    image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Smart+Hub",
-  },
-  {
-    id: 3,
-    name: "Ultra-Lightweight Folding Wheelchair",
-    price: 599.99,
-    quantity: 1,
-    image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Wheelchair",
-  },
-];
+import { useCart } from "@/contexts/CartContext";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const { cartItems, removeFromCart, updateQuantity } = useCart();
   
   // Scroll to top on page load
   useEffect(() => {
@@ -54,18 +38,13 @@ const Cart = () => {
   // Calculate total
   const total = subtotal + tax;
   
-  // Remove item from cart
-  const removeItem = (id: number) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-  };
-  
-  // Update item quantity
-  const updateQuantity = (id: number, newQuantity: number) => {
-    if (newQuantity < 1) return;
-    
-    setCartItems(cartItems.map(item => 
-      item.id === id ? { ...item, quantity: newQuantity } : item
-    ));
+  // Handle checkout
+  const handleCheckout = () => {
+    toast({
+      title: "Checkout process initiated",
+      description: "This would normally redirect to a payment processor.",
+      duration: 5000,
+    });
   };
 
   return (
@@ -129,7 +108,7 @@ const Cart = () => {
                                   variant="ghost" 
                                   size="icon" 
                                   className="h-8 w-8 text-red-500 hover:text-red-700 hover:bg-red-50"
-                                  onClick={() => removeItem(item.id)}
+                                  onClick={() => removeFromCart(item.id)}
                                 >
                                   <Trash2 className="h-4 w-4" />
                                 </Button>
@@ -166,7 +145,11 @@ const Cart = () => {
                         <span>${total.toFixed(2)}</span>
                       </div>
                     </div>
-                    <Button className="w-full mb-3" size="lg">
+                    <Button 
+                      className="w-full mb-3" 
+                      size="lg"
+                      onClick={handleCheckout}
+                    >
                       <CreditCard className="mr-2 h-4 w-4" />
                       Checkout
                     </Button>

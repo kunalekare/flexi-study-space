@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -6,6 +5,9 @@ import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
+import { getFeaturedProducts } from "@/data/products";
 import { 
   Accessibility, 
   Headphones, 
@@ -18,6 +20,8 @@ import {
 } from "lucide-react";
 
 const Shop = () => {
+  const { addToCart } = useCart();
+  
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,53 +73,24 @@ const Shop = () => {
     },
   ];
 
-  // Featured products
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "Voice-Controlled Smart Home Hub",
-      category: "Smart Home Assistance",
-      price: 129.99,
-      originalPrice: 199.99,
-      discount: 35,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Smart+Hub",
-      rating: 4.8,
-      reviews: 245
-    },
-    {
-      id: 2,
-      name: "Adaptive Buttoning Aid Tool",
-      category: "Adaptive Clothing",
-      price: 24.99,
-      originalPrice: 34.99,
-      discount: 28,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Button+Aid",
-      rating: 4.6,
-      reviews: 187
-    },
-    {
-      id: 3,
-      name: "Ultra-Lightweight Folding Wheelchair",
-      category: "Mobility Aids",
-      price: 599.99,
-      originalPrice: 849.99,
-      discount: 29,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Wheelchair",
-      rating: 4.9,
-      reviews: 312
-    },
-    {
-      id: 4,
-      name: "Screen Reader Software Premium",
-      category: "Assistive Technology",
-      price: 199.99,
-      originalPrice: 299.99,
-      discount: 33,
-      image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Screen+Reader",
-      rating: 4.7,
-      reviews: 156
-    },
-  ];
+  // Get featured products
+  const featuredProducts = getFeaturedProducts();
+
+  // Handle add to cart
+  const handleAddToCart = (product: any) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image
+    });
+    
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+      duration: 3000,
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -229,7 +204,7 @@ const Shop = () => {
                       <img 
                         src={product.image} 
                         alt={product.name} 
-                        className="w-full h-48 object-contain rounded-md"
+                        className="w-full h-48 object-cover rounded-md"
                       />
                       {product.discount > 0 && (
                         <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
@@ -264,7 +239,14 @@ const Shop = () => {
                           <span className="text-sm text-muted-foreground line-through">${product.originalPrice}</span>
                         )}
                       </div>
-                      <Button className="w-full" size="sm">Add to Cart</Button>
+                      <Button 
+                        className="w-full" 
+                        size="sm"
+                        onClick={() => handleAddToCart(product)}
+                      >
+                        <ShoppingCart className="mr-2 h-3 w-3" />
+                        Add to Cart
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -370,7 +352,7 @@ const Shop = () => {
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-600 dark:text-purple-400">
                     <path d="M15 7.5V9"></path><path d="M12 6v6"></path><path d="M9 9v3"></path>
                     <path d="M8 16h8"></path>
-                    <path d="M12 6q-2.9 0-4.45 1.55Q6 9.1 6 12q0 2.9 1.55 4.45Q9.1 18 12 18q2.9 0 4.45-1.55Q18 14.9 18 12q0-2.9-1.55-4.45Q14.9 6 12 6"></path>
+                    <path d="M12 6q-2.9 0-4.45 1.55Q6.525 20.313 10 20.975v-2.05q-2.675-.625-4.138-2.537Q4.4 14.475 4.4 11.6q0-3.45 2.063 6.081Q9.1 18 12 18q2.9 0 4.45-1.55Q18 14.9 18 12q0-2.9-1.55-4.45Q14.9 6 12 6"></path>
                   </svg>
                 </div>
                 <h3 className="font-medium text-lg mb-2">Voice Navigation</h3>
