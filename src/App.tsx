@@ -14,6 +14,10 @@ import NotFound from "./pages/NotFound";
 import SubjectDetails from "./pages/SubjectDetails";
 import Subjects from "./pages/Subjects";
 import Accessibility from "./pages/Accessibility";
+import Shop from "./pages/Shop";
+import ShopCategory from "./pages/ShopCategory";
+import Cart from "./pages/Cart";
+import Sell from "./pages/Sell";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +37,13 @@ const App = () => (
           <Route path="/subjects" element={<Subjects />} />
           <Route path="/subjects/:subjectId" element={<SubjectDetails />} />
           <Route path="/accessibility" element={<Accessibility />} />
+          
+          {/* E-commerce Routes */}
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/:categoryId" element={<ShopCategory />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/sell" element={<Sell />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
