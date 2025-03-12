@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -83,7 +84,7 @@ const Navbar = () => {
           onClick={closeMobileMenu}
         >
           <GraduationCap className="h-6 w-6" />
-          <span className="tracking-tight">AccessiShop</span>
+          <span className="tracking-tight">EduAccess</span>
         </Link>
         
         <nav className="hidden md:flex items-center gap-2">

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { GraduationCap, Mail, Phone, MapPin } from "lucide-react";
@@ -14,13 +13,12 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2 text-primary font-bold text-xl">
               <GraduationCap className="h-6 w-6" />
-              <span className="tracking-tight">FlexiLearn</span>
+              <span className="tracking-tight">EduAccess</span>
             </Link>
             <p className="text-muted-foreground">
               Inclusive education tailored for the unique needs of specially-abled students.
             </p>
             <div className="flex gap-3 pt-2">
-              {/* Social Icons */}
               <a 
                 href="#" 
                 className="h-9 w-9 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
@@ -140,7 +138,7 @@ const Footer = () => {
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} FlexiLearn. All rights reserved.
+            © {new Date().getFullYear()} EduAccess. All rights reserved.
           </div>
           <div className="flex gap-4 text-sm">
             <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">
