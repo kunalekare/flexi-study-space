@@ -37,6 +37,7 @@ const formSchema = z.object({
   sellerCategory: z.string({
     required_error: "Please select a seller category",
   }),
+  selectedPlan: z.string().optional(),
   website: z.string().optional(),
   termsAgreed: z.boolean().refine(val => val === true, {
     message: "You must agree to the terms and conditions",
@@ -45,7 +46,11 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const SellerRegistrationForm = () => {
+interface SellerRegistrationFormProps {
+  selectedPlan?: string | null;
+}
+
+const SellerRegistrationForm = ({ selectedPlan }: SellerRegistrationFormProps) => {
   const { toast } = useToast();
   const navigate = useNavigate();
   
@@ -59,6 +64,7 @@ const SellerRegistrationForm = () => {
       companyName: "",
       businessType: "",
       sellerCategory: "",
+      selectedPlan: selectedPlan || "",
       website: "",
       termsAgreed: false,
     },
@@ -71,18 +77,29 @@ const SellerRegistrationForm = () => {
     // Show success toast
     toast({
       title: "Registration submitted!",
-      description: "Your seller account is being processed.",
+      description: data.selectedPlan 
+        ? `Your seller account with ${data.selectedPlan} plan is being processed.`
+        : "Your seller account is being processed.",
     });
     
     // Redirect to seller dashboard with state
     navigate("/seller-dashboard", { 
-      state: { fromRegistration: true } 
+      state: { 
+        fromRegistration: true,
+        selectedPlan: data.selectedPlan 
+      } 
     });
   };
 
   return (
     <div className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-sm border p-6 md:p-8">
       <h2 className="text-2xl font-bold mb-6">Seller Registration</h2>
+      
+      {selectedPlan && (
+        <div className="mb-6 p-3 bg-primary/10 rounded-md">
+          <p className="font-medium">You are registering with the <span className="text-primary">{selectedPlan}</span> plan</p>
+        </div>
+      )}
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -212,6 +229,33 @@ const SellerRegistrationForm = () => {
               )}
             />
           </div>
+          
+          {!selectedPlan && (
+            <FormField
+              control={form.control}
+              name="selectedPlan"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Subscription Plan</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a subscription plan" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Individual">Individual ($4.99/month)</SelectItem>
+                      <SelectItem value="Professional">Professional ($39.99/month)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormDescription>
+                    Choose the plan that best fits your business needs.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
           
           <FormField
             control={form.control}

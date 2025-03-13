@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -14,10 +15,14 @@ import {
   BadgeCheck, 
   ShieldCheck, 
   Users, 
-  Star
+  Star,
+  X
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SellerRegistrationForm from "@/components/seller/SellerRegistrationForm";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog";
+import ContactSalesForm from "@/components/seller/ContactSalesForm";
+import { useToast } from "@/components/ui/use-toast";
 
 const Sell = () => {
   // Scroll to top on page load
@@ -26,6 +31,28 @@ const Sell = () => {
   }, []);
 
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [showContactForm, setShowContactForm] = useState(false);
+  const { toast } = useToast();
+
+  // Handle plan selection
+  const handlePlanSelect = (planName: string) => {
+    setSelectedPlan(planName);
+    
+    if (planName === "Enterprise") {
+      setShowContactForm(true);
+    } else {
+      // Show registration form with selected plan
+      setShowRegistrationForm(true);
+      // Scroll to top to show the registration form
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      toast({
+        title: `${planName} Plan Selected`,
+        description: "Fill the registration form to continue with your selected plan.",
+      });
+    }
+  };
 
   // Seller benefits
   const benefits = [
@@ -145,7 +172,7 @@ const Sell = () => {
               </div>
               <div className="md:w-1/2 flex justify-center md:justify-end">
                 {showRegistrationForm ? (
-                  <SellerRegistrationForm />
+                  <SellerRegistrationForm selectedPlan={selectedPlan} />
                 ) : (
                   <div className="relative">
                     <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-lg blur opacity-25"></div>
@@ -224,13 +251,32 @@ const Sell = () => {
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Choose the right plan for your business needs. Scale as you grow with our flexible options.
               </p>
+              {selectedPlan && (
+                <div className="mt-4 inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-2 rounded-full">
+                  <span>Selected: {selectedPlan}</span>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="h-5 w-5 ml-1" 
+                    onClick={() => setSelectedPlan(null)}
+                  >
+                    <X className="h-3 w-3" />
+                  </Button>
+                </div>
+              )}
             </div>
             
             <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
               {plans.map((plan, index) => (
                 <Card 
                   key={index} 
-                  className={`flex-1 overflow-hidden ${plan.recommended ? 'border-primary shadow-lg' : 'border-border shadow-sm'}`}
+                  className={`flex-1 overflow-hidden ${
+                    selectedPlan === plan.name 
+                      ? 'border-2 border-primary shadow-lg' 
+                      : plan.recommended 
+                        ? 'border-primary shadow-lg' 
+                        : 'border-border shadow-sm'
+                  }`}
                 >
                   {plan.recommended && (
                     <div className="bg-primary text-primary-foreground text-center py-1 text-sm font-medium">
@@ -274,9 +320,14 @@ const Sell = () => {
                     </ul>
                     <Button 
                       className="w-full" 
-                      variant={plan.recommended ? "default" : "outline"}
+                      variant={selectedPlan === plan.name ? "default" : plan.recommended ? "default" : "outline"}
+                      onClick={() => handlePlanSelect(plan.name)}
                     >
-                      {plan.price !== null ? "Select Plan" : "Contact Sales"}
+                      {plan.price !== null 
+                        ? selectedPlan === plan.name 
+                          ? "Selected" 
+                          : "Select Plan" 
+                        : "Contact Sales"}
                     </Button>
                   </CardContent>
                 </Card>
@@ -479,7 +530,12 @@ const Sell = () => {
                 >
                   Register as a Seller
                 </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full sm:w-auto"
+                  onClick={() => setShowContactForm(true)}
+                >
                   Contact Sales Team
                 </Button>
               </div>
@@ -492,6 +548,19 @@ const Sell = () => {
       
       {/* Accessibility Panel */}
       <AccessibilityPanel />
+      
+      {/* Contact Sales Dialog */}
+      <Dialog open={showContactForm} onOpenChange={setShowContactForm}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Contact Our Sales Team</DialogTitle>
+            <DialogDescription>
+              Get in touch with our sales team for a customized Enterprise plan solution.
+            </DialogDescription>
+          </DialogHeader>
+          <ContactSalesForm onClose={() => setShowContactForm(false)} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
