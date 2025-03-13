@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type NavbarActionsProps = {
@@ -17,6 +17,11 @@ const NavbarActions = ({ cartCount }: NavbarActionsProps) => {
           <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full w-4 h-4 text-[10px] flex items-center justify-center">
             {cartCount}
           </span>
+        </Link>
+      </Button>
+      <Button variant="outline" size="icon" asChild>
+        <Link to="/seller-dashboard">
+          <Store className="h-4 w-4" />
         </Link>
       </Button>
       <Button variant="ghost" asChild>

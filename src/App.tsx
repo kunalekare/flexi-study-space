@@ -19,6 +19,7 @@ import Shop from "./pages/Shop";
 import ShopCategory from "./pages/ShopCategory";
 import Cart from "./pages/Cart";
 import Sell from "./pages/Sell";
+import SellerDashboard from "./pages/SellerDashboard";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="/shop/:categoryId" element={<ShopCategory />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/sell" element={<Sell />} />
+            <Route path="/seller-dashboard" element={<SellerDashboard />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
