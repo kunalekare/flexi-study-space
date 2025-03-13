@@ -1,5 +1,4 @@
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
@@ -18,12 +17,15 @@ import {
   Star
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SellerRegistrationForm from "@/components/seller/SellerRegistrationForm";
 
 const Sell = () => {
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
 
   // Seller benefits
   const benefits = [
@@ -127,8 +129,12 @@ const Sell = () => {
                   Join our marketplace dedicated to accessibility and assistive technology. Make a difference while growing your business.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="w-full sm:w-auto">
-                    Register as a Seller
+                  <Button 
+                    size="lg" 
+                    className="w-full sm:w-auto"
+                    onClick={() => setShowRegistrationForm(!showRegistrationForm)}
+                  >
+                    {showRegistrationForm ? "Hide Registration Form" : "Register as a Seller"}
                   </Button>
                   <Button variant="outline" size="lg" className="w-full sm:w-auto" asChild>
                     <Link to="#plans">
@@ -138,43 +144,47 @@ const Sell = () => {
                 </div>
               </div>
               <div className="md:w-1/2 flex justify-center md:justify-end">
-                <div className="relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-lg blur opacity-25"></div>
-                  <div className="relative bg-background rounded-lg shadow-xl p-6 md:p-8">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center gap-2">
-                        <div className="bg-primary/20 rounded-full p-2">
-                          <Store className="h-5 w-5 text-primary" />
+                {showRegistrationForm ? (
+                  <SellerRegistrationForm />
+                ) : (
+                  <div className="relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-lg blur opacity-25"></div>
+                    <div className="relative bg-background rounded-lg shadow-xl p-6 md:p-8">
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-2">
+                          <div className="bg-primary/20 rounded-full p-2">
+                            <Store className="h-5 w-5 text-primary" />
+                          </div>
+                          <span className="font-semibold">Seller Dashboard</span>
                         </div>
-                        <span className="font-semibold">Seller Dashboard</span>
+                        <div className="text-sm text-muted-foreground">Preview</div>
                       </div>
-                      <div className="text-sm text-muted-foreground">Preview</div>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between p-3 bg-muted/50 rounded-md">
-                        <div className="flex items-center gap-3">
-                          <BarChart3 className="h-5 w-5 text-primary" />
-                          <span>Sales Overview</span>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between p-3 bg-muted/50 rounded-md">
+                          <div className="flex items-center gap-3">
+                            <BarChart3 className="h-5 w-5 text-primary" />
+                            <span>Sales Overview</span>
+                          </div>
+                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
                         </div>
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                      </div>
-                      <div className="flex items-center justify-between p-3 bg-muted/50 rounded-md">
-                        <div className="flex items-center gap-3">
-                          <PackageOpen className="h-5 w-5 text-primary" />
-                          <span>Product Management</span>
+                        <div className="flex items-center justify-between p-3 bg-muted/50 rounded-md">
+                          <div className="flex items-center gap-3">
+                            <PackageOpen className="h-5 w-5 text-primary" />
+                            <span>Product Management</span>
+                          </div>
+                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
                         </div>
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                      </div>
-                      <div className="flex items-center justify-between p-3 bg-muted/50 rounded-md">
-                        <div className="flex items-center gap-3">
-                          <CreditCard className="h-5 w-5 text-primary" />
-                          <span>Payments & Reports</span>
+                        <div className="flex items-center justify-between p-3 bg-muted/50 rounded-md">
+                          <div className="flex items-center gap-3">
+                            <CreditCard className="h-5 w-5 text-primary" />
+                            <span>Payments & Reports</span>
+                          </div>
+                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
                         </div>
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -459,7 +469,14 @@ const Sell = () => {
                 Join our community of sellers making a difference in the lives of people with accessibility needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="w-full sm:w-auto">
+                <Button 
+                  size="lg" 
+                  className="w-full sm:w-auto"
+                  onClick={() => {
+                    setShowRegistrationForm(true);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
                   Register as a Seller
                 </Button>
                 <Button variant="outline" size="lg" className="w-full sm:w-auto">
