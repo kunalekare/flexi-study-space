@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Accessibility, GraduationCap, Home, ShoppingCart, Store, Eye, Shirt, Heart, Headphones, User, LogIn } from "lucide-react";
+import { Accessibility, GraduationCap, Home, ShoppingCart, Store, Eye, Shirt, Heart, Headphones, User, LogIn, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type MobileMenuProps = {
@@ -17,20 +17,27 @@ const NavbarMobileMenu = ({ isOpen, onClose, subjects, accessibilityCategories }
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden fixed inset-0 z-50 bg-background/95 backdrop-blur-sm animate-in fade-in">
-      <div className="absolute top-0 right-0 p-4">
+    <div className="md:hidden fixed inset-0 z-50 bg-background/98 backdrop-blur-md animate-in fade-in">
+      <div className="sticky top-0 z-50 flex items-center justify-between p-4 border-b border-border bg-background/50 backdrop-blur-sm">
+        <Link 
+          to="/" 
+          className="flex items-center gap-2 text-primary font-bold text-xl"
+          onClick={onClose}
+        >
+          <GraduationCap className="h-6 w-6" />
+          <span className="tracking-tight">EduAccess</span>
+        </Link>
+        
         <button 
           onClick={onClose}
           className="p-2 rounded-full hover:bg-muted"
           aria-label="Close menu"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <X className="h-6 w-6" />
         </button>
       </div>
       
-      <div className="h-full overflow-y-auto pb-32 pt-16">
+      <div className="h-[calc(100vh-4rem)] overflow-y-auto pb-32 pt-4">
         <div className="container flex flex-col gap-4 px-4">
           <Link 
             to="/" 
