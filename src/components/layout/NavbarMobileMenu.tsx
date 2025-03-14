@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Accessibility, GraduationCap, Home, ShoppingCart, Store, Eye, Shirt, Heart, Headphones, User, LogIn, X } from "lucide-react";
@@ -17,8 +16,8 @@ const NavbarMobileMenu = ({ isOpen, onClose, subjects, accessibilityCategories }
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden fixed inset-0 z-50 bg-background/98 backdrop-blur-md animate-in fade-in">
-      <div className="sticky top-0 z-50 flex items-center justify-between p-4 border-b border-border bg-background/50 backdrop-blur-sm">
+    <div className="md:hidden fixed inset-0 z-50 bg-white dark:bg-gray-900 animate-in fade-in">
+      <div className="sticky top-0 z-50 flex items-center justify-between p-4 border-b border-border bg-white dark:bg-gray-900 shadow-sm">
         <Link 
           to="/" 
           className="flex items-center gap-2 text-primary font-bold text-xl"
@@ -37,7 +36,7 @@ const NavbarMobileMenu = ({ isOpen, onClose, subjects, accessibilityCategories }
         </button>
       </div>
       
-      <div className="h-[calc(100vh-4rem)] overflow-y-auto pb-32 pt-4">
+      <div className="h-[calc(100vh-4rem)] overflow-y-auto pb-32 pt-4 bg-white dark:bg-gray-900">
         <div className="container flex flex-col gap-4 px-4">
           <Link 
             to="/" 
