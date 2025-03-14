@@ -6,7 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, BookOpen, FileText, Play, CheckCircle, Award } from "lucide-react";
+import { ArrowLeft, BookOpen, FileText, Play, CheckCircle, Award, Video } from "lucide-react";
 import SubjectData from "@/components/subjects/SubjectData";
 import SubjectHeader from "@/components/subjects/SubjectHeader";
 import SubjectSections from "@/components/subjects/SubjectSections";
