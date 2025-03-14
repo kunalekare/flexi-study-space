@@ -12,9 +12,11 @@ interface SubjectHeaderProps {
     textColor: string;
     image: string;
   };
+  onStartLearning: () => void;
+  onLessonPlans: () => void;
 }
 
-const SubjectHeader = ({ subject }: SubjectHeaderProps) => {
+const SubjectHeader = ({ subject, onStartLearning, onLessonPlans }: SubjectHeaderProps) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
       <div className="flex flex-col justify-center">
@@ -24,11 +26,11 @@ const SubjectHeader = ({ subject }: SubjectHeaderProps) => {
         <h1 className="text-4xl md:text-5xl font-bold mb-4">{subject.title}</h1>
         <p className="text-xl text-muted-foreground mb-6">{subject.description}</p>
         <div className="flex flex-wrap gap-3">
-          <Button>
+          <Button onClick={onStartLearning}>
             <Play className="mr-2 h-4 w-4" />
             Start Learning
           </Button>
-          <Button variant="outline">
+          <Button variant="outline" onClick={onLessonPlans}>
             <FileText className="mr-2 h-4 w-4" />
             Lesson Plans
           </Button>
