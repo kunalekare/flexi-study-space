@@ -87,7 +87,7 @@ const ShopCategory = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow pt-24">
+      <main className="flex-grow pt-24 bg-gray-50 dark:bg-gray-950">
         {/* Category Header */}
         <CategoryHeader 
           icon={currentCategory.icon}
@@ -97,12 +97,14 @@ const ShopCategory = () => {
         />
         
         {/* Products Section */}
-        <section className="py-12">
+        <section className="py-8">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
+            {/* Filter Controls */}
+            <div className="mb-6">
               <FilterControls />
             </div>
             
+            {/* Products Grid */}
             <ProductsGrid products={filteredProducts} />
           </div>
         </section>
