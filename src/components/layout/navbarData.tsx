@@ -15,6 +15,7 @@ export const subjects = [
   { name: "Language Arts", path: "/subjects/language-arts" },
   { name: "Social Studies", path: "/subjects/social-studies" },
   { name: "Art & Music", path: "/subjects/art-music" },
+  {name:"Kindergarten", path:"/subjects/kindergarten"}
 ];
 
 export const accessibilityCategories = [

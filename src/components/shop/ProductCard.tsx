@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -28,7 +27,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image
+      image: product.image,
     });
     
     toast({
@@ -39,45 +38,47 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <Card className="group h-full border border-border hover:shadow-lg transition-all duration-300 overflow-hidden">
+    <Card className="group h-full border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden rounded-lg">
       <CardContent className="p-0 h-full flex flex-col">
         {/* Product Image with Discount Badge */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden bg-gray-100">
           <img 
             src={product.image} 
             alt={product.name} 
-            className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
           />
           {product.discount && product.discount > 0 && (
-            <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 text-xs font-bold">
+            <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 text-xs font-bold rounded">
               {product.discount}% OFF
             </div>
           )}
-          <button className="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" aria-label="Add to wishlist">
-            <Heart className="h-4 w-4 text-gray-600 hover:text-red-500" />
+          <button className="absolute top-2 right-2 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white shadow-md" aria-label="Add to wishlist">
+            <Heart className="h-5 w-5 text-gray-600 hover:text-red-500" />
           </button>
         </div>
         
         {/* Product Info */}
         <div className="p-4 flex flex-col flex-grow">
-          <span className="text-xs text-muted-foreground mb-1">{product.category}</span>
-          <h3 className="font-medium text-foreground line-clamp-2 h-12 mb-1 group-hover:text-primary transition-colors">{product.name}</h3>
+          <span className="text-xs text-gray-500 mb-1 uppercase tracking-wide">{product.category}</span>
+          <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 h-10 mb-1 group-hover:text-blue-600 transition-colors">
+            {product.name}
+          </h3>
           
           {/* Ratings */}
           <div className="flex items-center mb-2">
-            <div className="flex items-center bg-green-50 text-green-700 text-xs px-1.5 py-0.5 rounded">
-              <span className="font-semibold mr-0.5">{product.rating}</span>
-              <Star className="h-3 w-3 fill-current" />
+            <div className="flex items-center bg-green-100 text-green-700 text-xs px-2 py-1 rounded-md font-semibold">
+              <span className="mr-1">{product.rating}</span>
+              <Star className="h-4 w-4 fill-current" />
             </div>
-            <span className="text-xs text-muted-foreground ml-2">({product.reviews})</span>
+            <span className="text-xs text-gray-500 ml-2">({product.reviews} Reviews)</span>
           </div>
           
           {/* Price */}
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-lg font-bold">${product.price}</span>
+            <span className="text-lg font-bold text-gray-900">${product.price}</span>
             {product.originalPrice && (
               <>
-                <span className="text-sm text-muted-foreground line-through">${product.originalPrice}</span>
+                <span className="text-sm text-gray-400 line-through">${product.originalPrice}</span>
                 <span className="text-xs text-green-600 font-semibold">
                   Save ${(product.originalPrice - product.price).toFixed(2)}
                 </span>
@@ -88,10 +89,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {/* Add to Cart Button */}
           <div className="mt-auto">
             <Button 
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white" 
+              className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-md shadow-md" 
               onClick={handleAddToCart}
             >
-              <ShoppingCart className="mr-2 h-4 w-4" />
+              <ShoppingCart className="mr-2 h-5 w-5" />
               Add to Cart
             </Button>
           </div>

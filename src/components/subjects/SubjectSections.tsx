@@ -37,6 +37,7 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
     return "dQw4w9WgXcQ"; // This is just a placeholder ID
   };
   
+
   const handlePlayVideo = (lesson: Lesson) => {
     if (lesson.type === "Video") {
       setSelectedVideo(getYoutubeId(lesson.title));
@@ -148,18 +149,19 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
             </DialogTitle>
           </DialogHeader>
           {selectedVideo && (
-            <div className="aspect-video w-full">
-              <iframe 
-                width="100%" 
-                height="100%" 
-                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
-                title="YouTube video player" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen
-              ></iframe>
-            </div>
-          )}
+  <div className="aspect-video w-full">
+    <iframe 
+      width="100%" 
+      height="100%" 
+      src={`https://www.youtube.com/embed/YKNKY8Tk_vk?autoplay=1`}
+      title="YouTube video player" 
+      frameBorder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowFullScreen
+    ></iframe>
+  </div>
+)}
+
         </DialogContent>
       </Dialog>
       
@@ -207,7 +209,7 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
             
             <div className="flex justify-end space-x-2">
               <Button variant="outline">Download Materials</Button>
-              <Button>Start Activity</Button>
+              <Button>Start activity</Button>
             </div>
           </div>
         </DialogContent>

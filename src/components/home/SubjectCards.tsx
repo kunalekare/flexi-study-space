@@ -8,7 +8,8 @@ import {
   Beaker, 
   BookOpen, 
   Globe, 
-  Palette 
+  Palette,
+  Smile
 } from "lucide-react";
 
 const subjects = [
@@ -27,6 +28,23 @@ const subjects = [
       "Adaptive difficulty levels based on progress",
       "Real-life applications like money and time",
       "Speech-to-text support for math problems"
+    ]
+  },
+  {
+    id: "for-kindergarten",
+    title: "For Kindergarten",
+    description: "Fun and interactive learning with songs, stories, and engaging activities designed for early learners.",
+    icon: <Smile className="h-6 w-6" />,
+    color: "bg-pink-50 dark:bg-pink-900/20",
+    textColor: "text-pink-600 dark:text-pink-400",
+    ringColor: "focus-visible:ring-pink-500",
+    features: [
+      "Animated storytelling with simple language",
+      "Sing-along songs for language development",
+      "Interactive shape and color recognition games",
+      "Hands-on learning through virtual crafts",
+      "Basic counting and alphabet activities",
+      "Play-based memory and logic puzzles"
     ]
   },
   {
