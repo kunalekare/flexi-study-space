@@ -1,7 +1,7 @@
 # Welcome to your project
 
 ## Project info
-[Preview](https://speciallyableperson.vercel.app/)
+[Preview](https://edu-access-study-space-7lgrhe3vx-kunals-projects-66cd6b7f.vercel.app)
 ## How can I edit this code?
 
 There are several ways of editing your application. and start prompting.
