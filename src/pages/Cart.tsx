@@ -1,10 +1,9 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // <— Updated
 import { toast } from "@/hooks/use-toast";
 import { 
   ShoppingCart, 
@@ -21,6 +20,9 @@ import { useCart } from "@/contexts/CartContext";
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
+
+  // NEW: Hook for navigation
+  const navigate = useNavigate();
   
   // Scroll to top on page load
   useEffect(() => {
@@ -45,6 +47,8 @@ const Cart = () => {
       description: "This would normally redirect to a payment processor.",
       duration: 5000,
     });
+    // NEW: Redirect to payment
+    navigate("/payment");
   };
 
   return (
@@ -160,7 +164,7 @@ const Cart = () => {
                 </Card>
               </div>
             </div>
-          ) : (
+          ) : ( 
             <div className="text-center py-16">
               <div className="bg-muted/40 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <ShoppingBag className="h-10 w-10 text-muted-foreground" />

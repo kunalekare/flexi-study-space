@@ -8,7 +8,7 @@ const scienceData = {
   icon: React.createElement(Beaker, { className: "h-6 w-6" }),
   color: "bg-emerald-50 dark:bg-emerald-900/20",
   textColor: "text-emerald-600 dark:text-emerald-400",
-  image: "https://images.unsplash.com/photo-1532094349884-543019a69b2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+  image: "https://www.graduateprogram.org/wp-content/uploads/2022/11/Nov-23-Strategies-for-Teaching-Students-with-Disabilities_web.jpg",
   sections: [
     {
       id: "animated-lessons",

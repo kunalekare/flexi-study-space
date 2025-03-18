@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,7 +27,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  
+
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,25 +41,47 @@ const Login = () => {
     },
   });
 
-  function onSubmit(data: LoginFormValues) {
-    // For demonstration purposes, show success toast
-    toast({
-      title: "Login successful",
-      description: "Welcome back to FlexiLearn!",
-    });
-    
-    console.log("Login credentials:", data);
-    
-    // Redirect to home page after login
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
+  async function onSubmit(data: LoginFormValues) {
+    try {
+      const response = await fetch("http://localhost:5001/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Login failed. Please try again.");
+      }
+
+      // Store token or session data (if needed)
+      localStorage.setItem("user", JSON.stringify(result.user));
+
+      // Show success message
+      toast({
+        title: "Login successful",
+        description: "Welcome back to FlexiLearn!",
+      });
+
+      // Redirect after login
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } catch (error: any) {
+      toast({
+        title: "Login failed",
+        description: error.message || "Invalid email or password",
+      });
+    }
   }
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
+
       <main className="flex-grow pt-32 md:pt-40 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto bg-card rounded-xl shadow-sm border border-border p-6 md:p-8">
@@ -68,7 +89,7 @@ const Login = () => {
               <h1 className="text-2xl md:text-3xl font-bold mb-2">Welcome Back</h1>
               <p className="text-muted-foreground">Log in to continue your learning journey</p>
             </div>
-            
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -78,17 +99,13 @@ const Login = () => {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="your.email@example.com" 
-                          type="email" 
-                          {...field} 
-                        />
+                        <Input placeholder="your.email@example.com" type="email" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="password"
@@ -96,27 +113,23 @@ const Login = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="••••••••" 
-                          type="password" 
-                          {...field} 
-                        />
+                        <Input placeholder="••••••••" type="password" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                
+
                 <div className="text-right">
                   <Link to="/forgot-password" className="text-sm text-primary hover:underline">
                     Forgot password?
                   </Link>
                 </div>
-                
+
                 <Button type="submit" className="w-full">
                   Log in
                 </Button>
-                
+
                 <div className="text-center text-sm text-muted-foreground">
                   Don't have an account?{" "}
                   <Link to="/signup" className="text-primary hover:underline">
@@ -128,7 +141,7 @@ const Login = () => {
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

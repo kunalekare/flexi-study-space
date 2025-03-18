@@ -70,26 +70,37 @@ const SellerRegistrationForm = ({ selectedPlan }: SellerRegistrationFormProps) =
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    // In a real application, this would send the data to a backend API
-    console.log("Form submitted:", data);
-    
-    // Show success toast
-    toast({
-      title: "Registration submitted!",
-      description: data.selectedPlan 
-        ? `Your seller account with ${data.selectedPlan} plan is being processed.`
-        : "Your seller account is being processed.",
+
+// This is new registration form of submition
+const onSubmit = async (data: FormValues) => {
+  try {
+    const response = await fetch("http://localhost:5001/api/seller/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
-    
-    // Redirect to seller dashboard with state
-    navigate("/seller-dashboard", { 
-      state: { 
-        fromRegistration: true,
-        selectedPlan: data.selectedPlan 
-      } 
-    });
-  };
+
+    const result = await response.json();
+
+    if (response.ok) {
+      toast({
+        title: "Registration successful!",
+        description: "Your seller account is being processed.",
+      });
+      navigate("/seller-dashboard", { 
+        state: { fromRegistration: true, selectedPlan: data.selectedPlan } 
+      });
+    } else {
+      toast({ title: "Error", description: result.message, variant: "destructive" });
+    }
+  } catch (error) {
+    console.error("Error submitting registration:", error);
+    toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+  }
+};
+
 
   return (
     <div className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-sm border p-6 md:p-8">

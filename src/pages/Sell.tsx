@@ -164,9 +164,7 @@ const Sell = () => {
                     {showRegistrationForm ? "Hide Registration Form" : "Register as a Seller"}
                   </Button>
                   <Button variant="outline" size="lg" className="w-full sm:w-auto" asChild>
-                    <Link to="#plans">
-                      View Pricing Plans
-                    </Link>
+                    <a href="#Plans"> View Pricing Plans</a>
                   </Button>
                 </div>
               </div>
@@ -244,7 +242,7 @@ const Sell = () => {
         </section>
         
         {/* Pricing Plans */}
-        <section id="plans" className="py-16 bg-muted/30">
+        <section id="Plans" className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Seller Plans</h2>

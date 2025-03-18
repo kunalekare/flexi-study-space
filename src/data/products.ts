@@ -152,7 +152,7 @@ export const products = [
   price: 2499.99,
   originalPrice: 2999.99,
   discount: 17,
-  image: "https://example.com/images/braille-ereader.jpg",
+  image: "https://americanthermoform.com/wp-content/uploads/2019/11/Canute-braille-tablet.png",
   rating: 4.9,
   reviews: 89,
   description: "An electronic device that displays text in Braille, allowing visually impaired users to read digital content."
@@ -164,7 +164,7 @@ export const products = [
   price: 799.99,
   originalPrice: 999.99,
   discount: 20,
-  image: "https://example.com/images/sip-and-puff-controller.jpg",
+  image: "https://actionseating.net/assets/img/products/permobil-sip-and-puff-wheelchair-control-system-1.jpg",
   rating: 4.7,
   reviews: 54,
   description: "A system that allows individuals with limited mobility to control a wheelchair using sip and puff actions."
@@ -176,7 +176,7 @@ export const products = [
   price: 149.99,
   originalPrice: 199.99,
   discount: 25,
-  image: "https://example.com/images/voice-recognition-software.jpg",
+  image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRFT5vNFVWZzuU7-YZcFMQLXdJ6AceeZMWyXetDWFGaZO1CktF5tll-DCjTdwK85jzCWO6l6uJtMkOJUbpNd6_JFNzWrtM__miLFlbJAHjp",
   rating: 4.5,
   reviews: 112,
   description: "Software that converts spoken words into text, aiding individuals with mobility or dexterity impairments."
@@ -188,7 +188,7 @@ export const products = [
   price: 299.99,
   originalPrice: 349.99,
   discount: 14,
-  image: "https://example.com/images/portable-video-magnifier.jpg",
+  image: "https://5.imimg.com/data5/SELLER/Default/2022/9/OR/OS/WN/1693712/humanware-explore-12-portable-video-magnifier-500x500.jpg",
   rating: 4.6,
   reviews: 78,
   description: "A handheld device that magnifies text and images, assisting individuals with low vision."
@@ -200,7 +200,7 @@ export const products = [
   price: 99.99,
   originalPrice: 129.99,
   discount: 23,
-  image: "https://example.com/images/adaptive-gaming-controller.jpg",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv-Ujs1PiLwv8MakPcJN3eoYH5Yts_b4DjiQ&s",
   rating: 4.8,
   reviews: 134,
   description: "A customizable game controller designed for gamers with limited mobility."
@@ -212,7 +212,7 @@ export const products = [
   price: 19.99,
   originalPrice: 29.99,
   discount: 33,
-  image: "https://example.com/images/screen-reader-app.jpg",
+  image: "https://i.ytimg.com/vi/RoO6Gs5bFPU/maxresdefault.jpg",
   rating: 4.5,
   reviews: 203,
   description: "An app that reads aloud on-screen content, aiding users with visual impairments."
@@ -224,7 +224,7 @@ export const products = [
   price: 59.99,
   originalPrice: 79.99,
   discount: 25,
-  image: "https://example.com/images/walking-cane-with-seat.jpg",
+  image: "https://m.media-amazon.com/images/I/61DrjqNU2xL._AC_UF1000,1000_QL80_.jpg",
   rating: 4.7,
   reviews: 91,
   description: "A walking cane that doubles as a seat, providing rest for individuals with mobility challenges."
@@ -236,7 +236,7 @@ export const products = [
   price: 199.99,
   originalPrice: 249.99,
   discount: 20,
-  image: "https://example.com/images/hearing-amplifier.jpg",
+  image: "https://m.media-amazon.com/images/I/61b-N78Pt5L._AC_UF1000,1000_QL80_.jpg",
   rating: 4.6,
   reviews: 67,
   description: "A device that amplifies sound while reducing background noise, assisting those with hearing impairments."
@@ -248,7 +248,7 @@ export const products = [
   price: 24.99,
   originalPrice: 34.99,
   discount: 29,
-  image: "https://example.com/images/touchscreen-stylus.jpg",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTekx9ERoLWFP4znrPsvhkC-BjzWbWmBZtDlw&s",
   rating: 4.4,
   reviews: 58,
   description: "A stylus designed for individuals with limited hand dexterity to interact with touchscreens."
@@ -260,7 +260,7 @@ export const products = [
   price: 129.99,
   originalPrice: 159.99,
   discount: 19,
-  image: "https://example.com/images/reading-pen.jpg",
+  image: "https://m.media-amazon.com/images/I/81E8rTFObHL._AC_UF350,350_QL80_.jpg",
   rating: 4.5,
   reviews: 74,
   description: "A pen-shaped device that scans and reads text aloud, aiding those with reading difficulties."
@@ -272,7 +272,7 @@ export const products = [
   price: 1999.99,
   originalPrice: 2499.99,
   discount: 20,
-  image: "https://example.com/images/braille-display.jpg",
+  image: "https://i0.wp.com/enablemart.in/wp-content/uploads/2023/08/Orbit-20x-3.jpg?fit=2078%2C1400&ssl=1?v=1692366631",
   rating: 4.8,
   reviews: 85,
   description: "A refreshable Braille display that helps visually impaired users read digital text."
@@ -284,7 +284,7 @@ export const products = [
   price: 129.99,
   originalPrice: 179.99,
   discount: 28,
-  image: "https://example.com/images/bedside-commode.jpg",
+  image: "https://m.media-amazon.com/images/I/61sMxjBjURL._AC_SL1500_.jpg",
   rating: 4.6,
   reviews: 90,
   description: "A height-adjustable commode for individuals with mobility limitations."
@@ -296,7 +296,7 @@ export const products = [
   price: 349.99,
   originalPrice: 449.99,
   discount: 22,
-  image: "https://example.com/images/smart-glove.jpg",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3wUjrIctepc3vqxJ0TgVFH2eQW6zpH5wl7A&s",
   rating: 4.7,
   reviews: 120,
   description: "A rehabilitation glove that helps individuals recover hand mobility after a stroke."
@@ -308,7 +308,7 @@ export const products = [
   price: 39.99,
   originalPrice: 59.99,
   discount: 33,
-  image: "https://example.com/images/steering-knob.jpg",
+  image: "https://www.mobilityworks.com/wp-content/uploads/spinner-tri-pin.jpg",
   rating: 4.5,
   reviews: 73,
   description: "An ergonomic knob allowing easier steering for drivers with limited mobility."
@@ -320,7 +320,7 @@ export const products = [
   price: 199.99,
   originalPrice: 249.99,
   discount: 20,
-  image: "https://example.com/images/wheelchair-desk.jpg",
+  image: "https://www.marshallfurniture.com/media/djcatalog2/images/item/12/elco-60rl-quick-ship-height-adjust-wheelchair-accessible-desk-in-white-melamine-mfi-50843.1.jpg",
   rating: 4.8,
   reviews: 55,
   description: "A height-adjustable desk designed for wheelchair users."
@@ -332,7 +332,7 @@ export const products = [
   price: 29.99,
   originalPrice: 49.99,
   discount: 40,
-  image: "https://example.com/images/hairdryer-holder.jpg",
+  image: "https://m.media-amazon.com/images/I/61bvyjQ1gdL._AC_UF894,1000_QL80_.jpg",
   rating: 4.7,
   reviews: 102,
   description: "A hands-free hair dryer stand for individuals with limited hand mobility."
@@ -344,7 +344,7 @@ export const products = [
   price: 129.99,
   originalPrice: 179.99,
   discount: 28,
-  image: "https://example.com/images/fall-sensor.jpg",
+  image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSq70W-BLzRX0Hr3Wi7QJpZzspnk7wab3imXNwdKuSBGHkMjax3tN_P196VnRQtHOK7sWsGwGTi4x1FyNDM1UCa4KsEx8UBVyIg3axAh1Kw5N-QryLE2rVg",
   rating: 4.8,
   reviews: 76,
   description: "A sensor that detects falls and automatically alerts caregivers."
@@ -356,7 +356,7 @@ export const products = [
   price: 299.99,
   originalPrice: 349.99,
   discount: 14,
-  image: "https://example.com/images/speech-to-text-device.jpg",
+  image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQIgrWVnEDpfK9P01E6UnpeSGELlt6lciSm_BzRfUjcvqRGqwiSM87KfPUDNsDtHd0fAvF66MrcyobzJ8Dhx7u-515rwTKYsnJonT8lhSCzo25P03zGxZmzKQ",
   rating: 4.6,
   reviews: 87,
   description: "A device that converts speech into text for individuals with speech impairments."
@@ -368,7 +368,7 @@ export const products = [
   price: 3499.99,
   originalPrice: 3999.99,
   discount: 12,
-  image: "https://example.com/images/prosthetic-hand.jpg",
+  image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSEfGKrCUnDjy8silpPYzp3MLwGYRpTdo4cmWDtdK2QvjQu_WOmav5iuJkPIZICu1z3hJNkf85AI9uHVbslWkZYjMipsowOLogXpGNIRBaxM3UWwz7hp5tl",
   rating: 4.9,
   reviews: 65,
   description: "A robotic prosthetic hand with customizable grip settings."
@@ -380,7 +380,7 @@ export const products = [
   price: 39.99,
   originalPrice: 49.99,
   discount: 20,
-  image: "https://example.com/images/adaptive-utensils.jpg",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjGE3kxX_Lptpeu2dnhJfk2kfi7VW_QT9xXg&s",
   rating: 4.6,
   reviews: 114,
   description: "Ergonomically designed utensils for individuals with limited hand dexterity."
@@ -392,7 +392,7 @@ export const products = [
   price: 179.99,
   originalPrice: 229.99,
   discount: 22,
-  image: "https://example.com/images/smart-thermostat.jpg",
+  image: "https://topgunairtx.com/wp-content/uploads/2021/09/3x2-SmartThermostat_Sensor-THREEQUARTER-US_2x.png",
   rating: 4.7,
   reviews: 98,
   description: "A voice-controlled thermostat for individuals with mobility challenges."
@@ -404,7 +404,7 @@ export const products = [
   price: 149.99,
   originalPrice: 199.99,
   discount: 25,
-  image: "https://example.com/images/rollator-walker.jpg",
+  image: "https://images-cdn.ubuy.co.in/633aea874c47412d3a59d833-ubuy-online-shopping.jpg",
   rating: 4.8,
   reviews: 112,
   description: "A foldable, lightweight walker with a built-in seat and storage."
@@ -416,7 +416,7 @@ export const products = [
   price: 299.99,
   originalPrice: 399.99,
   discount: 25,
-  image: "https://example.com/images/bluetooth-hearing-aid.jpg",
+  image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/hearing-aid/1/s/i/old-age-with-auto-noise-cancellation-bluetooth-for-both-ear-bte-original-imah53x2trdvkggn.jpeg?q=90&crop=false",
   rating: 4.6,
   reviews: 88,
   description: "Rechargeable Bluetooth-enabled hearing aids with advanced noise reduction."
@@ -428,7 +428,7 @@ export const products = [
   price: 49.99,
   originalPrice: 69.99,
   discount: 29,
-  image: "https://example.com/images/voice-light-switch.jpg",
+  image: "https://5.imimg.com/data5/SELLER/Default/2020/11/AM/KR/MV/8974620/wifi-switch-diy-wireless-remote-domotica-light-smart-home-automation-relay-module-500x500.jpg",
   rating: 4.7,
   reviews: 77,
   description: "A hands-free, voice-controlled light switch for accessibility."
@@ -440,7 +440,7 @@ export const products = [
   price: 99.99,
   originalPrice: 139.99,
   discount: 29,
-  image: "https://example.com/images/shower-chair.jpg",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoqwO2XLixH3CZ1AABJYHEgMc0hA14UF0kzg&s",
   rating: 4.8,
   reviews: 94,
   description: "A reclining shower chair for safe and comfortable bathing."
@@ -452,7 +452,7 @@ export const products = [
   price: 179.99,
   originalPrice: 229.99,
   discount: 22,
-  image: "https://example.com/images/smart-lock.jpg",
+  image: "https://m.media-amazon.com/images/I/6182pyLo2TL.jpg",
   rating: 4.7,
   reviews: 101,
   description: "A keyless, voice-controlled smart lock for easy access."
@@ -464,7 +464,7 @@ export const products = [
   price: 49.99,
   originalPrice: 69.99,
   discount: 29,
-  image: "https://example.com/images/braille-label-maker.jpg",
+  image: "https://i.ytimg.com/vi/HAbkQzWQrgE/maxresdefault.jpg",
   rating: 4.6,
   reviews: 89,
   description: "A portable label maker that prints in Braille for visually impaired individuals."
@@ -476,7 +476,7 @@ export const products = [
   price: 3999.99,
   originalPrice: 4499.99,
   discount: 11,
-  image: "https://example.com/images/standing-wheelchair.jpg",
+  image: "https://m.media-amazon.com/images/I/71n-8cCIT9L._AC_UF1000,1000_QL80_.jpg",
   rating: 4.9,
   reviews: 47,
   description: "A powered wheelchair that allows users to transition between sitting and standing."

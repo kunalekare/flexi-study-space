@@ -1,10 +1,18 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+// Counting numbers
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 const Hero = () => {
+  // 1) Setup Intersection Observer
+  const [ref, inView] = useInView({
+    threshold: 0.3,     // ~30% in view triggers
+    triggerOnce: true,  // animate only once
+  });
+
   return (
     <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
       {/* Decorative background elements */}
@@ -43,17 +51,29 @@ const Hero = () => {
               </Button>
             </div>
             
-            <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-4">
+            {/* Stats Section */}
+            <div ref={ref} className="flex flex-wrap gap-8 justify-center lg:justify-start pt-4">
+              {/* 1) Learning Resources */}
               <div className="flex flex-col items-center lg:items-start">
-                <span className="text-3xl font-bold text-primary">1000+</span>
+                <span className="text-3xl font-bold text-primary">
+                  {inView ? <CountUp end={1000} suffix="+" duration={2} /> : "0+"}
+                </span>
                 <span className="text-sm text-muted-foreground">Learning Resources</span>
               </div>
+
+              {/* 2) Accessibility Features */}
               <div className="flex flex-col items-center lg:items-start">
-                <span className="text-3xl font-bold text-primary">15+</span>
+                <span className="text-3xl font-bold text-primary">
+                  {inView ? <CountUp end={15} suffix="+" duration={2} /> : "0+"}
+                </span>
                 <span className="text-sm text-muted-foreground">Accessibility Features</span>
               </div>
+
+              {/* 3) Customizable Experience */}
               <div className="flex flex-col items-center lg:items-start">
-                <span className="text-3xl font-bold text-primary">100%</span>
+                <span className="text-3xl font-bold text-primary">
+                  {inView ? <CountUp end={100} suffix="%" duration={2} /> : "0%"}
+                </span>
                 <span className="text-sm text-muted-foreground">Customizable Experience</span>
               </div>
             </div>
@@ -72,7 +92,17 @@ const Hero = () => {
                 <div className="absolute -right-6 top-10 glass-panel px-4 py-3 rounded-lg shadow-lg hover-lift">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                      <svg 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="text-primary"
+                      >
                         <path d="M11 8a1 1 0 0 1 2 0v8a1 1 0 0 1-2 0z" />
                         <path d="M18.63 8.55a.8.8 0 1 1-1.26-.98 7.5 7.5 0 0 1 0 8.86.8.8 0 0 1 1.26-.98 5.9 5.9 0 0 0 0-6.9z" />
                         <path d="M6.37 8.55a5.9 5.9 0 0 0 0 6.89.8.8 0 1 1-1.26.98 7.5 7.5 0 0 1 0-8.86.8.8 0 0 1 1.26.98z" />
@@ -88,7 +118,17 @@ const Hero = () => {
                 <div className="absolute -left-6 bottom-12 glass-panel px-4 py-3 rounded-lg shadow-lg hover-lift">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                      <svg 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="text-primary"
+                      >
                         <circle cx="12" cy="12" r="10" />
                         <path d="M12 18v-3" />
                         <path d="M8 14.5h8" />

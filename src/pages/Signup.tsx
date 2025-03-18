@@ -1,9 +1,9 @@
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -24,7 +24,7 @@ const signupSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
   termsAccepted: z.boolean().refine(val => val === true, {
-    message: "You must accept the terms and conditions"
+    message: "You must accept the terms and conditions",
   }),
 });
 
@@ -33,8 +33,8 @@ type SignupFormValues = z.infer<typeof signupSchema>;
 const Signup = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  
-  // Scroll to top on page load
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -49,25 +49,44 @@ const Signup = () => {
     },
   });
 
-  function onSubmit(data: SignupFormValues) {
-    // For demonstration purposes, show success toast
-    toast({
-      title: "Account created!",
-      description: "Welcome to FlexiLearn! Your learning journey begins now.",
-    });
-    
-    console.log("Signup data:", data);
-    
-    // Redirect to home page after signup
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
+  async function onSubmit(data: SignupFormValues) {
+    console.log("Submitting form with data:", data); // Debugging
+
+    setLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:5001/api/signup", {
+        name: data.name,
+        email: data.email,
+        password: data.password, // Sending plain text password
+      });
+
+      toast({
+        title: "Account created!",
+        description: "Welcome to FlexiLearn! Your learning journey begins now.",
+      });
+
+      console.log("Signup success:", response.data);
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } catch (error) {
+      console.error("Signup error:", error);
+      toast({
+        title: "Signup failed!",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
+
       <main className="flex-grow pt-32 md:pt-40 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto bg-card rounded-xl shadow-sm border border-border p-6 md:p-8">
@@ -75,7 +94,7 @@ const Signup = () => {
               <h1 className="text-2xl md:text-3xl font-bold mb-2">Join FlexiLearn</h1>
               <p className="text-muted-foreground">Create your account to get started</p>
             </div>
-            
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -91,7 +110,7 @@ const Signup = () => {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="email"
@@ -109,7 +128,7 @@ const Signup = () => {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="password"
@@ -127,39 +146,38 @@ const Signup = () => {
                     </FormItem>
                   )}
                 />
-                
+
+                {/* Terms and Conditions Checkbox */}
                 <FormField
                   control={form.control}
                   name="termsAccepted"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                    <FormItem className="flex items-center space-x-2">
                       <FormControl>
                         <Checkbox
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
                       </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-sm font-normal">
-                          I agree to the{" "}
-                          <Link to="/terms" className="text-primary hover:underline">
-                            terms of service
-                          </Link>{" "}
-                          and{" "}
-                          <Link to="/privacy" className="text-primary hover:underline">
-                            privacy policy
-                          </Link>
-                        </FormLabel>
-                        <FormMessage />
-                      </div>
+                      <FormLabel className="text-sm">
+                        I agree to the{" "}
+                        <Link to="/terms" className="text-primary hover:underline">
+                          Terms of Service
+                        </Link>{" "}
+                        and{" "}
+                        <Link to="/privacy" className="text-primary hover:underline">
+                          Privacy Policy
+                        </Link>.
+                      </FormLabel>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
-                
-                <Button type="submit" className="w-full">
-                  Create Account
+
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? "Creating Account..." : "Create Account"}
                 </Button>
-                
+
                 <div className="text-center text-sm text-muted-foreground">
                   Already have an account?{" "}
                   <Link to="/login" className="text-primary hover:underline">
@@ -171,7 +189,7 @@ const Signup = () => {
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );
