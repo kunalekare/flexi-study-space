@@ -131,6 +131,7 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
                 </Card>
               </div>
             </div>
+             {/* End of level */}
           </TabsContent>
         ))}
       </Tabs>

@@ -38,7 +38,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="#" 
+                href="https://www.instagram.com/learn_with_kunal1/" 
                 className="h-9 w-9 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                 aria-label="Instagram"
               >
@@ -98,19 +98,19 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <span className="text-muted-foreground">
-                  123 Education Ave, Learning City, 10001
+                  Gittikhadan,Nagpur 440013, India
                 </span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-5 w-5 text-primary shrink-0" />
                 <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                  (123) 456-7890
+                  (+91) 9322433172
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-primary shrink-0" />
                 <a href="mailto:info@flexilearn.edu" className="text-muted-foreground hover:text-primary transition-colors">
-                  info@flexilearn.edu
+                  ekareks@rknec.edu
                 </a>
               </li>
             </ul>
@@ -138,7 +138,7 @@ const Footer = () => {
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} EduAccess. All rights reserved.
+            © {new Date().getFullYear()} EduAccess. All rights reserved.Made by kunal ekare
           </div>
           <div className="flex gap-4 text-sm">
             <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">

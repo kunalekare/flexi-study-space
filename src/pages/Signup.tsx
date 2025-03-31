@@ -91,7 +91,7 @@ const Signup = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto bg-card rounded-xl shadow-sm border border-border p-6 md:p-8">
             <div className="text-center mb-8">
-              <h1 className="text-2xl md:text-3xl font-bold mb-2">Join FlexiLearn</h1>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2">Join EduAccess</h1>
               <p className="text-muted-foreground">Create your account to get started</p>
             </div>
 

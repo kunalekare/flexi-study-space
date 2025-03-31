@@ -56,17 +56,46 @@ const Contact = () => {
     },
   });
 
-  function onSubmit(data: ContactFormValues) {
-    // For demonstration purposes, show success toast
-    toast({
-      title: "Message sent!",
-      description: "Thank you for contacting us. We'll get back to you soon.",
-    });
-    
-    console.log("Contact form data:", data);
-    form.reset();
+  async function onSubmit(data: ContactFormValues) {
+    const formattedData = {
+      fullName: data.name, // Rename name to fullName
+      email: data.email,
+      phone: data.phone,
+      subject: data.subject,
+      message: data.message,
+    };
+  
+    try {
+      const response = await fetch("http://localhost:5001/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formattedData), // Send formatted data
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong");
+      }
+  
+      toast({
+        title: "Message sent!",
+        description: "Thank you for contacting us. We'll get back to you soon.",
+      });
+  
+      form.reset();
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message",
+        variant: "destructive",
+      });
+    }
   }
-
+  
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -91,7 +120,7 @@ const Contact = () => {
                 <h3 className="text-lg font-semibold mb-2">Email Us</h3>
                 <p className="text-muted-foreground mb-4">For general inquiries and support</p>
                 <a href="mailto:support@flexilearn.example" className="text-primary hover:underline">
-                  support@flexilearn.example
+                 ekareks@rknec.edu
                 </a>
               </div>
               
@@ -102,7 +131,7 @@ const Contact = () => {
                 <h3 className="text-lg font-semibold mb-2">Call Us</h3>
                 <p className="text-muted-foreground mb-4">Speak with our accessibility experts</p>
                 <a href="tel:+1234567890" className="text-primary hover:underline">
-                  +1 (234) 567-890
+                  +91 9322433172
                 </a>
               </div>
               
@@ -114,7 +143,7 @@ const Contact = () => {
                 <p className="text-muted-foreground mb-4">We're available to assist you</p>
                 <p className="text-sm">
                   Monday - Friday: 9AM - 6PM<br />
-                  Saturday: 10AM - 4PM<br />
+                  Saturday: 10AM - 5PM<br />
                   Sunday: Closed
                 </p>
               </div>
@@ -130,10 +159,10 @@ const Contact = () => {
                     <div>
                       <h3 className="font-medium mb-1">Main Headquarters</h3>
                       <p className="text-muted-foreground text-sm">
-                        123 Accessibility Avenue<br />
-                        Innovation District<br />
-                        San Francisco, CA 94103<br />
-                        United States
+                        Ramdeobaba university<br />
+                        Gittikhadan , Nagpur District<br />
+                        Maharastra, Pin :440013<br />
+                        India
                       </p>
                     </div>
                   </div>

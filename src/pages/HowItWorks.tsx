@@ -20,7 +20,7 @@ const HowItWorks = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-3xl md:text-5xl font-bold mb-8 text-center">
-              How <span className="text-primary">FlexiLearn</span> Works
+              How <span className="text-primary">EduAccess</span> Works
             </h1>
             
             <div className="space-y-16 mt-12">

@@ -84,7 +84,7 @@ const NavbarDropdownMenus = ({ subjects, accessibilityCategories }: NavbarDropdo
       
       <Link to="/sell" className="px-3 py-2 text-foreground/80 hover:text-primary transition-colors flex items-center">
         <Store className="h-4 w-4 mr-1" />
-        Sell on AccessiShop
+        Sell on EduAccess
       </Link>
     </nav>
   );
