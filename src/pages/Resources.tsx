@@ -1,1117 +1,640 @@
 
-// import React, { useEffect, useState } from "react";
-// import { Button } from "@/components/ui/button";
-// import { Link } from "react-router-dom";
-// import Navbar from "@/components/layout/Navbar";
-// import Footer from "@/components/layout/Footer";
-// import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
-// import { 
-//   Tabs, 
-//   TabsContent, 
-//   TabsList, 
-//   TabsTrigger 
-// } from "@/components/ui/tabs";
-// import { 
-//   Card, 
-//   CardContent, 
-//   CardDescription, 
-//   CardFooter, 
-//   CardHeader, 
-//   CardTitle 
-// } from "@/components/ui/card";
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogClose,
-//   DialogFooter,
-// } from "@/components/ui/dialog";
-// import { Input } from "@/components/ui/input";
-// import { Badge } from "@/components/ui/badge";
-// import { FileText, Video, Download, Book, Lightbulb, Users, Search, BookOpen, GraduationCap, Star, X } from "lucide-react";
-// import { toast } from "sonner";
-
-// const resourceCategories = [
-//   {
-//     id: "guides",
-//     name: "Learning Guides",
-//     icon: <FileText className="h-5 w-5" />,
-//     resources: [
-//       {
-//         title: "Adaptive Learning Strategies",
-//         description: "A comprehensive guide on different learning approaches for various disabilities.",
-//         type: "PDF",
-//         link: "#",
-//         tags: ["adaptive", "strategies", "disabilities"],
-//         level: "Intermediate",
-//         rating: 4.7,
-        
-//         downloads: 1252
-//       },
-//       {
-//         title: "Visual Learning Techniques",
-//         description: "Specialized methods for visual learners with accessibility considerations.",
-//         type: "PDF",
-//         link: "#",
-//         tags: ["visual", "techniques", "accessibility"],
-//         level: "Beginner",
-//         rating: 4.5,
-//         downloads: 983
-//       },
-//       {
-//         title: "Auditory Processing Guide",
-//         description: "Techniques to improve learning for students with auditory processing differences.",
-//         type: "PDF",
-//         link: "#",
-//         tags: ["auditory", "processing", "hearing"],
-//         level: "Advanced",
-//         rating: 4.8,
-//         downloads: 756
-//       }
-//     ]
-//   },
-//   {
-//     id: "videos",
-//     name: "Video Tutorials",
-//     icon: <Video className="h-5 w-5" />,
-//     resources: [
-//       {
-//         title: "Introduction to Accessible Math",
-//         description: "Learn about accessible ways to approach mathematics with visual or cognitive differences.",
-//         type: "Video",
-//         duration: "15 mins",
-//         link: "#",
-//         tags: ["math", "accessibility", "visual"],
-//         level: "Beginner",
-//         rating: 4.6,
-//         views: 3421
-//       },
-//       {
-//         title: "Science Experiments with Assistive Tools",
-//         description: "How to conduct science experiments using assistive technology and tools.",
-//         type: "Video",
-//         duration: "22 mins",
-//         link: "#",
-//         tags: ["science", "experiments", "assistive tech"],
-//         level: "Intermediate",
-//         rating: 4.9,
-//         views: 2187
-//       },
-//       {
-//         title: "Language Arts for All",
-//         description: "Inclusive approaches to teaching and learning language arts and literature.",
-//         type: "Video",
-//         duration: "18 mins",
-//         link: "#",
-//         tags: ["language", "literature", "inclusive"],
-//         level: "Beginner",
-//         rating: 4.4,
-//         views: 1856
-//       }
-//     ]
-//   },
-//   {
-//     id: "tools",
-//     name: "Tools & Downloads",
-//     icon: <Download className="h-5 w-5" />,
-//     resources: [
-//       {
-//         title: "Math Formula Reader",
-//         description: "A tool that converts mathematical formulas into accessible formats.",
-//         type: "Software",
-//         platform: "Windows/Mac",
-//         link: "#",
-//         tags: ["math", "formulas", "accessibility"],
-//         level: "All Levels",
-//         rating: 4.7,
-//         downloads: 5234
-//       },
-//       {
-//         title: "Visual Schedule Creator",
-//         description: "Create customizable visual schedules for daily learning activities.",
-//         type: "Web App",
-//         link: "#",
-//         tags: ["visual", "schedule", "planning"],
-//         level: "Beginner",
-//         rating: 4.8,
-//         downloads: 3867
-//       },
-//       {
-//         title: "Customizable Worksheet Templates",
-//         description: "Adaptable worksheet templates for different learning needs and subjects.",
-//         type: "Templates",
-//         format: "DOCX/PDF",
-//         link: "#",
-//         tags: ["worksheets", "templates", "customizable"],
-//         level: "Intermediate",
-//         rating: 4.5,
-//         downloads: 7123
-//       }
-//     ]
-//   }
-// ];
-
-// const Resources = () => {
-//   // Scroll to top on page load
-//   useEffect(() => {
-//     window.scrollTo(0, 0);
-//   }, []);
-
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const [activeCategory, setActiveCategory] = useState("guides");
-//   const [selectedResource, setSelectedResource] = useState<any>(null);
-//   const [isResourceOpen, setIsResourceOpen] = useState(false);
-//   const [savedResources, setSavedResources] = useState<string[]>([]);
-
-//   const handleSearch = (e: React.FormEvent) => {
-//     e.preventDefault();
-//     // In a real app, you would filter resources based on the search query
-//     toast.success(`Searching for "${searchQuery}"...`);
-//   };
-
-//   const filteredResources = resourceCategories.find(cat => cat.id === activeCategory)?.resources.filter(resource => 
-//     resource.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-//     resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//     (resource.tags && resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())))
-//   );
-
-//   const handleResourceClick = (resource: any) => {
-//     setSelectedResource(resource);
-//     setIsResourceOpen(true);
-//   };
-
-//   const handleSaveResource = (title: string) => {
-//     if (savedResources.includes(title)) {
-//       setSavedResources(savedResources.filter(r => r !== title));
-//       toast.success(`Removed "${title}" from saved resources`);
-//     } else {
-//       setSavedResources([...savedResources, title]);
-//       toast.success(`Saved "${title}" to your resources`);
-//     }
-//   };
-
-//   const handleDownload = (resource: any) => {
-//     // In a real app, this would trigger an actual download
-//     toast.success(`Downloading "${resource.title}"`);
-//   };
-
-//   return (
-//     <div className="min-h-screen flex flex-col">
-//       <Navbar />
-      
-//       <main className="flex-grow pt-32 md:pt-40 pb-16">
-//         <div className="container mx-auto px-4">
-//           <div className="max-w-5xl mx-auto">
-//             <div className="text-center mb-12">
-//               <h1 className="text-3xl md:text-5xl font-bold mb-4">
-//                 Learning <span className="text-primary">Resources</span>
-//               </h1>
-//               <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-//                 Explore our collection of accessible learning resources designed to support different learning needs and styles.
-//               </p>
-              
-//               {/* Search Bar */}
-//               <form onSubmit={handleSearch} className="relative max-w-md mx-auto mb-4">
-//                 <Input
-//                   type="text"
-//                   placeholder="Search resources..."
-//                   value={searchQuery}
-//                   onChange={(e) => setSearchQuery(e.target.value)}
-//                   className="pl-10 pr-4 py-2"
-//                 />
-//                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-//                 <Button type="submit" size="sm" className="absolute right-1 top-1/2 transform -translate-y-1/2">
-//                   Search
-//                 </Button>
-//               </form>
-              
-//               {/* Resource Stats */}
-//               <div className="flex flex-wrap justify-center gap-4 mb-10">
-//                 <div className="bg-muted px-4 py-2 rounded-full flex items-center">
-//                   <BookOpen className="h-4 w-4 mr-2 text-primary" />
-//                   <span className="text-sm">100+ Learning Resources</span>
-//                 </div>
-//                 <div className="bg-muted px-4 py-2 rounded-full flex items-center">
-//                   <GraduationCap className="h-4 w-4 mr-2 text-primary" />
-//                   <span className="text-sm">All Learning Levels</span>
-//                 </div>
-//                 <div className="bg-muted px-4 py-2 rounded-full flex items-center">
-//                   <Users className="h-4 w-4 mr-2 text-primary" />
-//                   <span className="text-sm">Teacher & Student Resources</span>
-//                 </div>
-//               </div>
-//             </div>
-            
-//             <Tabs defaultValue="guides" className="w-full" onValueChange={setActiveCategory}>
-//               <TabsList className="grid grid-cols-3 mb-8">
-//                 {resourceCategories.map((category) => (
-//                   <TabsTrigger key={category.id} value={category.id} className="flex items-center gap-2">
-//                     {category.icon}
-//                     <span className="hidden sm:inline">{category.name}</span>
-//                   </TabsTrigger>
-//                 ))}
-//               </TabsList>
-              
-//               {resourceCategories.map((category) => (
-//                 <TabsContent key={category.id} value={category.id} className="mt-4">
-//                   {filteredResources && filteredResources.length > 0 ? (
-//                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//                       {filteredResources.map((resource, index) => (
-//                         <Card key={index} className="hover-lift group cursor-pointer transition-all duration-300">
-//                           <CardHeader>
-//                             <div className="flex items-start justify-between">
-//                               <CardTitle 
-//                                 className="text-lg group-hover:text-primary transition-colors" 
-//                                 onClick={() => handleResourceClick(resource)}
-//                               >
-//                                 {resource.title}
-//                               </CardTitle>
-//                               <div className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-//                                  {resource?.type}
-//                                  {resource?.duration && ` • ${resource.duration}`}
-//                               </div>
-
-//                             </div>
-//                             <CardDescription>{resource.description}</CardDescription>
-//                           </CardHeader>
-//                           <CardContent>
-//                             <div className="flex flex-wrap gap-1 mb-3">
-//                               {resource.tags && resource.tags.map((tag: string, i: number) => (
-//                                 <Badge key={i} variant="outline" className="text-xs">{tag}</Badge>
-//                               ))}
-//                             </div>
-//                             <div className="flex items-center justify-between text-sm">
-//                               <div className="flex items-center">
-//                                 <Star className="h-4 w-4 text-amber-500 mr-1" />
-//                                 <span>{resource.rating}</span>
-//                               </div>
-//                               <span className="text-muted-foreground">
-//                                 {resource.level}
-//                               </span>
-//                             </div>
-//                           </CardContent>
-//                           <CardFooter className="flex justify-between">
-//                             <Button 
-//                               variant="outline" 
-//                               size="sm" 
-//                               className="text-xs"
-//                               onClick={() => handleSaveResource(resource.title)}
-//                             >
-//                               {savedResources.includes(resource.title) ? 'Saved' : 'Save for Later'}
-//                             </Button>
-//                             <Button variant="default" size="sm" className="text-xs" onClick={() => handleResourceClick(resource)}>
-//                               {resource.type === "PDF" || resource.type === "Templates" ? "Preview" : 
-//                               resource.type === "Video" ? "Watch Now" : 
-//                               resource.type === "Software" || resource.type === "Web App" ? "Get Access" : 
-//                               "View Resource"}
-//                             </Button>
-//                           </CardFooter>
-//                         </Card>
-//                       ))}
-//                     </div>
-//                   ) : (
-//                     <div className="text-center py-12">
-//                       <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-//                       <h3 className="text-lg font-medium mb-2">No resources found</h3>
-//                       <p className="text-muted-foreground">
-//                         Try adjusting your search query or browse another category.
-//                       </p>
-//                     </div>
-//                   )}
-//                 </TabsContent>
-//               ))}
-//             </Tabs>
-            
-//             <div className="mt-20 bg-muted p-8 rounded-xl border border-border">
-//               <div className="flex flex-col md:flex-row items-center gap-6">
-//                 <div className="md:w-1/4 flex justify-center">
-//                   <div className="h-24 w-24 rounded-full bg-primary/20 flex items-center justify-center">
-//                     <Lightbulb className="h-12 w-12 text-primary" />
-//                   </div>
-//                 </div>
-//                 <div className="md:w-3/4 text-center md:text-left">
-//                   <h2 className="text-2xl font-bold mb-2">Need Personalized Resources?</h2>
-//                   <p className="text-muted-foreground mb-4">
-//                     Our educational specialists can help create custom learning materials tailored to specific needs.
-//                   </p>
-//                   <Button asChild>
-//                     <Link to="/contact">
-//                       <Users className="mr-2 h-4 w-4" />
-//                       Request Custom Resources
-//                     </Link>
-//                   </Button>
-//                 </div>
-//               </div>
-//             </div>
-            
-//             {/* Featured Collections */}
-//             <div className="mt-16">
-//               <h2 className="text-2xl font-bold mb-6 text-center">Featured Resource Collections</h2>
-//               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-//                 <Card className="hover-lift">
-//                   <CardHeader className="pb-2">
-//                     <CardTitle className="text-lg flex items-center">
-//                       <BookOpen className="h-5 w-5 mr-2 text-primary" />
-//                       Math Learning Path
-//                     </CardTitle>
-//                   </CardHeader>
-//                   <CardContent>
-//                     <p className="text-sm text-muted-foreground mb-3">
-//                       A comprehensive collection of resources for learning mathematics at any level.
-//                     </p>
-//                     <div className="flex justify-between text-sm">
-//                       <span>12 resources</span>
-//                       <span className="text-primary">Beginner to Advanced</span>
-//                     </div>
-//                   </CardContent>
-//                   <CardFooter>
-//                     <Button variant="outline" size="sm" className="w-full">
-//                       Explore Collection
-//                     </Button>
-//                   </CardFooter>
-//                 </Card>
-                
-//                 <Card className="hover-lift">
-//                   <CardHeader className="pb-2">
-//                     <CardTitle className="text-lg flex items-center">
-//                       <Video className="h-5 w-5 mr-2 text-primary" />
-//                       Literacy Development
-//                     </CardTitle>
-//                   </CardHeader>
-//                   <CardContent>
-//                     <p className="text-sm text-muted-foreground mb-3">
-//                       Resources focused on reading and writing skills for diverse learning needs.
-//                     </p>
-//                     <div className="flex justify-between text-sm">
-//                       <span>15 resources</span>
-//                       <span className="text-primary">All Levels</span>
-//                     </div>
-//                   </CardContent>
-//                   <CardFooter>
-//                     <Button variant="outline" size="sm" className="w-full">
-//                       Explore Collection
-//                     </Button>
-//                   </CardFooter>
-//                 </Card>
-                
-//                 <Card className="hover-lift">
-//                   <CardHeader className="pb-2">
-//                     <CardTitle className="text-lg flex items-center">
-//                       <GraduationCap className="h-5 w-5 mr-2 text-primary" />
-//                       Teacher Toolkit
-//                     </CardTitle>
-//                   </CardHeader>
-//                   <CardContent>
-//                     <p className="text-sm text-muted-foreground mb-3">
-//                       Essential resources for educators working with diverse learning abilities.
-//                     </p>
-//                     <div className="flex justify-between text-sm">
-//                       <span>20 resources</span>
-//                       <span className="text-primary">Professional</span>
-//                     </div>
-//                   </CardContent>
-//                   <CardFooter>
-//                     <Button variant="outline" size="sm" className="w-full">
-//                       Explore Collection
-//                     </Button>
-//                   </CardFooter>
-//                 </Card>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </main>
-      
-//       <Footer />
-      
-//       <AccessibilityPanel />
-      
-//       {/* Resource Preview Dialog */}
-//       <Dialog open={isResourceOpen} onOpenChange={setIsResourceOpen}>
-//         <DialogContent className="sm:max-w-[800px]">
-//           <DialogHeader>
-//             <DialogTitle className="flex justify-between items-center">
-//               <span>{selectedResource?.title}</span>
-//               <DialogClose asChild>
-//                 <Button variant="ghost" size="icon">
-//                   <X className="h-4 w-4" />
-//                 </Button>
-//               </DialogClose>
-//             </DialogTitle>
-//           </DialogHeader>
-          
-//           {selectedResource && (
-//             <div className="space-y-6">
-//               <div className="bg-muted p-4 rounded-lg">
-//                 <div className="flex items-center justify-between mb-4">
-//                   <div className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-//                     {selectedResource.type}
-//                     {selectedResource.duration && ` • ${selectedResource.duration}`}
-//                   </div>
-//                   <div className="flex items-center">
-//                     <Star className="h-4 w-4 text-amber-500 mr-1" />
-//                     <span className="text-sm font-medium">{selectedResource.rating}</span>
-//                     <span className="mx-2 text-muted-foreground">•</span>
-//                     <span className="text-sm text-muted-foreground">
-//                       {selectedResource.downloads ? `${selectedResource.downloads} downloads` : 
-//                        selectedResource.views ? `${selectedResource.views} views` : ''}
-//                     </span>
-//                   </div>
-//                 </div>
-                
-//                 <p className="text-sm mb-4">{selectedResource.description}</p>
-                
-//                 <div className="flex flex-wrap gap-1 mb-4">
-//                   <span className="text-sm font-medium mr-2">Tags:</span>
-//                   {selectedResource.tags && selectedResource.tags.map((tag: string, i: number) => (
-//                     <Badge key={i} variant="outline" className="text-xs">{tag}</Badge>
-//                   ))}
-//                 </div>
-                
-//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-//                   <div>
-//                     <span className="font-medium">Resource Type:</span> {selectedResource.type}
-//                     {selectedResource.format && ` (${selectedResource.format})`}
-//                   </div>
-//                   <div>
-//                     <span className="font-medium">Level:</span> {selectedResource.level}
-//                   </div>
-//                   {selectedResource.platform && (
-//                     <div>
-//                       <span className="font-medium">Platform:</span> {selectedResource.platform}
-//                     </div>
-//                   )}
-//                   {selectedResource.duration && (
-//                     <div>
-//                       <span className="font-medium">Duration:</span> {selectedResource.duration}
-//                     </div>
-//                   )}
-//                 </div>
-//               </div>
-              
-//               {/* Preview Area */}
-//               <div className="aspect-video w-full bg-black/5 rounded-lg border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-//                 {selectedResource.type === "Video" ? (
-//                   <div className="text-center">
-//                     <Play className="h-12 w-12 text-primary mx-auto mb-2" />
-//                     <p className="text-muted-foreground">Click to play video</p>
-//                   </div>
-//                 ) : selectedResource.type === "PDF" || selectedResource.type === "Templates" ? (
-//                   <div className="text-center">
-//                     <FileText className="h-12 w-12 text-primary mx-auto mb-2" />
-//                     <p className="text-muted-foreground">Preview document</p>
-//                   </div>
-//                 ) : (
-//                   <div className="text-center">
-//                     <Download className="h-12 w-12 text-primary mx-auto mb-2" />
-//                     <p className="text-muted-foreground">Get {selectedResource.type}</p>
-//                   </div>
-//                 )}
-//               </div>
-              
-//               {/* Related Resources */}
-//               <div>
-//                 <h3 className="text-lg font-medium mb-3">You might also like:</h3>
-//                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-//                   {resourceCategories
-//                     .find(cat => cat.id === activeCategory)?.resources
-//                     .filter(res => res.title !== selectedResource?.title)
-//                     .slice(0, 3)
-//                     .map((res, i) => (
-//                       <Card key={i} className="hover-lift cursor-pointer" onClick={() => handleResourceClick(res)}>
-//                         <CardHeader className="p-3">
-//                           <CardTitle className="text-sm">{res.title}</CardTitle>
-//                         </CardHeader>
-//                       </Card>
-//                     ))}
-//                 </div>
-//               </div>
-              
-//               <DialogFooter>
-//                 <Button 
-//                   variant="outline" 
-//                   onClick={() => handleSaveResource(selectedResource.title)}
-//                 >
-//                   {savedResources.includes(selectedResource.title) ? 'Saved' : 'Save for Later'}
-//                 </Button>
-//                 <Button onClick={() => handleDownload(selectedResource)}>
-//                   {selectedResource.type === "PDF" || selectedResource.type === "Templates" ? "Download" : 
-//                    selectedResource.type === "Video" ? "Watch Now" : 
-//                    selectedResource.type === "Software" || selectedResource.type === "Web App" ? "Get Access" : 
-//                    "Access Resource"}
-//                 </Button>
-//               </DialogFooter>
-//             </div>
-//           )}
-//         </DialogContent>
-//       </Dialog>
-//     </div>
-//   );
-// };
-
-// export default Resources;
-import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AccessibilityPanel from "@/components/ui/AccessibilityPanel";
-import { 
-  Tabs, 
-  TabsContent, 
-  TabsList, 
-  TabsTrigger 
-} from "@/components/ui/tabs";
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogClose,
-  DialogFooter,
-} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { 
+  Search, 
+  BookOpen, 
+  FileText, 
+  Video, 
+  Download,
+  Globe,
+  Clock,
+  X,
+  Heart,
+  Play,
+  Filter
+} from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Video, Download, Book, Lightbulb, Users, Search, BookOpen, GraduationCap, Star, X, Play } from "lucide-react";
-import { toast } from "sonner";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
+// Define resource types
+type ResourceType = "video" | "article" | "pdf" | "interactive" | "worksheet" | "tool";
+
+// Resource interface
 interface Resource {
+  id: string;
   title: string;
   description: string;
-  type: string;
+  type: ResourceType | string; 
   link: string;
   tags: string[];
   level: string;
   rating: number;
-  downloads?: number;
-  views?: number;
+  thumbnail?: string;
+  // These properties might not exist on all resources
   duration?: string;
-  platform?: string;
+  views?: number;
+  downloads?: number;
   format?: string;
+  platform?: string;
 }
 
-interface ResourceCategory {
-  id: string;
-  name: string;
-  icon: React.ReactNode;
-  resources: Resource[];
-}
+const resources: Resource[] = [
+  {
+    id: "r1",
+    title: "Understanding Learning Disabilities",
+    description: "A comprehensive introduction to different types of learning disabilities and effective teaching strategies.",
+    type: "video",
+    duration: "18:45",
+    link: "https://example.com/video1",
+    tags: ["learning disabilities", "teaching strategies", "education"],
+    level: "beginner",
+    rating: 4.8,
+    views: 12500,
+    thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+  },
+  {
+    id: "r2",
+    title: "Assistive Technology Guide",
+    description: "Explore various technologies that can help students with different learning needs.",
+    type: "pdf",
+    format: "PDF Guide",
+    link: "https://example.com/pdf1",
+    tags: ["assistive technology", "accessibility", "inclusive education"],
+    level: "intermediate",
+    rating: 4.5,
+    downloads: 8750,
+    thumbnail: "https://images.unsplash.com/photo-1593642533144-3d62aa4783ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80"
+  },
+  {
+    id: "r3",
+    title: "Inclusive Classroom Strategies",
+    description: "Learn how to create an inclusive classroom environment for students with diverse needs.",
+    type: "article",
+    duration: "10 min read",
+    link: "https://example.com/article1",
+    tags: ["inclusive education", "classroom management", "teaching strategies"],
+    level: "beginner",
+    rating: 4.7,
+    views: 9500,
+    thumbnail: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "r4",
+    title: "Math Manipulatives for Visual Learners",
+    description: "Interactive tools and strategies for teaching math concepts to visual learners.",
+    type: "interactive",
+    duration: "Self-paced",
+    link: "https://example.com/interactive1",
+    tags: ["mathematics", "visual learning", "manipulatives"],
+    level: "intermediate",
+    rating: 4.9,
+    views: 7200,
+    thumbnail: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "r5",
+    title: "Adapting Materials for Different Learning Styles",
+    description: "A guide to modifying educational materials to accommodate various learning styles and needs.",
+    type: "worksheet",
+    format: "Printable Guide",
+    link: "https://example.com/worksheet1",
+    tags: ["learning styles", "material adaptation", "differentiation"],
+    level: "advanced",
+    rating: 4.6,
+    downloads: 6300,
+    thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+  },
+  {
+    id: "r6",
+    title: "Social Skills Development",
+    description: "Strategies for helping students develop social skills through inclusive activities.",
+    type: "video",
+    duration: "22:15",
+    link: "https://example.com/video2",
+    tags: ["social skills", "inclusive activities", "emotional intelligence"],
+    level: "intermediate",
+    rating: 4.7,
+    views: 8300,
+    thumbnail: "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+  },
+  {
+    id: "r7",
+    title: "Text-to-Speech Tools Comparison",
+    description: "An in-depth analysis of various text-to-speech tools and their applications in education.",
+    type: "article",
+    duration: "15 min read",
+    link: "https://example.com/article2",
+    tags: ["text-to-speech", "assistive technology", "educational tools"],
+    level: "beginner",
+    rating: 4.4,
+    views: 5600,
+    thumbnail: "https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+  },
+  {
+    id: "r8",
+    title: "Individualized Education Program (IEP) Guide",
+    description: "A comprehensive guide to creating effective IEPs for students with special educational needs.",
+    type: "pdf",
+    format: "Comprehensive Guide",
+    link: "https://example.com/pdf2",
+    tags: ["IEP", "special education", "educational planning"],
+    level: "advanced",
+    rating: 4.9,
+    downloads: 12400,
+    thumbnail: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+  },
+  {
+    id: "r9",
+    title: "Multisensory Teaching Techniques",
+    description: "Explore teaching methods that engage multiple senses to enhance learning retention.",
+    type: "tool",
+    platform: "Web Application",
+    link: "https://example.com/tool1",
+    tags: ["multisensory learning", "teaching techniques", "sensory engagement"],
+    level: "intermediate",
+    rating: 4.6,
+    downloads: 9800,
+    thumbnail: "https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+  }
+];
 
-const resourceCategories: ResourceCategory[] = [
+const featuredCollections = [
   {
-    id: "guides",
-    name: "Learning Guides",
-    icon: <FileText className="h-5 w-5" />,
-    resources: [
-      {
-        title: "Adaptive Learning Strategies",
-        description: "A comprehensive guide on different learning approaches for various disabilities.",
-        type: "PDF",
-        link: "#",
-        tags: ["adaptive", "strategies", "disabilities"],
-        level: "Intermediate",
-        rating: 4.7,
-        downloads: 1252
-      },
-      {
-        title: "Visual Learning Techniques",
-        description: "Specialized methods for visual learners with accessibility considerations.",
-        type: "PDF",
-        link: "#",
-        tags: ["visual", "techniques", "accessibility"],
-        level: "Beginner",
-        rating: 4.5,
-        downloads: 983
-      },
-      {
-        title: "Auditory Processing Guide",
-        description: "Techniques to improve learning for students with auditory processing differences.",
-        type: "PDF",
-        link: "#",
-        tags: ["auditory", "processing", "hearing"],
-        level: "Advanced",
-        rating: 4.8,
-        downloads: 756
-      }
-    ]
+    title: "Getting Started with Inclusive Education",
+    description: "Essential resources for educators new to inclusive teaching practices",
+    resources: ["r1", "r3", "r7"],
+    icon: BookOpen
   },
   {
-    id: "videos",
-    name: "Video Tutorials",
-    icon: <Video className="h-5 w-5" />,
-    resources: [
-      {
-        title: "Introduction to Accessible Math",
-        description: "Learn about accessible ways to approach mathematics with visual or cognitive differences.",
-        type: "Video",
-        duration: "15 mins",
-        link: "#",
-        tags: ["math", "accessibility", "visual"],
-        level: "Beginner",
-        rating: 4.6,
-        views: 3421
-      },
-      {
-        title: "Science Experiments with Assistive Tools",
-        description: "How to conduct science experiments using assistive technology and tools.",
-        type: "Video",
-        duration: "22 mins",
-        link: "#",
-        tags: ["science", "experiments", "assistive tech"],
-        level: "Intermediate",
-        rating: 4.9,
-        views: 2187
-      },
-      {
-        title: "Language Arts for All",
-        description: "Inclusive approaches to teaching and learning language arts and literature.",
-        type: "Video",
-        duration: "18 mins",
-        link: "#",
-        tags: ["language", "literature", "inclusive"],
-        level: "Beginner",
-        rating: 4.4,
-        views: 1856
-      }
-    ]
+    title: "Technology for Accessibility",
+    description: "Tools and guides for implementing assistive technology in the classroom",
+    resources: ["r2", "r7", "r9"],
+    icon: Globe
   },
   {
-    id: "tools",
-    name: "Tools & Downloads",
-    icon: <Download className="h-5 w-5" />,
-    resources: [
-      {
-        title: "Math Formula Reader",
-        description: "A tool that converts mathematical formulas into accessible formats.",
-        type: "Software",
-        platform: "Windows/Mac",
-        link: "#",
-        tags: ["math", "formulas", "accessibility"],
-        level: "All Levels",
-        rating: 4.7,
-        downloads: 5234
-      },
-      {
-        title: "Visual Schedule Creator",
-        description: "Create customizable visual schedules for daily learning activities.",
-        type: "Web App",
-        link: "#",
-        tags: ["visual", "schedule", "planning"],
-        level: "Beginner",
-        rating: 4.8,
-        downloads: 3867
-      },
-      {
-        title: "Customizable Worksheet Templates",
-        description: "Adaptable worksheet templates for different learning needs and subjects.",
-        type: "Templates",
-        format: "DOCX/PDF",
-        link: "#",
-        tags: ["worksheets", "templates", "customizable"],
-        level: "Intermediate",
-        rating: 4.5,
-        downloads: 7123
-      }
-    ]
+    title: "Advanced Teaching Strategies",
+    description: "In-depth resources for experienced educators looking to enhance their skills",
+    resources: ["r5", "r8", "r9"],
+    icon: FileText
   }
 ];
 
 const Resources = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("guides");
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
-  const [isResourceOpen, setIsResourceOpen] = useState(false);
   const [savedResources, setSavedResources] = useState<string[]>([]);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success(`Searching for "${searchQuery}"...`);
-  };
-
-  const filteredResources = resourceCategories.find(cat => cat.id === activeCategory)?.resources.filter(resource => 
-    resource.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (resource.tags && resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())))
-  );
-
-  const handleResourceClick = (resource: Resource) => {
-    setSelectedResource(resource);
-    setIsResourceOpen(true);
-  };
-
-  const handleSaveResource = (title: string) => {
-    if (savedResources.includes(title)) {
-      setSavedResources(savedResources.filter(r => r !== title));
-      toast.success(`Removed "${title}" from saved resources`);
+  const [filterType, setFilterType] = useState<string>("all");
+  const [filterLevel, setFilterLevel] = useState<string>("all");
+  
+  const filteredResources = resources.filter(resource => {
+    const matchesSearch = 
+      resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesType = filterType === "all" || resource.type === filterType;
+    const matchesLevel = filterLevel === "all" || resource.level === filterLevel;
+    
+    return matchesSearch && matchesType && matchesLevel;
+  });
+  
+  const toggleSaveResource = (id: string) => {
+    if (savedResources.includes(id)) {
+      setSavedResources(savedResources.filter(r => r !== id));
     } else {
-      setSavedResources([...savedResources, title]);
-      toast.success(`Saved "${title}" to your resources`);
+      setSavedResources([...savedResources, id]);
     }
   };
-
-  const handleDownload = (resource: Resource) => {
-    toast.success(`Downloading "${resource.title}"`);
+  
+  const getResourceIcon = (type: string) => {
+    switch (type) {
+      case "video":
+        return <Video className="h-4 w-4" />;
+      case "pdf":
+        return <FileText className="h-4 w-4" />;
+      case "article":
+        return <BookOpen className="h-4 w-4" />;
+      case "interactive":
+        return <Play className="h-4 w-4" />;
+      case "worksheet":
+        return <FileText className="h-4 w-4" />;
+      case "tool":
+        return <Download className="h-4 w-4" />;
+      default:
+        return <FileText className="h-4 w-4" />;
+    }
+  };
+  
+  const formatDurationOrDownloads = (resource: Resource) => {
+    if ('duration' in resource && resource.duration) {
+      return (
+        <div className="flex items-center text-xs text-muted-foreground">
+          <Clock className="h-3 w-3 mr-1" />
+          <span>{resource.duration}</span>
+        </div>
+      );
+    }
+    
+    if ('downloads' in resource && resource.downloads) {
+      return (
+        <div className="flex items-center text-xs text-muted-foreground">
+          <Download className="h-3 w-3 mr-1" />
+          <span>{resource.downloads.toLocaleString()} downloads</span>
+        </div>
+      );
+    }
+    
+    return null;
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow pt-32 md:pt-40 pb-16">
+      <main className="flex-grow pt-32 pb-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">
-                Learning <span className="text-primary">Resources</span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-                Explore our collection of accessible learning resources designed to support different learning needs and styles.
-              </p>
-              
-              <form onSubmit={handleSearch} className="relative max-w-md mx-auto mb-4">
-                <Input
-                  type="text"
-                  placeholder="Search resources..."
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Learning Resources</h1>
+            <p className="text-xl text-muted-foreground">
+              Discover carefully curated educational materials designed for 
+              inclusive learning and accessible to students of all abilities.
+            </p>
+          </div>
+          
+          {/* Search and Filter Controls */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="relative flex-grow">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Input 
+                  placeholder="Search resources..." 
+                  className="pl-10"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2"
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Button type="submit" size="sm" className="absolute right-1 top-1/2 transform -translate-y-1/2">
-                  Search
-                </Button>
-              </form>
-              
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
-                <div className="bg-muted px-4 py-2 rounded-full flex items-center">
-                  <BookOpen className="h-4 w-4 mr-2 text-primary" />
-                  <span className="text-sm">100+ Learning Resources</span>
-                </div>
-                <div className="bg-muted px-4 py-2 rounded-full flex items-center">
-                  <GraduationCap className="h-4 w-4 mr-2 text-primary" />
-                  <span className="text-sm">All Learning Levels</span>
-                </div>
-                <div className="bg-muted px-4 py-2 rounded-full flex items-center">
-                  <Users className="h-4 w-4 mr-2 text-primary" />
-                  <span className="text-sm">Teacher & Student Resources</span>
-                </div>
               </div>
-            </div>
-            
-            <Tabs defaultValue="guides" className="w-full" onValueChange={setActiveCategory}>
-              <TabsList className="grid grid-cols-3 mb-8">
-                {resourceCategories.map((category) => (
-                  <TabsTrigger key={category.id} value={category.id} className="flex items-center gap-2">
-                    {category.icon}
-                    <span className="hidden sm:inline">{category.name}</span>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-              
-              {resourceCategories.map((category) => (
-                <TabsContent key={category.id} value={category.id} className="mt-4">
-                  {filteredResources && filteredResources.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {filteredResources.map((resource, index) => (
-                        <Card key={index} className="hover-lift group cursor-pointer transition-all duration-300">
-                          <CardHeader>
-                            <div className="flex items-start justify-between">
-                              <CardTitle 
-                                className="text-lg group-hover:text-primary transition-colors" 
-                                onClick={() => handleResourceClick(resource)}
-                              >
-                                {resource.title}
-                              </CardTitle>
-                              <div className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-                                {resource.type}
-                                {resource.type === "Video" && resource.duration && ` • ${resource.duration}`}
-                              </div>
-                            </div>
-                            <CardDescription>{resource.description}</CardDescription>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex flex-wrap gap-1 mb-3">
-                              {resource.tags.map((tag, i) => (
-                                <Badge key={i} variant="outline" className="text-xs">{tag}</Badge>
-                              ))}
-                            </div>
-                            <div className="flex items-center justify-between text-sm">
-                              <div className="flex items-center">
-                                <Star className="h-4 w-4 text-amber-500 mr-1" />
-                                <span>{resource.rating}</span>
-                              </div>
-                              <span className="text-muted-foreground">
-                                {resource.level}
-                              </span>
-                            </div>
-                          </CardContent>
-                          <CardFooter className="flex justify-between">
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="text-xs"
-                              onClick={() => handleSaveResource(resource.title)}
-                            >
-                              {savedResources.includes(resource.title) ? 'Saved' : 'Save for Later'}
-                            </Button>
-                            <Button variant="default" size="sm" className="text-xs" onClick={() => handleResourceClick(resource)}>
-                              {resource.type === "PDF" || resource.type === "Templates" ? "Preview" : 
-                              resource.type === "Video" ? "Watch Now" : 
-                              resource.type === "Software" || resource.type === "Web App" ? "Get Access" : 
-                              "View Resource"}
-                            </Button>
-                          </CardFooter>
-                        </Card>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-12">
-                      <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="text-lg font-medium mb-2">No resources found</h3>
-                      <p className="text-muted-foreground">
-                        Try adjusting your search query or browse another category.
-                      </p>
-                    </div>
-                  )}
-                </TabsContent>
-              ))}
-            </Tabs>
-            
-            <div className="mt-20 bg-muted p-8 rounded-xl border border-border">
-              <div className="flex flex-col md:flex-row items-center gap-6">
-                <div className="md:w-1/4 flex justify-center">
-                  <div className="h-24 w-24 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Lightbulb className="h-12 w-12 text-primary" />
-                  </div>
-                </div>
-                <div className="md:w-3/4 text-center md:text-left">
-                  <h2 className="text-2xl font-bold mb-2">Need Personalized Resources?</h2>
-                  <p className="text-muted-foreground mb-4">
-                    Our educational specialists can help create custom learning materials tailored to specific needs.
-                  </p>
-                  <Button asChild>
-                    <Link to="/contact">
-                      <Users className="mr-2 h-4 w-4" />
-                      Request Custom Resources
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-16">
-              <h2 className="text-2xl font-bold mb-6 text-center">Featured Resource Collections</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="hover-lift">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center">
-                      <BookOpen className="h-5 w-5 mr-2 text-primary" />
-                      Math Learning Path
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      A comprehensive collection of resources for learning mathematics at any level.
-                    </p>
-                    <div className="flex justify-between text-sm">
-                      <span>12 resources</span>
-                      <span className="text-primary">Beginner to Advanced</span>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button variant="outline" size="sm" className="w-full">
-                      Explore Collection
-                    </Button>
-                  </CardFooter>
-                </Card>
-                
-                <Card className="hover-lift">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center">
-                      <Video className="h-5 w-5 mr-2 text-primary" />
-                      Literacy Development
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Resources focused on reading and writing skills for diverse learning needs.
-                    </p>
-                    <div className="flex justify-between text-sm">
-                      <span>15 resources</span>
-                      <span className="text-primary">All Levels</span>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button variant="outline" size="sm" className="w-full">
-                      Explore Collection
-                    </Button>
-                  </CardFooter>
-                </Card>
-                
-                <Card className="hover-lift">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center">
-                      <GraduationCap className="h-5 w-5 mr-2 text-primary" />
-                      Teacher Toolkit
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Essential resources for educators working with diverse learning abilities.
-                    </p>
-                    <div className="flex justify-between text-sm">
-                      <span>20 resources</span>
-                      <span className="text-primary">Professional</span>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button variant="outline" size="sm" className="w-full">
-                      Explore Collection
-                    </Button>
-                  </CardFooter>
-                </Card>
+              <div className="flex gap-2">
+                <select
+                  className="border border-input bg-background px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+                  value={filterType}
+                  onChange={(e) => setFilterType(e.target.value)}
+                >
+                  <option value="all">All Types</option>
+                  <option value="video">Videos</option>
+                  <option value="article">Articles</option>
+                  <option value="pdf">PDFs</option>
+                  <option value="interactive">Interactive</option>
+                  <option value="worksheet">Worksheets</option>
+                  <option value="tool">Tools</option>
+                </select>
+                <select
+                  className="border border-input bg-background px-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+                  value={filterLevel}
+                  onChange={(e) => setFilterLevel(e.target.value)}
+                >
+                  <option value="all">All Levels</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
               </div>
             </div>
           </div>
+          
+          {/* Resource Content */}
+          <Tabs defaultValue="browse" className="mb-16">
+            <TabsList className="mb-8 mx-auto w-fit">
+              <TabsTrigger value="browse">Browse All</TabsTrigger>
+              <TabsTrigger value="collections">Featured Collections</TabsTrigger>
+              {savedResources.length > 0 && (
+                <TabsTrigger value="saved">Saved ({savedResources.length})</TabsTrigger>
+              )}
+            </TabsList>
+            
+            <TabsContent value="browse">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredResources.length > 0 ? (
+                  filteredResources.map((resource) => (
+                    <Card key={resource.id} className="hover-lift overflow-hidden">
+                      {resource.thumbnail && (
+                        <div 
+                          className="h-40 bg-cover bg-center" 
+                          style={{ backgroundImage: `url(${resource.thumbnail})` }}
+                        >
+                          <div className="w-full h-full bg-gradient-to-t from-background/80 to-transparent flex items-end p-4">
+                            <Badge variant="secondary" className="flex items-center gap-1">
+                              {getResourceIcon(resource.type)}
+                              {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
+                            </Badge>
+                          </div>
+                        </div>
+                      )}
+                      <CardHeader className={resource.thumbnail ? "pt-3" : ""}>
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-lg">{resource.title}</CardTitle>
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            className="h-8 w-8"
+                            onClick={() => toggleSaveResource(resource.id)}
+                          >
+                            <Heart 
+                              className={`h-4 w-4 ${savedResources.includes(resource.id) ? "fill-red-500 text-red-500" : ""}`} 
+                            />
+                          </Button>
+                        </div>
+                        <CardDescription className="line-clamp-2">
+                          {resource.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {resource.tags.slice(0, 2).map((tag, i) => (
+                            <Badge key={i} variant="outline" className="text-xs">
+                              {tag}
+                            </Badge>
+                          ))}
+                          {resource.tags.length > 2 && (
+                            <Badge variant="outline" className="text-xs">
+                              +{resource.tags.length - 2} more
+                            </Badge>
+                          )}
+                        </div>
+                        
+                        <div className="flex items-center justify-between text-sm mt-2">
+                          {formatDurationOrDownloads(resource)}
+                          <Badge className="capitalize">{resource.level}</Badge>
+                        </div>
+                      </CardContent>
+                      <CardFooter className="pt-0">
+                        <Button 
+                          className="w-full"
+                          variant="outline"
+                          onClick={() => setSelectedResource(resource)}
+                        >
+                          View Resource
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  ))
+                ) : (
+                  <div className="col-span-3 py-12 text-center">
+                    <h3 className="text-lg font-medium mb-2">No resources found</h3>
+                    <p className="text-muted-foreground">
+                      Try adjusting your search or filters to find what you're looking for.
+                    </p>
+                    {(searchQuery || filterType !== "all" || filterLevel !== "all") && (
+                      <Button
+                        variant="outline"
+                        className="mt-4"
+                        onClick={() => {
+                          setSearchQuery("");
+                          setFilterType("all");
+                          setFilterLevel("all");
+                        }}
+                      >
+                        <Filter className="h-4 w-4 mr-2" />
+                        Clear Filters
+                      </Button>
+                    )}
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="collections">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {featuredCollections.map((collection, index) => {
+                  const collectionResources = collection.resources.map(id => 
+                    resources.find(r => r.id === id)
+                  ).filter((r): r is Resource => r !== undefined);
+                  
+                  return (
+                    <Card key={index} className="hover-lift">
+                      <CardHeader className="pb-2">
+                        <div className="flex items-center gap-2 mb-2">
+                          {React.createElement(collection.icon, { className: "h-5 w-5 text-primary" })}
+                          <CardTitle className="text-xl">{collection.title}</CardTitle>
+                        </div>
+                        <CardDescription>{collection.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          {collectionResources.map((resource) => (
+                            <div 
+                              key={resource.id} 
+                              className="flex items-start gap-2 p-2 rounded-md hover:bg-muted cursor-pointer"
+                              onClick={() => setSelectedResource(resource)}
+                            >
+                              <div className="mt-0.5">
+                                {getResourceIcon(resource.type)}
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="text-sm font-medium">{resource.title}</h4>
+                                <p className="text-xs text-muted-foreground line-clamp-1">
+                                  {resource.description}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                      <CardFooter>
+                        <Button variant="outline" size="sm" className="w-full">
+                          View All Resources
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  );
+                })}
+              </div>
+            </TabsContent>
+            
+            {savedResources.length > 0 && (
+              <TabsContent value="saved">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {resources
+                    .filter(resource => savedResources.includes(resource.id))
+                    .map((resource) => (
+                      <Card key={resource.id} className="hover-lift overflow-hidden">
+                        {resource.thumbnail && (
+                          <div 
+                            className="h-40 bg-cover bg-center" 
+                            style={{ backgroundImage: `url(${resource.thumbnail})` }}
+                          >
+                            <div className="w-full h-full bg-gradient-to-t from-background/80 to-transparent flex items-end p-4">
+                              <Badge variant="secondary" className="flex items-center gap-1">
+                                {getResourceIcon(resource.type)}
+                                {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
+                              </Badge>
+                            </div>
+                          </div>
+                        )}
+                        <CardHeader className={resource.thumbnail ? "pt-3" : ""}>
+                          <div className="flex justify-between items-start">
+                            <CardTitle className="text-lg">{resource.title}</CardTitle>
+                            <Button 
+                              variant="ghost" 
+                              size="icon"
+                              className="h-8 w-8"
+                              onClick={() => toggleSaveResource(resource.id)}
+                            >
+                              <Heart className="h-4 w-4 fill-red-500 text-red-500" />
+                            </Button>
+                          </div>
+                          <CardDescription className="line-clamp-2">
+                            {resource.description}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent className="pt-0">
+                          <div className="flex flex-wrap gap-1 mb-3">
+                            {resource.tags.slice(0, 2).map((tag, i) => (
+                              <Badge key={i} variant="outline" className="text-xs">
+                                {tag}
+                              </Badge>
+                            ))}
+                            {resource.tags.length > 2 && (
+                              <Badge variant="outline" className="text-xs">
+                                +{resource.tags.length - 2} more
+                              </Badge>
+                            )}
+                          </div>
+                          
+                          <div className="flex items-center justify-between text-sm mt-2">
+                            {formatDurationOrDownloads(resource)}
+                            <Badge className="capitalize">{resource.level}</Badge>
+                          </div>
+                        </CardContent>
+                        <CardFooter className="pt-0">
+                          <Button 
+                            className="w-full"
+                            variant="outline"
+                            onClick={() => setSelectedResource(resource)}
+                          >
+                            View Resource
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    ))}
+                </div>
+              </TabsContent>
+            )}
+          </Tabs>
         </div>
       </main>
       
-      <Footer />
-      <AccessibilityPanel />
-      
-      <Dialog open={isResourceOpen} onOpenChange={setIsResourceOpen}>
-        <DialogContent className="sm:max-w-[800px]">
-          {selectedResource && (
-            <>
-              <DialogHeader>
-                <DialogTitle className="flex justify-between items-center">
-                  <span>{selectedResource.title}</span>
-                  <DialogClose asChild>
-                    <Button variant="ghost" size="icon">
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </DialogClose>
-                </DialogTitle>
-              </DialogHeader>
+      {/* Resource Preview Dialog */}
+      <Dialog open={!!selectedResource} onOpenChange={(open) => !open && setSelectedResource(null)}>
+        <DialogContent className="sm:max-w-[800px] max-h-[90vh] flex flex-col">
+          <DialogHeader>
+            <DialogTitle className="flex justify-between items-center">
+              <span className="pr-8">{selectedResource?.title}</span>
+              <DialogClose asChild>
+                <Button variant="ghost" size="icon">
+                  <X className="h-4 w-4" />
+                </Button>
+              </DialogClose>
+            </DialogTitle>
+          </DialogHeader>
+          
+          <ScrollArea className="flex-1 max-h-[70vh]">
+            <div className="space-y-6">
+              {selectedResource?.thumbnail && (
+                <div className="aspect-video w-full overflow-hidden rounded-md">
+                  <img 
+                    src={selectedResource.thumbnail} 
+                    alt={selectedResource.title} 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+              )}
               
-              <div className="space-y-6">
-                <div className="bg-muted p-4 rounded-lg">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-                      {selectedResource.type}
-                      {selectedResource.type === "Video" && selectedResource.duration && ` • ${selectedResource.duration}`}
-                    </div>
-                    <div className="flex items-center">
-                      <Star className="h-4 w-4 text-amber-500 mr-1" />
-                      <span className="text-sm font-medium">{selectedResource.rating}</span>
-                      <span className="mx-2 text-muted-foreground">•</span>
-                      <span className="text-sm text-muted-foreground">
-                        {selectedResource.downloads ? `${selectedResource.downloads} downloads` : 
-                         selectedResource.views ? `${selectedResource.views} views` : ''}
-                      </span>
-                    </div>
-                  </div>
-                  
-                 <p className="text-sm mb-4">{selectedResource.description}</p>
-                  
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    <span className="text-sm font-medium mr-2">Tags:</span>
-                    {selectedResource.tags.map((tag, i) => (
-                      <Badge key={i} variant="outline" className="text-xs">{tag}</Badge>
-                    ))}
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="font-medium">Resource Type:</span> {selectedResource.type}
-                      {selectedResource.format && ` (${selectedResource.format})`}
-                    </div>
-                    <div>
-                      <span className="font-medium">Level:</span> {selectedResource.level}
-                    </div>
-                    {selectedResource.platform && (
-                      <div>
-                        <span className="font-medium">Platform:</span> {selectedResource.platform}
-                      </div>
-                    )}
-                    {selectedResource.duration && (
-                      <div>
-                        <span className="font-medium">Duration:</span> {selectedResource.duration}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Preview Area */}
-                <div className="aspect-video w-full bg-black/5 rounded-lg border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                  {selectedResource.type === "Video" ? (
-                    <div className="text-center">
-                      <Play className="h-12 w-12 text-primary mx-auto mb-2" />
-                      <p className="text-muted-foreground">Click to play video</p>
-                    </div>
-                  ) : selectedResource.type === "PDF" || selectedResource.type === "Templates" ? (
-                    <div className="text-center">
-                      <FileText className="h-12 w-12 text-primary mx-auto mb-2" />
-                      <p className="text-muted-foreground">Preview document</p>
-                    </div>
-                  ) : (
-                    <div className="text-center">
-                      <Download className="h-12 w-12 text-primary mx-auto mb-2" />
-                      <p className="text-muted-foreground">Get {selectedResource.type}</p>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Related Resources */}
-                <div>
-                  <h3 className="text-lg font-medium mb-3">You might also like:</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    {resourceCategories
-                      .find(cat => cat.id === activeCategory)?.resources
-                      .filter(res => res.title !== selectedResource.title)
-                      .slice(0, 3)
-                      .map((res, i) => (
-                        <Card key={i} className="hover-lift cursor-pointer" onClick={() => handleResourceClick(res)}>
-                          <CardHeader className="p-3">
-                            <CardTitle className="text-sm">{res.title}</CardTitle>
-                          </CardHeader>
-                        </Card>
-                      ))}
-                  </div>
-                </div>
-                
-                <DialogFooter>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => handleSaveResource(selectedResource.title)}
-                  >
-                    {savedResources.includes(selectedResource.title) ? 'Saved' : 'Save for Later'}
-                  </Button>
-                  <Button onClick={() => handleDownload(selectedResource)}>
-                    {selectedResource.type === "PDF" || selectedResource.type === "Templates" ? "Download" : 
-                     selectedResource.type === "Video" ? "Watch Now" : 
-                     selectedResource.type === "Software" || selectedResource.type === "Web App" ? "Get Access" : 
-                     "Access Resource"}
-                  </Button>
-                </DialogFooter>
+              <div className="flex flex-wrap gap-2 items-center">
+                <Badge variant="secondary" className="flex items-center gap-1">
+                  {selectedResource && getResourceIcon(selectedResource.type)}
+                  {selectedResource?.type.charAt(0).toUpperCase() + selectedResource?.type.slice(1)}
+                </Badge>
+                <Badge className="capitalize">{selectedResource?.level}</Badge>
+                <div className="flex-1"></div>
+                {selectedResource && formatDurationOrDownloads(selectedResource)}
               </div>
-            </>
-          )}
+              
+              <div>
+                <h3 className="text-lg font-medium mb-2">Description</h3>
+                <p className="text-muted-foreground">
+                  {selectedResource?.description}
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-medium mb-2">Topics Covered</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedResource?.tags.map((tag, i) => (
+                    <Badge key={i} variant="outline">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="bg-muted p-4 rounded-lg">
+                <h3 className="text-lg font-medium mb-2">Learning Objectives</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    <span>Understand key concepts related to {selectedResource?.tags[0]}</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    <span>Learn practical strategies for implementation</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    <span>Apply knowledge in classroom settings</span>
+                  </li>
+                </ul>
+              </div>
+              
+              {selectedResource?.type === "video" && (
+                <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <Play className="h-12 w-12 text-primary mx-auto mb-4" />
+                    <p className="text-muted-foreground">Click to play video</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
+          
+          <div className="flex justify-between items-center pt-4 mt-4 border-t border-border">
+            <Button 
+              variant="outline"
+              onClick={() => selectedResource && toggleSaveResource(selectedResource.id)}
+            >
+              <Heart 
+                className={`h-4 w-4 mr-2 ${selectedResource && savedResources.includes(selectedResource.id) ? "fill-red-500 text-red-500" : ""}`} 
+              />
+              {selectedResource && savedResources.includes(selectedResource.id) ? "Saved" : "Save for later"}
+            </Button>
+            
+            <Button>
+              Access Resource
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
+      
+      <Footer />
+      
+      <AccessibilityPanel />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ListChecks, Play, X, BookOpen, CheckCircle, FileText, Video } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
 
 interface Lesson {
   title: string;
@@ -28,6 +29,7 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [showResourcesDialog, setShowResourcesDialog] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>(sections[0].id);
+  const [selectedLevel, setSelectedLevel] = useState<string>("beginner");
   
   // Function to generate a YouTube video ID based on the lesson title
   // In a real app, you would store actual YouTube IDs in your data
@@ -37,7 +39,6 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
     return "dQw4w9WgXcQ"; // This is just a placeholder ID
   };
   
-
   const handlePlayVideo = (lesson: Lesson) => {
     if (lesson.type === "Video") {
       setSelectedVideo(getYoutubeId(lesson.title));
@@ -51,8 +52,31 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
     setShowResourcesDialog(true);
   };
 
+  // Defined levels for learning paths
+  const levels = [
+    { id: "beginner", name: "Beginner", color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400" },
+    { id: "intermediate", name: "Intermediate", color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400" },
+    { id: "advanced", name: "Advanced", color: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400" },
+  ];
+
   return (
     <>
+      <div className="mb-6">
+        <h3 className="text-lg font-medium mb-3">Choose Your Learning Level</h3>
+        <div className="flex flex-wrap gap-2">
+          {levels.map((level) => (
+            <Badge 
+              key={level.id} 
+              variant={selectedLevel === level.id ? "default" : "outline"}
+              className={`cursor-pointer text-sm py-1.5 px-3 ${selectedLevel === level.id ? "bg-primary" : level.color}`}
+              onClick={() => setSelectedLevel(level.id)}
+            >
+              {level.name}
+            </Badge>
+          ))}
+        </div>
+      </div>
+
       <Tabs defaultValue={sections[0].id} className="mb-16">
         <TabsList className="mb-8 flex flex-wrap h-auto">
           {sections.map((section) => (
@@ -69,10 +93,68 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
                 <Card>
                   <CardHeader>
                     <CardTitle>{section.title}</CardTitle>
+                    <Badge className={`${levels.find(l => l.id === selectedLevel)?.color} mt-2 w-fit`}>
+                      {levels.find(l => l.id === selectedLevel)?.name} Level
+                    </Badge>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">{section.content}</p>
-                    <div className="mt-6">
+                    
+                    <div className="mt-6 space-y-4">
+                      <div className="p-3 rounded-md bg-muted/50 border border-border">
+                        <h4 className="font-medium mb-2 text-sm">Level-specific learning goals:</h4>
+                        <ul className="space-y-1">
+                          {selectedLevel === "beginner" && (
+                            <>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Basic understanding of key concepts</span>
+                              </li>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Learn foundational skills</span>
+                              </li>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Build confidence through simple activities</span>
+                              </li>
+                            </>
+                          )}
+                          {selectedLevel === "intermediate" && (
+                            <>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Apply concepts to solve problems</span>
+                              </li>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Connect ideas across different topics</span>
+                              </li>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Develop independent learning strategies</span>
+                              </li>
+                            </>
+                          )}
+                          {selectedLevel === "advanced" && (
+                            <>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Master complex challenges</span>
+                              </li>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Create original projects and solutions</span>
+                              </li>
+                              <li className="text-sm text-muted-foreground flex items-start">
+                                <span className="mr-2 text-primary">•</span>
+                                <span>Extend learning beyond the curriculum</span>
+                              </li>
+                            </>
+                          )}
+                        </ul>
+                      </div>
+                      
                       <Button 
                         variant="outline" 
                         size="sm" 
@@ -91,41 +173,52 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
                   <CardHeader>
                     <CardTitle>Available Lessons</CardTitle>
                     <CardDescription>
-                      Interactive content designed for different learning styles
+                      {selectedLevel === "beginner" && "Foundational content for beginners"}
+                      {selectedLevel === "intermediate" && "Challenging content for continuing learners"}
+                      {selectedLevel === "advanced" && "Complex material for advanced students"}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {section.lessons.map((lesson, index) => (
-                        <Card key={index} className="hover-lift cursor-pointer" onClick={() => handlePlayVideo(lesson)}>
-                          <CardHeader className="pb-2">
-                            <div className="flex justify-between items-start">
-                              <CardTitle className="text-lg">{lesson.title}</CardTitle>
-                              <div className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-                                {lesson.type}
+                      {section.lessons
+                        .filter((_, index) => {
+                          // Filter lessons based on level - this is a placeholder implementation
+                          // In a real app, each lesson would have its own level property
+                          if (selectedLevel === "beginner") return index < 4;
+                          if (selectedLevel === "intermediate") return index >= 2 && index < 5;
+                          if (selectedLevel === "advanced") return index >= 3;
+                          return true;
+                        })
+                        .map((lesson, index) => (
+                          <Card key={index} className="hover-lift cursor-pointer" onClick={() => handlePlayVideo(lesson)}>
+                            <CardHeader className="pb-2">
+                              <div className="flex justify-between items-start">
+                                <CardTitle className="text-lg">{lesson.title}</CardTitle>
+                                <div className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+                                  {lesson.type}
+                                </div>
                               </div>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex justify-between items-center">
-                              <div className="text-sm text-muted-foreground">
-                                Duration: {lesson.duration}
+                            </CardHeader>
+                            <CardContent>
+                              <div className="flex justify-between items-center">
+                                <div className="text-sm text-muted-foreground">
+                                  Duration: {lesson.duration}
+                                </div>
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm" 
+                                  className="p-0"
+                                >
+                                  {lesson.type === "Video" ? (
+                                    <Video className="h-4 w-4 text-red-500" />
+                                  ) : (
+                                    <Play className="h-4 w-4" />
+                                  )}
+                                </Button>
                               </div>
-                              <Button 
-                                variant="ghost" 
-                                size="sm" 
-                                className="p-0"
-                              >
-                                {lesson.type === "Video" ? (
-                                  <Video className="h-4 w-4 text-red-500" />
-                                ) : (
-                                  <Play className="h-4 w-4" />
-                                )}
-                              </Button>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))}
+                            </CardContent>
+                          </Card>
+                        ))}
                     </div>
                   </CardContent>
                 </Card>
@@ -150,19 +243,18 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
             </DialogTitle>
           </DialogHeader>
           {selectedVideo && (
-  <div className="aspect-video w-full">
-    <iframe 
-      width="100%" 
-      height="100%" 
-      src={`https://www.youtube.com/embed/YKNKY8Tk_vk?autoplay=1`}
-      title="YouTube video player" 
-      frameBorder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowFullScreen
-    ></iframe>
-  </div>
-)}
-
+            <div className="aspect-video w-full">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src={`https://www.youtube.com/embed/YKNKY8Tk_vk?autoplay=1`}
+                title="YouTube video player" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
       
@@ -231,7 +323,12 @@ const SubjectSections = ({ sections }: SubjectSectionsProps) => {
           </DialogHeader>
           
           <div className="space-y-4">
-            <h3 className="text-lg font-medium">Resources for {sections.find(s => s.id === activeSection)?.title}</h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-medium">Resources for {sections.find(s => s.id === activeSection)?.title}</h3>
+              <Badge className={levels.find(l => l.id === selectedLevel)?.color}>
+                {levels.find(l => l.id === selectedLevel)?.name} Level
+              </Badge>
+            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card>
