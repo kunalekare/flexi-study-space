@@ -2,23 +2,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-interface RelatedSubjectsProps {
-  currentSubjectTitle: string;
-  subjectData: Record<string, any>;
+interface RelatedSubjectProps {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  color: string;
+  textColor: string;
 }
 
-const RelatedSubjects = ({ currentSubjectTitle, subjectData }: RelatedSubjectsProps) => {
+interface RelatedSubjectsProps {
+  currentSubjectId: string;
+  subjects: RelatedSubjectProps[];
+}
+
+const RelatedSubjects = ({ currentSubjectId, subjects }: RelatedSubjectsProps) => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Related Subjects</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {Object.values(subjectData)
-          .filter(relatedSubject => relatedSubject.title !== currentSubjectTitle)
+        {subjects
+          .filter(subject => subject.id !== currentSubjectId)
           .slice(0, 3)
           .map((relatedSubject) => (
             <Link
-              key={relatedSubject.title}
-              to={`/subjects/${Object.keys(subjectData).find(key => subjectData[key].title === relatedSubject.title)}`}
+              key={relatedSubject.id}
+              to={`/subjects/${relatedSubject.id}`}
               className={`relative overflow-hidden rounded-xl p-6 border border-border hover:border-primary/30 transition-all ${relatedSubject.color} hover-lift`}
             >
               <div className="flex items-center gap-4">

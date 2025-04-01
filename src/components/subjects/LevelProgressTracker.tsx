@@ -79,7 +79,10 @@ const LevelProgressTracker = ({
               <span>Current progress</span>
               <span className="font-medium">{progress}%</span>
             </div>
-            <Progress className="h-2" value={progress} indicatorClassName={getProgressColorClass(level)} />
+            <Progress 
+              className={`h-2 ${getProgressColorClass(level)}`} 
+              value={progress} 
+            />
             <p className="text-xs text-muted-foreground mt-1 flex items-center">
               <BookOpen className="h-3 w-3 mr-1" />
               Next milestone: {nextMilestone}

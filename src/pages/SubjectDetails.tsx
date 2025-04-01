@@ -10,9 +10,8 @@ import LevelProgressTracker from "@/components/subjects/LevelProgressTracker";
 import RelatedSubjects from "@/components/subjects/RelatedSubjects";
 import NotFoundContent from "@/components/subjects/NotFoundContent";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Video } from "lucide-react";
 import SubjectData from "@/components/subjects/SubjectData";
-import { Video } from "lucide-react";
 
 const SubjectDetails = () => {
   const { subjectId } = useParams();
