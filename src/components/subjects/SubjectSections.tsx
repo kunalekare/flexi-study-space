@@ -11,6 +11,7 @@ interface Lesson {
   title: string;
   type: string;
   duration: string;
+  content?: string;
 }
 
 interface Section {

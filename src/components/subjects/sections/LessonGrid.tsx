@@ -90,17 +90,24 @@ const LessonGrid = ({ section, selectedLevel, handlePlayVideo }: LessonGridProps
               if (selectedLevel === "advanced") return index >= 3;
               return true;
             })
-            .map((lesson, index) => (
-              <LessonCard 
-                key={index} 
-                lesson={lesson} 
-                handlePlayVideo={handlePlayVideo} 
-                lessonIndex={index}
-                isExpanded={!!expandedLessons[index]}
-                toggleExpansion={() => toggleLessonExpansion(index)}
-                content={lessonContents[lesson.title] || "Content for this lesson will be available soon."}
-              />
-            ))}
+            .map((lesson, index) => {
+              // Ensure the lesson has content from our mapping or use the content property if available
+              const enrichedLesson = {
+                ...lesson,
+                content: lesson.content || lessonContents[lesson.title] || "Content for this lesson will be available soon."
+              };
+
+              return (
+                <LessonCard 
+                  key={index} 
+                  lesson={enrichedLesson} 
+                  handlePlayVideo={handlePlayVideo} 
+                  lessonIndex={index}
+                  isExpanded={!!expandedLessons[index]}
+                  toggleExpansion={() => toggleLessonExpansion(index)}
+                />
+              );
+            })}
         </div>
       </CardContent>
     </Card>
@@ -113,7 +120,6 @@ interface LessonCardProps {
   lessonIndex: number;
   isExpanded: boolean;
   toggleExpansion: () => void;
-  content: string;
 }
 
 const LessonCard = ({ 
@@ -121,8 +127,7 @@ const LessonCard = ({
   handlePlayVideo, 
   lessonIndex, 
   isExpanded, 
-  toggleExpansion, 
-  content 
+  toggleExpansion
 }: LessonCardProps) => {
   return (
     <Card className="hover:shadow-md transition-shadow">
@@ -175,7 +180,7 @@ const LessonCard = ({
             id={`lesson-content-${lessonIndex}`}
             className="border-t pt-3 mt-1 text-sm"
           >
-            <p className="text-muted-foreground">{content}</p>
+            <p className="text-muted-foreground">{lesson.content}</p>
             <div className="mt-3">
               <Button 
                 size="sm" 

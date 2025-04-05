@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X, CheckCircle, Play, Download } from "lucide-react";
-import LetterRecognition from "../LetterRecognition";
 
 interface Lesson {
   title: string;
   type: string;
   duration: string;
+  content?: string;
 }
 
 interface InteractiveLessonDialogProps {
@@ -94,8 +94,28 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
           </div>
         ) : (
           <div>
-            {/* Sample interactive content */}
-            <LetterRecognition />
+            {/* Display actual lesson content instead of the generic LetterRecognition component */}
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-4">{selectedLesson?.title}</h2>
+              <div className="bg-muted p-4 rounded-lg mb-4">
+                <h3 className="font-medium mb-2">About This Lesson</h3>
+                <p className="text-muted-foreground">{selectedLesson?.content}</p>
+              </div>
+              
+              <div className="border-t border-border pt-4 mt-6">
+                <h3 className="font-medium mb-3">Lesson Activities</h3>
+                <div className="grid gap-4">
+                  <div className="bg-primary/5 p-4 rounded-lg">
+                    <h4 className="font-medium text-primary">Interactive Exercise</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Complete the interactive activities related to {selectedLesson?.title}</p>
+                  </div>
+                  <div className="bg-primary/5 p-4 rounded-lg">
+                    <h4 className="font-medium text-primary">Practice Questions</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Test your understanding with these practice questions</p>
+                  </div>
+                </div>
+              </div>
+            </div>
             
             <div className="flex justify-end mt-4">
               <Button 
