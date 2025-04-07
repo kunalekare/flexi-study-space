@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { X, CheckCircle, Play, Download } from "lucide-react";
+import { X, CheckCircle, Play, Download, Pencil, Music, BookOpen } from "lucide-react";
 
 interface Lesson {
   title: string;
@@ -24,6 +23,12 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
   const [draggedShape, setDraggedShape] = useState<string | null>(null);
   const [droppedShapes, setDroppedShapes] = useState<string[]>([]);
   const [countValue, setCountValue] = useState<number | null>(null);
+  const [storyProgress, setStoryProgress] = useState(0);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
+  const [drawnShapes, setDrawnShapes] = useState<string[]>([]);
+  const [matchedPairs, setMatchedPairs] = useState<number[]>([]);
+  const [phonicsLetter, setPhonicLetter] = useState("A");
 
   const handleStartActivity = () => {
     setActivityStarted(true);
@@ -32,6 +37,7 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
   // Renders specific interactive content based on the lesson title
   const renderLessonContent = () => {
     switch (selectedLesson?.title) {
+      // Math activities
       case "Number Recognition":
         return renderNumberRecognition();
       case "Pattern Matching":
@@ -40,6 +46,53 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
         return renderCountingGames();
       case "Shape Explorer":
         return renderShapeExplorer();
+      case "Counting 1 to 10":
+        return renderCountingOneToTen();
+      case "Simple Addition":
+        return renderSimpleAddition();
+      case "Number Tracing":
+        return renderNumberTracing();
+      case "Sorting & Matching":
+        return renderSortingAndMatching();
+        
+      // Shapes & Colors activities
+      case "Color Matching Game":
+        return renderColorMatchingGame();
+      case "Shape Hunt":
+        return renderShapeHunt();
+      case "Sorting by Color":
+        return renderSortingByColor();
+      case "Drawing with Shapes":
+        return renderDrawingWithShapes();
+        
+      // Stories & Songs activities
+      case "The Little Red Hen":
+        return renderLittleRedHen();
+      case "Counting with Songs":
+        return renderCountingSongs();
+      case "Fairy Tale Time":
+        return renderFairyTaleTime();
+      case "Alphabet Song":
+        return renderAlphabetSong();
+        
+      // Memory & Logic activities
+      case "Find the Pattern":
+        return renderFindPattern();
+      case "Matching Game":
+        return renderMatchingGame();
+      case "Memory Challenge":
+        return renderMemoryChallenge();
+      case "Spot the Difference":
+        return renderSpotTheDifference();
+        
+      // Alphabets activities
+      case "A to Z Letter Recognition":
+        return renderLetterRecognition();
+      case "Phonics Sounds":
+        return renderPhonicsSounds();
+      case "Letter Tracing Practice":
+        return renderLetterTracing();
+        
       default:
         return renderDefaultContent();
     }
@@ -332,26 +385,132 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
     );
   };
 
-  // Default content for other lessons
-  const renderDefaultContent = () => {
+  // Color Matching Game activity
+  const renderColorMatchingGame = () => {
+    const colors = [
+      { name: "Red", hex: "#FF0000", items: ["Apple", "Strawberry", "Fire Truck"] },
+      { name: "Blue", hex: "#0000FF", items: ["Sky", "Blueberry", "Ocean"] },
+      { name: "Yellow", hex: "#FFFF00", items: ["Sun", "Banana", "Lemon"] },
+      { name: "Green", hex: "#00FF00", items: ["Leaf", "Frog", "Grass"] }
+    ];
+
     return (
       <div className="p-6">
-        <h2 className="text-2xl font-bold mb-4">{selectedLesson?.title}</h2>
-        <div className="bg-muted p-4 rounded-lg mb-4">
-          <h3 className="font-medium mb-2">About This Lesson</h3>
-          <p className="text-muted-foreground">{selectedLesson?.content}</p>
+        <h2 className="text-2xl font-bold mb-4">Color Matching Game</h2>
+        <div className="bg-muted p-4 rounded-lg mb-6">
+          <h3 className="font-medium mb-3">Match colors to objects</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            {colors.map((color, index) => (
+              <div key={index} className="bg-white rounded-lg p-4 shadow-sm">
+                <div 
+                  className="h-16 w-16 rounded-lg mx-auto mb-3"
+                  style={{ backgroundColor: color.hex }}
+                ></div>
+                <h4 className="text-center font-medium mb-2">{color.name}</h4>
+                <ul className="space-y-1 pl-2">
+                  {color.items.map((item, idx) => (
+                    <li key={idx} className="flex items-center">
+                      <span 
+                        className="w-2 h-2 rounded-full mr-2" 
+                        style={{ backgroundColor: color.hex }}
+                      ></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button 
+                  className="w-full mt-3"
+                  size="sm"
+                  variant={selectedColor === color.name ? "default" : "outline"}
+                  onClick={() => setSelectedColor(color.name)}
+                >
+                  Select
+                </Button>
+              </div>
+            ))}
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg mb-4">
+            <h4 className="font-medium mb-3">Find something {selectedColor || "..."} in your home!</h4>
+            <p className="text-sm text-muted-foreground mb-4">
+              {selectedColor ? 
+                `Look around you! Can you find something ${selectedColor.toLowerCase()} like the examples above?` :
+                "Select a color above to start the activity"
+              }
+            </p>
+            {selectedColor && (
+              <div className="p-3 bg-primary/10 rounded-lg">
+                <p className="text-sm font-medium">Learning tip:</p>
+                <p className="text-xs text-muted-foreground">
+                  Identifying colors in everyday objects helps strengthen color recognition and builds vocabulary.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
-        
-        <div className="border-t border-border pt-4 mt-6">
-          <h3 className="font-medium mb-3">Lesson Activities</h3>
-          <div className="grid gap-4">
-            <div className="bg-primary/5 p-4 rounded-lg">
-              <h4 className="font-medium text-primary">Interactive Exercise</h4>
-              <p className="text-sm text-muted-foreground mt-1">Complete the interactive activities related to {selectedLesson?.title}</p>
-            </div>
-            <div className="bg-primary/5 p-4 rounded-lg">
-              <h4 className="font-medium text-primary">Practice Questions</h4>
-              <p className="text-sm text-muted-foreground mt-1">Test your understanding with these practice questions</p>
+      </div>
+    );
+  };
+
+  // Shape Hunt activity
+  const renderShapeHunt = () => {
+    const shapes = [
+      { name: "Circle", emoji: "⭕", examples: ["Clock", "Wheels", "Plates"] },
+      { name: "Square", emoji: "⬛", examples: ["Block", "Window", "Picture frame"] },
+      { name: "Triangle", emoji: "🔺", examples: ["Roof", "Pizza slice", "Warning sign"] },
+      { name: "Rectangle", emoji: "📱", examples: ["Door", "Book", "TV screen"] }
+    ];
+
+    return (
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-4">Shape Hunt</h2>
+        <div className="bg-muted p-4 rounded-lg mb-6">
+          <h3 className="font-medium mb-3">Find shapes in your environment</h3>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            {shapes.map((shape, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg border">
+                <div className="flex items-center mb-2">
+                  <span className="text-3xl mr-3">{shape.emoji}</span>
+                  <h4 className="font-medium">{shape.name}</h4>
+                </div>
+                <p className="text-sm mb-2">Examples:</p>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  {shape.examples.map((example, idx) => (
+                    <li key={idx}>• {example}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          
+          <div className="bg-primary/10 p-4 rounded-lg mb-4">
+            <h4 className="font-medium mb-2">Shape Hunt Challenge!</h4>
+            <p className="text-sm mb-4">
+              Go on a shape hunt around your home or classroom! How many different shapes can you find?
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-white p-3 rounded-lg text-center">
+                <p className="text-xs mb-1">I found a:</p>
+                <p className="font-bold">Circle</p>
+                <p className="text-xs mt-1">Draw or tell what it was</p>
+              </div>
+              <div className="bg-white p-3 rounded-lg text-center">
+                <p className="text-xs mb-1">I found a:</p>
+                <p className="font-bold">Square</p>
+                <p className="text-xs mt-1">Draw or tell what it was</p>
+              </div>
+              <div className="bg-white p-3 rounded-lg text-center">
+                <p className="text-xs mb-1">I found a:</p>
+                <p className="font-bold">Triangle</p>
+                <p className="text-xs mt-1">Draw or tell what it was</p>
+              </div>
+              <div className="bg-white p-3 rounded-lg text-center">
+                <p className="text-xs mb-1">I found a:</p>
+                <p className="font-bold">Rectangle</p>
+                <p className="text-xs mt-1">Draw or tell what it was</p>
+              </div>
             </div>
           </div>
         </div>
@@ -359,92 +518,226 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
     );
   };
 
-  return (
-    <Dialog open={!!selectedLesson && !selectedVideo} onOpenChange={(open) => !open && setSelectedLesson(null)}>
-      <DialogContent className="sm:max-w-[800px]">
-        <DialogHeader>
-          <DialogTitle className="flex justify-between items-center">
-            <span>{selectedLesson?.title}</span>
-            <DialogClose asChild>
-              <Button variant="ghost" size="icon" aria-label="Close">
-                <X className="h-4 w-4" />
-              </Button>
-            </DialogClose>
-          </DialogTitle>
-          <DialogDescription>
-            Interactive lesson with learning objectives and practice activities
-          </DialogDescription>
-        </DialogHeader>
-        
-        {!activityStarted ? (
-          <div className="space-y-4">
-            <div className="bg-muted p-4 rounded-lg">
-              <h3 className="text-lg font-medium mb-2">Learning Objectives</h3>
-              <ul className="space-y-2" aria-label="Learning objectives">
-                <li className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-primary mr-2 shrink-0" aria-hidden="true" />
-                  <span>Understand key concepts of {selectedLesson?.title}</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-primary mr-2 shrink-0" aria-hidden="true" />
-                  <span>Practice through interactive exercises</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-primary mr-2 shrink-0" aria-hidden="true" />
-                  <span>Apply knowledge to real-world scenarios</span>
-                </li>
-              </ul>
+  // Sorting by Color activity
+  const renderSortingByColor = () => {
+    const items = [
+      { name: "Apple", color: "red", emoji: "🍎" },
+      { name: "Blueberry", color: "blue", emoji: "🫐" },
+      { name: "Banana", color: "yellow", emoji: "🍌" },
+      { name: "Strawberry", color: "red", emoji: "🍓" },
+      { name: "Lemon", color: "yellow", emoji: "🍋" },
+      { name: "Grapes", color: "purple", emoji: "🍇" },
+      { name: "Orange", color: "orange", emoji: "🍊" },
+      { name: "Watermelon", color: "green", emoji: "🍉" }
+    ];
+
+    return (
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-4">Sorting by Color</h2>
+        <div className="bg-muted p-4 rounded-lg mb-6">
+          <h3 className="font-medium mb-3">Sort the fruits by color</h3>
+          
+          <div className="mb-6">
+            <h4 className="text-sm font-medium mb-2">Items to sort:</h4>
+            <div className="flex flex-wrap gap-3">
+              {items.map((item, index) => (
+                <div key={index} className="bg-white p-2 rounded-lg shadow-sm text-center">
+                  <div className="text-3xl mb-1">{item.emoji}</div>
+                  <p className="text-xs">{item.name}</p>
+                </div>
+              ))}
             </div>
-            
-            <div className="aspect-video w-full bg-muted/50 rounded-lg flex items-center justify-center border-2 border-dashed border-muted-foreground/20">
-              <div className="text-center p-4">
-                <Play className="h-12 w-12 text-primary mx-auto mb-4" aria-hidden="true" />
-                <h3 className="text-lg font-medium">Interactive {selectedLesson?.type} Content</h3>
-                <p className="text-muted-foreground text-sm mt-2">
-                  This is a preview for the interactive content for {selectedLesson?.title}
-                </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div className="bg-red-50 border border-red-200 p-3 rounded-lg">
+              <h4 className="font-medium text-red-700 mb-2">Red Items</h4>
+              <div className="min-h-20 flex flex-wrap gap-2">
+                {items
+                  .filter(item => item.color === "red")
+                  .map((item, index) => (
+                    <div key={index} className="bg-white p-2 rounded-lg shadow-sm text-center">
+                      <div className="text-3xl">{item.emoji}</div>
+                      <p className="text-xs">{item.name}</p>
+                    </div>
+                  ))
+                }
               </div>
             </div>
-            
-            <div className="flex justify-end space-x-2">
-              <Button 
-                variant="outline"
-                aria-label={`Download materials for ${selectedLesson?.title}`}
-              >
-                <Download className="mr-2 h-4 w-4" aria-hidden="true" />
-                Download Materials
-              </Button>
-              <Button 
-                onClick={handleStartActivity}
-                aria-label={`Start ${selectedLesson?.title} activity`}
-                aria-describedby="activity-description"
-              >
-                <Play className="mr-2 h-4 w-4" aria-hidden="true" />
-                Start activity
-              </Button>
-              <span id="activity-description" className="sr-only">
-                Starting this activity will present interactive content related to {selectedLesson?.title}
-              </span>
+            <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-lg">
+              <h4 className="font-medium text-yellow-700 mb-2">Yellow Items</h4>
+              <div className="min-h-20 flex flex-wrap gap-2">
+                {items
+                  .filter(item => item.color === "yellow")
+                  .map((item, index) => (
+                    <div key={index} className="bg-white p-2 rounded-lg shadow-sm text-center">
+                      <div className="text-3xl">{item.emoji}</div>
+                      <p className="text-xs">{item.name}</p>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           </div>
-        ) : (
-          <div>
-            {renderLessonContent()}
-            
-            <div className="flex justify-end mt-4">
-              <Button 
-                variant="outline" 
-                onClick={() => setActivityStarted(false)}
-                aria-label="Return to lesson overview"
-              >
-                Return to overview
-              </Button>
-            </div>
+          
+          <div className="bg-primary/10 p-4 rounded-lg">
+            <h4 className="font-medium mb-2">Sorting Tips</h4>
+            <p className="text-sm mb-3">
+              Sorting by color helps develop:
+            </p>
+            <ul className="space-y-1 text-sm text-muted-foreground">
+              <li>• Color recognition skills</li>
+              <li>• Classification and categorization abilities</li>
+              <li>• Visual discrimination</li>
+              <li>• Early math concepts</li>
+            </ul>
           </div>
-        )}
-      </DialogContent>
-    </Dialog>
-  );
-};
+        </div>
+      </div>
+    );
+  };
 
-export default InteractiveLessonDialog;
+  // Drawing with Shapes activity
+  const renderDrawingWithShapes = () => {
+    const shapes = [
+      { name: "Circle", emoji: "⭕" },
+      { name: "Square", emoji: "⬛" },
+      { name: "Triangle", emoji: "🔺" },
+      { name: "Rectangle", emoji: "▬" }
+    ];
+
+    const examples = [
+      { name: "House", shapes: ["Square", "Triangle", "Rectangle"] },
+      { name: "Car", shapes: ["Rectangle", "Circle", "Circle"] },
+      { name: "Snowman", shapes: ["Circle", "Circle", "Circle"] },
+      { name: "Flower", shapes: ["Circle", "Circle", "Circle", "Circle", "Circle"] }
+    ];
+
+    const handleAddShape = (shape: string) => {
+      setDrawnShapes([...drawnShapes, shape]);
+    };
+
+    return (
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-4">Drawing with Shapes</h2>
+        <div className="bg-muted p-4 rounded-lg mb-6">
+          <h3 className="font-medium mb-3">Create pictures using different shapes</h3>
+          
+          <div className="mb-6">
+            <h4 className="text-sm font-medium mb-2">Available shapes:</h4>
+            <div className="flex flex-wrap gap-3 mb-4">
+              {shapes.map((shape, index) => (
+                <Button 
+                  key={index} 
+                  variant="outline"
+                  className="flex items-center"
+                  onClick={() => handleAddShape(shape.name)}
+                >
+                  <span className="text-2xl mr-2">{shape.emoji}</span>
+                  <span>{shape.name}</span>
+                </Button>
+              ))}
+            </div>
+            <Button size="sm" onClick={() => setDrawnShapes([])}>Clear</Button>
+          </div>
+          
+          <div className="mb-6">
+            <h4 className="text-sm font-medium mb-2">Your drawing:</h4>
+            <div className="bg-white border border-gray-200 p-3 rounded-lg min-h-[150px]">
+              {drawnShapes.length === 0 ? (
+                <p className="text-sm text-muted-foreground text-center pt-10">
+                  Select shapes above to start drawing
+                </p>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {drawnShapes.map((shape, index) => {
+                    const shapeObj = shapes.find(s => s.name === shape);
+                    return (
+                      <span key={index} className="text-3xl">
+                        {shapeObj?.emoji}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+          
+          <div className="bg-primary/10 p-4 rounded-lg">
+            <h4 className="font-medium mb-2">Shape Drawing Ideas</h4>
+            <div className="grid grid-cols-2 gap-3">
+              {examples.map((example, index) => (
+                <div key={index} className="bg-white p-3 rounded-lg text-center">
+                  <h5 className="font-medium mb-2">{example.name}</h5>
+                  <div className="flex flex-wrap justify-center gap-1">
+                    {example.shapes.map((shape, idx) => {
+                      const shapeObj = shapes.find(s => s.name === shape);
+                      return (
+                        <span key={idx} className="text-2xl">
+                          {shapeObj?.emoji}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // The Little Red Hen story
+  const renderLittleRedHen = () => {
+    const storyPages = [
+      {
+        text: "Once upon a time, there was a little red hen who lived on a farm with her friends: a lazy dog, a sleepy cat, and a noisy duck.",
+        image: "🐔🐕🐱🦆"
+      },
+      {
+        text: "One day, the little red hen found some wheat seeds. 'Who will help me plant these wheat seeds?' asked the little red hen.",
+        image: "🐔🌾"
+      },
+      {
+        text: "'Not I,' said the dog. 'Not I,' said the cat. 'Not I,' said the duck. 'Then I will do it myself,' said the little red hen.",
+        image: "🐔🙅‍♂️🐕🙅‍♂️🐱🙅‍♂️🦆"
+      },
+      {
+        text: "The little red hen planted the wheat seeds all by herself. Soon the wheat grew tall.",
+        image: "🐔🌾🌾🌾"
+      },
+      {
+        text: "'Who will help me cut the wheat?' asked the little red hen. 'Not I,' said the dog. 'Not I,' said the cat. 'Not I,' said the duck.",
+        image: "🐔✂️🌾🙅‍♂️🐕🙅‍♂️🐱🙅‍♂️🦆"
+      },
+      {
+        text: "'Then I will do it myself,' said the little red hen. And she cut the wheat all by herself.",
+        image: "🐔✂️🌾"
+      },
+      {
+        text: "The little red hen asked who would help her take the wheat to the mill, but again, no one would help. So she did it herself.",
+        image: "🐔🏠🌾"
+      },
+      {
+        text: "Then she asked who would help her bake bread from the flour. Again, no one would help. So she baked the bread herself.",
+        image: "🐔👩‍🍳🍞"
+      },
+      {
+        text: "When the bread was ready, she asked, 'Who will help me eat the bread?' 'I will!' said the dog. 'I will!' said the cat. 'I will!' said the duck.",
+        image: "🐔🍞🙋‍♂️🐕🙋‍♂️🐱🙋‍♂️🦆"
+      },
+      {
+        text: "'No, you won't,' said the little red hen. 'You didn't help me plant the wheat, cut it, take it to the mill, or bake the bread. So I will eat it myself.' And she did!",
+        image: "🐔😋🍞😢🐕😢🐱😢🦆"
+      },
+      {
+        text: "The moral of the story: If you want to enjoy the rewards, you must help with the work.",
+        image: "👨‍🏫"
+      }
+    ];
+
+    const currentPage = storyPages[storyProgress];
+
+    return (
+      <div className="p-6">
