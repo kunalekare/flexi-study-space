@@ -15,6 +15,12 @@ import SortingByColor from "./activities/SortingByColor";
 import DrawingWithShapes from "./activities/DrawingWithShapes";
 import LittleRedHen from "./activities/LittleRedHen";
 import DefaultContent from "./activities/DefaultContent";
+import CountingOneToTen from "./activities/CountingOneToTen";
+import SimpleAddition from "./activities/SimpleAddition";
+import CountingWithSongs from "./activities/CountingWithSongs";
+import AlphabetSong from "./activities/AlphabetSong";
+import LetterTracing from "./activities/LetterTracing";
+import PhonicsSounds from "./activities/PhonicsSounds";
 
 interface Lesson {
   title: string;
@@ -72,11 +78,11 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
       case "Shape Explorer":
         return <ShapeExplorer />;
       case "Counting 1 to 10":
-        return <CountingGames countValue={countValue} setCountValue={setCountValue} />;
+        return <CountingOneToTen />;
       case "Simple Addition":
-        return <NumberRecognition selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} />;
+        return <SimpleAddition />;
       case "Number Tracing":
-        return <NumberRecognition selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} />;
+        return <LetterTracing />;
       case "Sorting & Matching":
         return <SortingByColor />;
         
@@ -94,11 +100,11 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
       case "The Little Red Hen":
         return <LittleRedHen storyProgress={storyProgress} setStoryProgress={setStoryProgress} />;
       case "Counting with Songs":
-        return <CountingGames countValue={countValue} setCountValue={setCountValue} />;
+        return <CountingWithSongs />;
       case "Fairy Tale Time":
         return <LittleRedHen storyProgress={storyProgress} setStoryProgress={setStoryProgress} />;
       case "Alphabet Song":
-        return <NumberRecognition selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} />;
+        return <AlphabetSong />;
         
       // Memory & Logic activities
       case "Find the Pattern":
@@ -120,11 +126,11 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
         
       // Alphabets activities
       case "A to Z Letter Recognition":
-        return <NumberRecognition selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} />;
+        return <LetterTracing />;
       case "Phonics Sounds":
-        return <NumberRecognition selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} />;
+        return <PhonicsSounds />;
       case "Letter Tracing Practice":
-        return <NumberRecognition selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} />;
+        return <LetterTracing />;
         
       default:
         return <DefaultContent selectedLesson={selectedLesson} />;
