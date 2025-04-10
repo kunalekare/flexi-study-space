@@ -5,6 +5,7 @@ import languageArtsData from './languageArts';
 import socialStudiesData from './socialStudies';
 import artMusicData from './artMusic';
 import kindergartenData from './kindergarten';
+import learnToShopData from './learnToShop';
 
 const SubjectData = {
   "mathematics": mathematicsData,
@@ -12,7 +13,8 @@ const SubjectData = {
   "language-arts": languageArtsData,
   "social-studies": socialStudiesData,
   "art-music": artMusicData,
-  "kindergarten": kindergartenData
+  "kindergarten": kindergartenData,
+  "learn-to-shop": learnToShopData
 };
 
 export default SubjectData;

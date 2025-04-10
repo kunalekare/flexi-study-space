@@ -6,7 +6,8 @@ import {
   Shirt,
   Heart,
   Eye,
-  Home
+  Home,
+  ShoppingCart
 } from "lucide-react";
 
 export const subjects = [
@@ -15,7 +16,8 @@ export const subjects = [
   { name: "Language Arts", path: "/subjects/language-arts" },
   { name: "Social Studies", path: "/subjects/social-studies" },
   { name: "Art & Music", path: "/subjects/art-music" },
-  {name:"Kindergarten", path:"/subjects/kindergarten"}
+  { name: "Kindergarten", path: "/subjects/kindergarten" },
+  { name: "Learn to Shop", path: "/subjects/learn-to-shop" }
 ];
 
 export const accessibilityCategories = [

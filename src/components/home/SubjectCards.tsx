@@ -9,7 +9,8 @@ import {
   BookOpen, 
   Globe, 
   Palette,
-  Smile
+  Smile,
+  ShoppingCart
 } from "lucide-react";
 
 const subjects = [
@@ -113,6 +114,23 @@ const subjects = [
       "Virtual instruments with simplified controls",
       "Guided movement and dance videos",
       "Creative expression for all abilities"
+    ]
+  },
+  {
+    id: "learn-to-shop",
+    title: "Learn to Shop",
+    description: "Master essential shopping skills including how to identify items, compare prices, and make smart shopping decisions both in-store and online.",
+    icon: <ShoppingCart className="h-6 w-6" />,
+    color: "bg-teal-50 dark:bg-teal-900/20",
+    textColor: "text-teal-600 dark:text-teal-400",
+    ringColor: "focus-visible:ring-teal-500",
+    features: [
+      "Understanding money and prices",
+      "Navigating stores and websites safely",
+      "Interactive shopping simulations",
+      "Budget planning and price comparisons",
+      "Smart shopping tips and strategies",
+      "Accessible checkout and payment methods"
     ]
   }
 ];
