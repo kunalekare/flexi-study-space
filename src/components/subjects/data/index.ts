@@ -5,7 +5,7 @@ import languageArtsData from './languageArts';
 import socialStudiesData from './socialStudies';
 import artMusicData from './artMusic';
 import kindergartenData from './kindergarten';
-import learnToShopData from './learnToShop';
+import learnToShopData from './learn-to-shop';
 
 const SubjectData = {
   "mathematics": mathematicsData,
