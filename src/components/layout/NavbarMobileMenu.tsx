@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Accessibility, GraduationCap, Home, ShoppingCart, Store, Eye, Shirt, Heart, Headphones, User, LogIn, X } from "lucide-react";
@@ -7,10 +8,11 @@ type MobileMenuProps = {
   isOpen: boolean;
   onClose: () => void;
   subjects: { name: string; path: string }[];
+  grades: { name: string; path: string }[];
   accessibilityCategories: { name: string; path: string; icon: React.ReactNode }[];
 };
 
-const NavbarMobileMenu = ({ isOpen, onClose, subjects, accessibilityCategories }: MobileMenuProps) => {
+const NavbarMobileMenu = ({ isOpen, onClose, subjects, grades, accessibilityCategories }: MobileMenuProps) => {
   const location = useLocation();
   
   if (!isOpen) return null;
@@ -84,6 +86,23 @@ const NavbarMobileMenu = ({ isOpen, onClose, subjects, accessibilityCategories }
                 >
                   <GraduationCap className="h-4 w-4 mr-2" />
                   {subject.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+          
+          <div className="px-4 py-2">
+            <p className="font-medium text-sm text-muted-foreground mb-2">Grades</p>
+            <div className="space-y-1">
+              {grades.map((grade) => (
+                <Link
+                  key={grade.name}
+                  to={grade.path}
+                  className={`flex items-center px-4 py-2 rounded-md text-sm ${location.pathname === grade.path ? 'bg-primary text-primary-foreground' : 'hover:bg-secondary'}`}
+                  onClick={onClose}
+                >
+                  <GraduationCap className="h-4 w-4 mr-2" />
+                  {grade.name}
                 </Link>
               ))}
             </div>

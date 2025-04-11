@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ShoppingCart, Store } from "lucide-react";
+import { ChevronDown, ShoppingCart, Store, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { 
   DropdownMenu,
@@ -14,10 +14,11 @@ import {
 
 type NavbarDropdownMenusProps = {
   subjects: { name: string; path: string }[];
+  grades: { name: string; path: string }[];
   accessibilityCategories: { name: string; path: string; icon: React.ReactNode }[];
 };
 
-const NavbarDropdownMenus = ({ subjects, accessibilityCategories }: NavbarDropdownMenusProps) => {
+const NavbarDropdownMenus = ({ subjects, grades, accessibilityCategories }: NavbarDropdownMenusProps) => {
   return (
     <nav className="hidden md:flex items-center gap-2">
       <Link to="/" className="px-3 py-2 text-foreground/80 hover:text-primary transition-colors">
@@ -68,6 +69,27 @@ const NavbarDropdownMenus = ({ subjects, accessibilityCategories }: NavbarDropdo
                 className="w-full cursor-pointer"
               >
                 {subject.name}
+              </Link>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+      
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="px-3 py-2 flex items-center gap-1">
+            Grades <ChevronDown className="h-4 w-4 opacity-50" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="center" className="w-48 glass-panel">
+          {grades.map((grade) => (
+            <DropdownMenuItem key={grade.name} asChild>
+              <Link 
+                to={grade.path}
+                className="w-full cursor-pointer flex items-center"
+              >
+                <GraduationCap className="h-4 w-4 mr-2" />
+                {grade.name}
               </Link>
             </DropdownMenuItem>
           ))}

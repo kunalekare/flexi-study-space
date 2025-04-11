@@ -7,7 +7,8 @@ import {
   Heart,
   Eye,
   Home,
-  ShoppingCart
+  ShoppingCart,
+  GraduationCap
 } from "lucide-react";
 
 export const subjects = [
@@ -18,6 +19,19 @@ export const subjects = [
   { name: "Art & Music", path: "/subjects/art-music" },
   { name: "Kindergarten", path: "/subjects/kindergarten" },
   { name: "Learn to Shop", path: "/subjects/learn-to-shop" }
+];
+
+export const grades = [
+  { name: "Grade 1", path: "/subjects/grade1" },
+  { name: "Grade 2", path: "/subjects/grade2" },
+  { name: "Grade 3", path: "/subjects/grade3" },
+  { name: "Grade 4", path: "/subjects/grade4" },
+  { name: "Grade 5", path: "/subjects/grade5" },
+  { name: "Grade 6", path: "/subjects/grade6" },
+  { name: "Grade 7", path: "/subjects/grade7" },
+  { name: "Grade 8", path: "/subjects/grade8" },
+  { name: "Grade 9", path: "/subjects/grade9" },
+  { name: "Grade 10", path: "/subjects/grade10" }
 ];
 
 export const accessibilityCategories = [

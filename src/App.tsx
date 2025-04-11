@@ -41,6 +41,18 @@ const App = () => (
             <Route path="/subjects/:subjectId" element={<SubjectDetails />} />
             <Route path="/accessibility" element={<Accessibility />} />
             
+            {/* Grade Routes */}
+            <Route path="/subjects/grade1" element={<SubjectDetails />} />
+            <Route path="/subjects/grade2" element={<SubjectDetails />} />
+            <Route path="/subjects/grade3" element={<SubjectDetails />} />
+            <Route path="/subjects/grade4" element={<SubjectDetails />} />
+            <Route path="/subjects/grade5" element={<SubjectDetails />} />
+            <Route path="/subjects/grade6" element={<SubjectDetails />} />
+            <Route path="/subjects/grade7" element={<SubjectDetails />} />
+            <Route path="/subjects/grade8" element={<SubjectDetails />} />
+            <Route path="/subjects/grade9" element={<SubjectDetails />} />
+            <Route path="/subjects/grade10" element={<SubjectDetails />} />
+            
             {/* E-commerce Routes */}
             <Route path="/shop" element={<Shop />} />
             <Route path="/shop/:categoryId" element={<ShopCategory />} />

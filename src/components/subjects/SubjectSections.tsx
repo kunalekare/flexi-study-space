@@ -1,10 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SectionContent from "@/components/subjects/sections/SectionContent";
 import ResourcesDialog from "@/components/subjects/sections/ResourcesDialog";
 import VideoLessonDialog from "@/components/subjects/sections/VideoLessonDialog";
 import InteractiveLessonDialog from "@/components/subjects/sections/InteractiveLessonDialog";
+import { useLocation } from "react-router-dom";
 
 interface SubjectSectionsProps {
   sections: {
@@ -45,6 +46,18 @@ const SubjectSections = ({
   const [currentSectionId, setCurrentSectionId] = useState("");
   const [currentLesson, setCurrentLesson] = useState<any>(null);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const location = useLocation();
+  
+  // Extract grade from URL if it exists
+  useEffect(() => {
+    const path = location.pathname;
+    if (path.includes('grade')) {
+      const grade = path.split('/').pop() || "";
+      if (grade.startsWith('grade')) {
+        setActiveGrade(grade);
+      }
+    }
+  }, [location, setActiveGrade]);
   
   const levels = [
     { id: "beginner", name: "Beginner", color: "text-green-500" },
@@ -67,6 +80,9 @@ const SubjectSections = ({
       setInteractiveLessonOpen(true);
     }
   };
+  
+  // Focus on grade-wise view
+  const showGradeSelector = true;
   
   return (
     <>
@@ -93,6 +109,7 @@ const SubjectSections = ({
               handlePlayVideo={handlePlayVideo}
               setSelectedLevel={setActiveLevel}
               setSelectedGrade={setActiveGrade}
+              showGradeSelector={showGradeSelector}
             />
           </TabsContent>
         ))}

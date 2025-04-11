@@ -31,6 +31,7 @@ interface SectionContentProps {
   handlePlayVideo: (lesson: Lesson) => void;
   setSelectedLevel: (level: string) => void;
   setSelectedGrade?: (grade: string) => void;
+  showGradeSelector?: boolean;
 }
 
 const SectionContent = ({
@@ -41,7 +42,8 @@ const SectionContent = ({
   handleViewResources,
   handlePlayVideo,
   setSelectedLevel,
-  setSelectedGrade = () => {}
+  setSelectedGrade = () => {},
+  showGradeSelector = true
 }: SectionContentProps) => {
   return (
     <div className="space-y-8">
@@ -49,7 +51,7 @@ const SectionContent = ({
         selectedLevel={selectedLevel}
         setSelectedLevel={setSelectedLevel}
         levels={levels}
-        showGrades={true}
+        showGrades={showGradeSelector}
         selectedGrade={selectedGrade}
         setSelectedGrade={setSelectedGrade}
       />

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, GraduationCap, User } from "lucide-react";
@@ -5,7 +6,7 @@ import { useCart } from "@/contexts/CartContext";
 import NavbarDropdownMenus from "./NavbarDropdownMenus";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarActions from "./NavbarActions";
-import { subjects, accessibilityCategories } from "./navbarData";
+import { subjects, grades, accessibilityCategories } from "./navbarData";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -87,34 +88,34 @@ const Navbar = () => {
 
         <NavbarDropdownMenus
           subjects={subjects}
+          grades={grades}
           accessibilityCategories={accessibilityCategories}
         />
 
         <div className="flex items-center gap-4">
-  <NavbarActions cartCount={cartCount} user={user} />
-  {user && (  // Show user dropdown only if logged in
-    <div className="relative">
-      <button
-        onClick={() => setShowDropdown(!showDropdown)}
-        className="relative p-2"
-      >
-        <User className="h-6 w-6 text-primary cursor-pointer" />
-      </button>
-      {showDropdown && (
-        <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-          <p className="text-gray-700 text-sm px-2">{user.email}</p>
-          <button
-            onClick={handleLogout}
-            className="block w-full text-left px-2 py-2 text-red-500 hover:bg-gray-100"
-          >
-            Logout
-          </button>
+          <NavbarActions cartCount={cartCount} user={user} />
+          {user && (  // Show user dropdown only if logged in
+            <div className="relative">
+              <button
+                onClick={() => setShowDropdown(!showDropdown)}
+                className="relative p-2"
+              >
+                <User className="h-6 w-6 text-primary cursor-pointer" />
+              </button>
+              {showDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
+                  <p className="text-gray-700 text-sm px-2">{user.email}</p>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-2 py-2 text-red-500 hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  )}
-</div>
-
 
         <button
           className="md:hidden p-2 text-foreground rounded-md hover:bg-muted/60"
@@ -129,6 +130,7 @@ const Navbar = () => {
         isOpen={isMobileMenuOpen}
         onClose={closeMobileMenu}
         subjects={subjects}
+        grades={grades}
         accessibilityCategories={accessibilityCategories}
       />
     </header>
