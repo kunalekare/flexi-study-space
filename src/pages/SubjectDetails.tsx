@@ -16,6 +16,7 @@ import SubjectData from "@/components/subjects/SubjectData";
 const SubjectDetails = () => {
   const { subjectId } = useParams();
   const [activeLevel, setActiveLevel] = useState("beginner");
+  const [activeGrade, setActiveGrade] = useState("all");
   
   // Load subject data based on ID
   const subject = SubjectData[subjectId as keyof typeof SubjectData];
@@ -51,6 +52,7 @@ const SubjectDetails = () => {
   
   useEffect(() => {
     window.scrollTo(0, 0);
+    setActiveGrade("all"); // Reset grade filter when changing subjects
   }, [subjectId]);
   
   // If subject not found
@@ -116,13 +118,19 @@ const SubjectDetails = () => {
                   </div>
                   <p className="text-muted-foreground mb-4">
                     This course offers a comprehensive journey through {subject.title} with content 
-                    tailored for beginners, intermediate, and advanced learners.
+                    tailored for beginners, intermediate, and advanced learners across grades 1-10.
                   </p>
                   <ul className="space-y-2 mb-6">
                     <li className="flex items-start">
                       <span className="mr-2 text-primary mt-1">•</span>
                       <span className="text-sm text-muted-foreground">
                         12 lesson modules across 3 difficulty levels
+                      </span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 text-primary mt-1">•</span>
+                      <span className="text-sm text-muted-foreground">
+                        Grade-specific content for targeted learning
                       </span>
                     </li>
                     <li className="flex items-start">
@@ -147,7 +155,13 @@ const SubjectDetails = () => {
           {/* Subject Content Sections */}
           <div className="mb-16">
             <h2 className="text-2xl font-bold mb-8">Explore Content</h2>
-            <SubjectSections sections={subject.sections} />
+            <SubjectSections 
+              sections={subject.sections} 
+              activeLevel={activeLevel}
+              setActiveLevel={setActiveLevel}
+              activeGrade={activeGrade}
+              setActiveGrade={setActiveGrade}
+            />
           </div>
           
           {/* Related Subjects */}

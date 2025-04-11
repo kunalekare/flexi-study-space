@@ -9,6 +9,7 @@ interface Lesson {
   type: string;
   duration: string;
   content?: string;
+  grade?: string;
 }
 
 interface LessonGridProps {
@@ -16,10 +17,11 @@ interface LessonGridProps {
     lessons: Lesson[];
   };
   selectedLevel: string;
+  selectedGrade?: string;
   handlePlayVideo: (lesson: Lesson) => void;
 }
 
-const LessonGrid = ({ section, selectedLevel, handlePlayVideo }: LessonGridProps) => {
+const LessonGrid = ({ section, selectedLevel, selectedGrade = "all", handlePlayVideo }: LessonGridProps) => {
   // Level-specific descriptions
   const levelDescriptions = {
     beginner: "Foundational content for beginners",
@@ -42,17 +44,33 @@ const LessonGrid = ({ section, selectedLevel, handlePlayVideo }: LessonGridProps
         <CardTitle>Available Lessons</CardTitle>
         <CardDescription>
           {levelDescriptions[selectedLevel as keyof typeof levelDescriptions]}
+          {selectedGrade !== "all" && ` - ${selectedGrade.replace("grade", "Grade ")} content`}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {section.lessons
-            .filter((_, index) => {
-              // Filter lessons based on level - this is a placeholder implementation
-              // In a real app, each lesson would have its own level property
-              if (selectedLevel === "beginner") return index < 4;
-              if (selectedLevel === "intermediate") return index >= 2 && index < 5;
-              if (selectedLevel === "advanced") return index >= 3;
+            .filter((lesson) => {
+              // Filter by level
+              if (selectedLevel === "beginner") {
+                if (!(lesson.type === "Simple" || lesson.type === "Beginner" || lesson.type === "Game" || lesson.type === "Story")) {
+                  return false;
+                }
+              } else if (selectedLevel === "intermediate") {
+                if (!(lesson.type === "Interactive" || lesson.type === "Activity" || lesson.type === "Intermediate")) {
+                  return false;
+                }
+              } else if (selectedLevel === "advanced") {
+                if (!(lesson.type === "Advanced" || lesson.type === "Creative" || lesson.type === "Puzzle")) {
+                  return false;
+                }
+              }
+              
+              // Filter by grade
+              if (selectedGrade !== "all" && lesson.grade && lesson.grade !== selectedGrade) {
+                return false;
+              }
+              
               return true;
             })
             .map((lesson, index) => (
@@ -93,6 +111,7 @@ const LessonCard = ({
           <CardTitle className="text-lg">{lesson.title}</CardTitle>
           <div className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
             {lesson.type}
+            {lesson.grade && ` - ${lesson.grade.replace("grade", "G")}`}
           </div>
         </div>
       </CardHeader>

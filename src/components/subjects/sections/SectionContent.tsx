@@ -2,11 +2,13 @@
 import React from "react";
 import SectionInfo from "./SectionInfo";
 import LessonGrid from "./LessonGrid";
+import LevelSelector from "./LevelSelector";
 
 interface Lesson {
   title: string;
   type: string;
   duration: string;
+  grade?: string;
 }
 
 interface Section {
@@ -19,6 +21,7 @@ interface Section {
 interface SectionContentProps {
   section: Section;
   selectedLevel: string;
+  selectedGrade?: string;
   levels: {
     id: string;
     name: string;
@@ -26,31 +29,48 @@ interface SectionContentProps {
   }[];
   handleViewResources: (sectionId: string) => void;
   handlePlayVideo: (lesson: Lesson) => void;
+  setSelectedLevel: (level: string) => void;
+  setSelectedGrade?: (grade: string) => void;
 }
 
 const SectionContent = ({
   section,
   selectedLevel,
+  selectedGrade = "all",
   levels,
   handleViewResources,
-  handlePlayVideo
+  handlePlayVideo,
+  setSelectedLevel,
+  setSelectedGrade = () => {}
 }: SectionContentProps) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div className="lg:col-span-1">
-        <SectionInfo
-          section={section}
-          selectedLevel={selectedLevel}
-          levels={levels}
-          handleViewResources={handleViewResources}
-        />
-      </div>
-      <div className="lg:col-span-2">
-        <LessonGrid
-          section={section}
-          selectedLevel={selectedLevel}
-          handlePlayVideo={handlePlayVideo}
-        />
+    <div className="space-y-8">
+      <LevelSelector 
+        selectedLevel={selectedLevel}
+        setSelectedLevel={setSelectedLevel}
+        levels={levels}
+        showGrades={true}
+        selectedGrade={selectedGrade}
+        setSelectedGrade={setSelectedGrade}
+      />
+      
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-1">
+          <SectionInfo
+            section={section}
+            selectedLevel={selectedLevel}
+            levels={levels}
+            handleViewResources={handleViewResources}
+          />
+        </div>
+        <div className="lg:col-span-2">
+          <LessonGrid
+            section={section}
+            selectedLevel={selectedLevel}
+            selectedGrade={selectedGrade}
+            handlePlayVideo={handlePlayVideo}
+          />
+        </div>
       </div>
     </div>
   );
