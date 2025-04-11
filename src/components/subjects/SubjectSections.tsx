@@ -38,6 +38,7 @@ const SubjectSections = ({
   const [interactiveLessonOpen, setInteractiveLessonOpen] = useState(false);
   const [currentSectionId, setCurrentSectionId] = useState("");
   const [currentLesson, setCurrentLesson] = useState<any>(null);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   
   const levels = [
     { id: "beginner", name: "Beginner", color: "text-green-500" },
@@ -55,6 +56,7 @@ const SubjectSections = ({
     
     if (lesson.type === "Video" || lesson.type === "Sing-along") {
       setVideoLessonOpen(true);
+      setSelectedVideo(lesson.content || "default-video-id");
     } else {
       setInteractiveLessonOpen(true);
     }
@@ -91,22 +93,23 @@ const SubjectSections = ({
       </Tabs>
       
       <ResourcesDialog 
-        open={resourcesOpen} 
-        setOpen={setResourcesOpen} 
-        sectionId={currentSectionId}
+        showResourcesDialog={resourcesOpen} 
+        setShowResourcesDialog={setResourcesOpen} 
+        activeSection={currentSectionId}
         sections={sections}
+        selectedLevel={activeLevel}
+        levels={levels}
       />
       
       <VideoLessonDialog 
-        open={videoLessonOpen} 
-        setOpen={setVideoLessonOpen}
-        lesson={currentLesson}
+        selectedVideo={selectedVideo} 
+        setSelectedVideo={setSelectedVideo}
       />
       
       <InteractiveLessonDialog 
-        open={interactiveLessonOpen} 
-        setOpen={setInteractiveLessonOpen}
-        lesson={currentLesson}
+        selectedLesson={interactiveLessonOpen ? currentLesson : null} 
+        setSelectedLesson={() => setInteractiveLessonOpen(false)}
+        selectedVideo={selectedVideo}
       />
     </>
   );
