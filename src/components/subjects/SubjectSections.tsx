@@ -17,6 +17,12 @@ interface SubjectSectionsProps {
       duration: string;
       content?: string;
       grade?: string;
+      quizQuestions?: {
+        question: string;
+        options: string[];
+        correctAnswer: number;
+        explanation?: string;
+      }[];
     }[];
   }[];
   activeLevel?: string;
