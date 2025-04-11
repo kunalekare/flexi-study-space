@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
@@ -11,21 +11,8 @@ import ActivityFooter from "./interactive/ActivityFooter";
 import QuizQuestion from "./interactive/QuizQuestion";
 import QuizResult from "./interactive/QuizResult";
 
-interface QuizQuestion {
-  question: string;
-  options: string[];
-  correctAnswer: number;
-  explanation?: string;
-}
-
-interface Lesson {
-  title: string;
-  type: string;
-  duration: string;
-  content?: string;
-  grade?: string;
-  quizQuestions?: QuizQuestion[];
-}
+// Import our new custom hook
+import { useInteractiveLessonState, Lesson } from "@/hooks/useInteractiveLessonState";
 
 interface InteractiveLessonDialogProps {
   selectedLesson: Lesson | null;
@@ -34,109 +21,27 @@ interface InteractiveLessonDialogProps {
 }
 
 const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVideo }: InteractiveLessonDialogProps) => {
-  const [activityStarted, setActivityStarted] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [currentPattern, setCurrentPattern] = useState(0);
-  const [draggedShape, setDraggedShape] = useState<string | null>(null);
-  const [droppedShapes, setDroppedShapes] = useState<string[]>([]);
-  const [countValue, setCountValue] = useState<number | null>(null);
-  const [storyProgress, setStoryProgress] = useState(0);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
-  const [drawnShapes, setDrawnShapes] = useState<string[]>([]);
-  const [matchedPairs, setMatchedPairs] = useState<number[]>([]);
-  const [phonicsLetter, setPhonicLetter] = useState("A");
-
-  // Quiz state
-  const [isQuizMode, setIsQuizMode] = useState(false);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<number[]>([]);
-  const [showResults, setShowResults] = useState(false);
-  const [quizCompleted, setQuizCompleted] = useState(false);
-
-  const handleStartActivity = () => {
-    setActivityStarted(true);
-    setIsQuizMode(false);
-  };
-
-  const handleStartQuiz = () => {
-    if (selectedLesson?.quizQuestions && selectedLesson.quizQuestions.length > 0) {
-      setActivityStarted(true);
-      setIsQuizMode(true);
-      setCurrentQuestionIndex(0);
-      setUserAnswers([]);
-      setShowResults(false);
-      setQuizCompleted(false);
-    }
-  };
-
-  const handleAnswerSelection = (answerIndex: number) => {
-    setSelectedAnswer(answerIndex);
-  };
-
-  const handleNextQuestion = () => {
-    if (selectedAnswer !== null) {
-      setUserAnswers([...userAnswers, selectedAnswer]);
-      
-      if (selectedLesson?.quizQuestions && currentQuestionIndex < selectedLesson.quizQuestions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setSelectedAnswer(null);
-      } else {
-        setShowResults(true);
-        setQuizCompleted(true);
-      }
-    }
-  };
-
-  const calculateScore = () => {
-    if (!selectedLesson?.quizQuestions) return 0;
-    
-    let correctCount = 0;
-    userAnswers.forEach((answer, index) => {
-      if (selectedLesson.quizQuestions && answer === selectedLesson.quizQuestions[index].correctAnswer) {
-        correctCount++;
-      }
-    });
-    
-    return Math.round((correctCount / selectedLesson.quizQuestions.length) * 100);
-  };
-
-  const resetQuiz = () => {
-    setCurrentQuestionIndex(0);
-    setUserAnswers([]);
-    setSelectedAnswer(null);
-    setShowResults(false);
-    setQuizCompleted(false);
-  };
-
-  const exitQuizMode = () => {
-    setIsQuizMode(false);
-    setActivityStarted(false);
-  };
-
-  const handleBackToOverview = () => {
-    setActivityStarted(false);
-  };
-
-  const startQuizMode = () => {
-    setIsQuizMode(true);
-    setCurrentQuestionIndex(0);
-    setUserAnswers([]);
-    setShowResults(false);
-  };
-
-  // Collect activity state for passing to ActivityContent
-  const activityState = {
-    selectedAnswer, currentPattern, draggedShape, droppedShapes,
-    countValue, storyProgress, selectedColor, selectedLetter,
-    drawnShapes, matchedPairs, phonicsLetter
-  };
-  
-  const setActivityState = {
-    setSelectedAnswer, setCurrentPattern, setDraggedShape, setDroppedShapes,
-    setCountValue, setStoryProgress, setSelectedColor, setSelectedLetter,
-    setDrawnShapes, setMatchedPairs, setPhonicLetter
-  };
+  // Use our custom hook for state management
+  const {
+    activityStarted,
+    isQuizMode,
+    currentQuestionIndex,
+    userAnswers,
+    showResults,
+    quizCompleted,
+    activityState,
+    setActivityState,
+    handleStartActivity,
+    handleStartQuiz,
+    handleAnswerSelection,
+    handleNextQuestion,
+    calculateScore,
+    resetQuiz,
+    exitQuizMode,
+    handleBackToOverview,
+    startQuizMode,
+    completeActivity
+  } = useInteractiveLessonState(selectedLesson, setSelectedLesson);
 
   // Render quiz content if in quiz mode
   const renderQuizContent = () => {
@@ -160,7 +65,7 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
         currentQuestion={currentQuestion}
         currentQuestionIndex={currentQuestionIndex}
         totalQuestions={selectedLesson.quizQuestions.length}
-        selectedAnswer={selectedAnswer}
+        selectedAnswer={activityState.selectedAnswer}
         handleAnswerSelection={handleAnswerSelection}
         handleNextQuestion={handleNextQuestion}
       />
@@ -220,6 +125,7 @@ const InteractiveLessonDialog = ({ selectedLesson, setSelectedLesson, selectedVi
             selectedLesson={selectedLesson}
             handleBackToOverview={handleBackToOverview}
             startQuizMode={startQuizMode}
+            completeActivity={completeActivity}
           />
         </div>
       </DialogContent>

@@ -16,7 +16,7 @@ interface ActivityFooterProps {
   } | null;
   handleBackToOverview: () => void;
   startQuizMode: () => void;
-  completeActivity?: () => void;
+  completeActivity: () => void;
 }
 
 const ActivityFooter = ({ 
@@ -25,7 +25,7 @@ const ActivityFooter = ({
   selectedLesson,
   handleBackToOverview,
   startQuizMode,
-  completeActivity = () => {}
+  completeActivity
 }: ActivityFooterProps) => {
   if (isQuizMode || quizCompleted) return null;
   
